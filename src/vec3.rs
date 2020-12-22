@@ -3,6 +3,9 @@ use std::ops::{Add, Sub, AddAssign, SubAssign, Mul, MulAssign, Div, DivAssign};
 #[derive(Debug, Clone, Copy)]
 pub struct Vec3(pub f64, pub f64, pub f64);
 
+pub type Point = Vec3;
+pub type Color = Vec3;
+
 impl Add<Vec3> for Vec3 {
     type Output = Vec3;
 
