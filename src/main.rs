@@ -24,7 +24,7 @@ fn ray_color(ray: &Ray, world: &dyn Hittable, depth: i32) -> Color {
     let hit_record = world.hit_by(ray, 0.001, f64::INFINITY);
     return match hit_record {
         Some(rec) => {
-            let target = rec.point + rec.normal + Vec3::random_in_unit_sphere();
+            let target = rec.point + rec.normal + Vec3::random_unit_vector();
             let next_ray = Ray { orig: rec.point, dir: target - rec.point };
             0.5 * ray_color(&next_ray, world, depth - 1)
         }
