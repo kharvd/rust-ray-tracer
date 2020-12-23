@@ -8,6 +8,7 @@ use crate::geometry::{HitRecord, Hittable};
 use crate::geometry::sphere::Sphere;
 use crate::ray::Ray;
 use crate::vec3::{Color, point};
+use rand::random;
 
 mod vec3;
 mod color;
@@ -34,6 +35,7 @@ fn main() {
     let aspect_ratio = 16.0 / 9.0;
     let image_width = 400;
     let image_height = (image_width as f64 / aspect_ratio) as i32;
+    let samples_per_pixel = 100;
 
     // World
     let world: Vec<Box<dyn Hittable>> = vec![
@@ -54,12 +56,15 @@ fn main() {
     for j in (0..image_height).rev() {
         eprintln!("\rScanlines remaining: {}", j);
         for i in 0..image_width {
-            let u = i as f64 / (image_width - 1) as f64;
-            let v = j as f64 / (image_height - 1) as f64;
-            let r = camera.get_ray(u, v);
-            let pix = ray_color(&r, &world);
-
-            print_color(pix);
+            let mut pix = color(0.0, 0.0, 0.0);
+            for s in 0..samples_per_pixel {
+                let u = (i as f64 + random::<f64>()) / (image_width - 1) as f64;
+                let v = (j as f64 + random::<f64>()) / (image_height - 1) as f64;
+                let r = camera.get_ray(u, v);
+                pix += ray_color(&r, &world);
+            }
+            
+            print_color(pix, samples_per_pixel);
         }
     }
 }
