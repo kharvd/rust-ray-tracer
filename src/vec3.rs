@@ -1,4 +1,5 @@
 use std::ops::{Add, Sub, AddAssign, SubAssign, Mul, MulAssign, Div, DivAssign, Neg};
+use rand::random;
 
 #[derive(Debug, Clone, Copy)]
 pub struct Vec3(pub f64, pub f64, pub f64);
@@ -112,6 +113,23 @@ impl Vec3 {
 
     pub fn normalize(&self) -> Vec3 {
         return *self / self.length();
+    }
+
+    pub fn random() -> Vec3 {
+        return Vec3(
+            2.0 * random::<f64>() - 1.0,
+            2.0 * random::<f64>() - 1.0,
+            2.0 * random::<f64>() - 1.0,
+        );
+    }
+
+    pub fn random_in_unit_sphere() -> Vec3 {
+        loop {
+            let v = Vec3::random();
+            if v.length2() < 1.0 {
+                return v;
+            }
+        }
     }
 }
 
