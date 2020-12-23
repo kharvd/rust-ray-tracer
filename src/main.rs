@@ -2,6 +2,7 @@ use std::f64;
 
 use vec3::Vec3;
 
+use crate::camera::Camera;
 use crate::color::{color, print_color};
 use crate::geometry::{HitRecord, Hittable};
 use crate::geometry::sphere::Sphere;
@@ -12,6 +13,7 @@ mod vec3;
 mod color;
 mod ray;
 mod geometry;
+mod camera;
 
 fn ray_color(ray: &Ray, world: &dyn Hittable) -> Color {
     let hit_record = world.hit_by(ray, 0.0, f64::INFINITY);
@@ -46,15 +48,7 @@ fn main() {
     ];
 
     // Camera
-    let viewport_height = 2.0;
-    let viewport_width = aspect_ratio * viewport_height;
-    let focal_length = 1.0;
-
-    let origin = point(0.0, 0.0, 0.0);
-    let horizontal = Vec3(viewport_width, 0.0, 0.0);
-    let vertical = Vec3(0.0, viewport_height, 0.0);
-    let lower_left_corner =
-        origin - horizontal / 2.0 - vertical / 2.0 - Vec3(0.0, 0.0, focal_length);
+    let camera = Camera::create(16.0 / 9.0, 2.0, 1.0);
 
     println!("P3\n{} {}\n255", image_width, image_height);
     for j in (0..image_height).rev() {
@@ -62,10 +56,7 @@ fn main() {
         for i in 0..image_width {
             let u = i as f64 / (image_width - 1) as f64;
             let v = j as f64 / (image_height - 1) as f64;
-            let r = Ray {
-                orig: origin,
-                dir: lower_left_corner + u * horizontal + v * vertical - origin,
-            };
+            let r = camera.get_ray(u, v);
             let pix = ray_color(&r, &world);
 
             print_color(pix);
