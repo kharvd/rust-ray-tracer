@@ -9,7 +9,7 @@ pub struct HitRecord {
 }
 
 pub trait Hittable {
-    fn hit_by(&self, ray: &Ray) -> Option<HitRecord>;
+    fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord>;
 }
 
 pub mod sphere {
@@ -23,7 +23,7 @@ pub mod sphere {
     }
 
     impl Hittable for Sphere {
-        fn hit_by(&self, ray: &Ray) -> Option<HitRecord> {
+        fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
             let orig_to_center = ray.orig - self.center;
             let a = ray.dir.length2();
             let half_b = ray.dir.dot(&orig_to_center);
@@ -34,7 +34,20 @@ pub mod sphere {
                 return Option::None;
             }
 
-            let t = (-half_b - discr.sqrt()) / a;
+            let sqrt_discr = discr.sqrt();
+
+            let t1 = (-half_b - sqrt_discr) / a;
+            let t = if t_min < t1 && t1 < t_max {
+                t1
+            } else {
+                let t2 = (-half_b + sqrt_discr) / a;
+                if t_min < t2 && t2 < t_max {
+                    t2
+                } else {
+                    return Option::None;
+                }
+            };
+
             let point = ray.at(t);
             let normal = self.normal_at(&point);
             return Some(HitRecord { point, normal, t });

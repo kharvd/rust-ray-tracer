@@ -1,14 +1,17 @@
+use std::f64;
+
+use vec3::Vec3;
+
+use crate::color::{color, print_color};
+use crate::geometry::{HitRecord, Hittable};
+use crate::geometry::sphere::Sphere;
+use crate::ray::Ray;
+use crate::vec3::{Color, point};
+
 mod vec3;
 mod color;
 mod ray;
 mod geometry;
-
-use vec3::Vec3;
-use crate::color::{color, print_color};
-use crate::ray::Ray;
-use crate::vec3::{Color, point};
-use crate::geometry::sphere::Sphere;
-use crate::geometry::{Hittable, HitRecord};
 
 fn ray_color(ray: &Ray) -> Color {
     let sphere = Sphere {
@@ -16,7 +19,7 @@ fn ray_color(ray: &Ray) -> Color {
         center: point(0.0, 0.0, -1.0),
     };
 
-    let hit_record = sphere.hit_by(ray);
+    let hit_record = sphere.hit_by(ray, 0.0, f64::INFINITY);
     return match hit_record {
         Some(hit) =>
             0.5 * color(hit.normal.0 + 1.0, hit.normal.1 + 1.0, hit.normal.2 + 1.0),
