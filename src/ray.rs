@@ -2,8 +2,8 @@ use crate::vec3::Vec3;
 use crate::vec3::Point;
 
 pub struct Ray {
-    orig: Point,
-    dir: Vec3,
+    pub orig: Point,
+    pub dir: Vec3,
 }
 
 impl Ray {

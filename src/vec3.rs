@@ -4,7 +4,14 @@ use std::ops::{Add, Sub, AddAssign, SubAssign, Mul, MulAssign, Div, DivAssign};
 pub struct Vec3(pub f64, pub f64, pub f64);
 
 pub type Point = Vec3;
+
+pub fn point(x: f64, y: f64, z: f64) -> Point {
+    return Vec3(x, y, z);
+}
+
 pub type Color = Vec3;
+
+
 
 impl Add<Vec3> for Vec3 {
     type Output = Vec3;
@@ -43,6 +50,14 @@ impl Mul<f64> for Vec3 {
 
     fn mul(self, rhs: f64) -> Self::Output {
         return Vec3(self.0 * rhs, self.1 * rhs, self.2 * rhs);
+    }
+}
+
+impl Mul<Vec3> for f64 {
+    type Output = Vec3;
+
+    fn mul(self, rhs: Vec3) -> Self::Output {
+        return rhs * self;
     }
 }
 
