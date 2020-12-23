@@ -6,8 +6,39 @@ use vec3::Vec3;
 use crate::color::{color, print_color};
 use crate::ray::Ray;
 use crate::vec3::{Color, point};
+use crate::sphere::Sphere;
+
+mod sphere {
+    use crate::vec3::Point;
+    use crate::ray::Ray;
+
+    pub struct Sphere {
+        pub center: Point,
+        pub radius: f64
+    }
+
+    impl Sphere {
+        pub fn is_hit_by(&self, ray: &Ray) -> bool {
+            let orig_to_center = ray.orig - self.center;
+            let a = ray.dir.length2();
+            let b = 2.0 * ray.dir.dot(&orig_to_center);
+            let c = orig_to_center.length2() - self.radius * self.radius;
+            let discr = b * b - 4.0 * a * c;
+            return discr >= 0.0;
+        }
+    }
+}
 
 fn ray_color(ray: &Ray) -> Color {
+    let sphere = Sphere {
+        radius: 0.5,
+        center: point(0.0, 0.0, -1.0),
+    };
+
+    if sphere.is_hit_by(ray) {
+        return color(1.0, 0.0, 0.0);
+    }
+
     let normalized_dir = ray.dir.normalize();
     let t = 0.5 * (normalized_dir.1 + 1.0);
     return (1.0 - t) * color(1.0, 1.0, 1.0) + t * color(0.5, 0.7, 1.0);
