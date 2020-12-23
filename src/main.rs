@@ -1,16 +1,14 @@
 use std::f64;
 
-use vec3::Vec3;
-
 use crate::camera::Camera;
 use crate::color::{color, print_color};
-use crate::geometry::{HitRecord, Hittable};
+use crate::geometry::Hittable;
 use crate::geometry::sphere::Sphere;
 use crate::ray::Ray;
 use crate::vec3::{Color, point};
 use rand::random;
 use std::rc::Rc;
-use crate::material::Lambertian;
+use crate::material::{Lambertian, Metal};
 
 mod vec3;
 mod color;
@@ -53,20 +51,41 @@ fn main() {
     let max_depth = 10;
 
     // World
+    let material_ground = Rc::new(Lambertian {
+        albedo: color(0.8, 0.8, 0.0)
+    });
+    let material_center = Rc::new(Lambertian {
+        albedo: color(0.7, 0.3, 0.3)
+    });
+    let material_left = Rc::new(Metal {
+        albedo: color(0.8, 0.8, 0.8),
+        fuzz: 0.3,
+    });
+    let material_right = Rc::new(Metal {
+        albedo: color(0.8, 0.6, 0.2),
+        fuzz: 1.0,
+    });
+
     let world: Vec<Box<dyn Hittable>> = vec![
         Box::new(Sphere {
             radius: 0.5,
             center: point(0.0, 0.0, -1.0),
-            material: Rc::new(Lambertian {
-                albedo: color(0.5, 0.0, 0.0),
-            }),
+            material: material_center,
+        }),
+        Box::new(Sphere {
+            radius: 0.5,
+            center: point(-1.0, 0.0, -1.0),
+            material: material_left,
+        }),
+        Box::new(Sphere {
+            radius: 0.5,
+            center: point(1.0, 0.0, -1.0),
+            material: material_right,
         }),
         Box::new(Sphere {
             radius: 100.0,
             center: point(0.0, -100.5, -1.0),
-            material: Rc::new(Lambertian {
-                albedo: color(0.5, 0.5, 0.5),
-            }),
+            material: material_ground,
         })
     ];
 
@@ -78,7 +97,7 @@ fn main() {
         eprint!("\rScanlines remaining: {}", j);
         for i in 0..image_width {
             let mut pix = color(0.0, 0.0, 0.0);
-            for s in 0..samples_per_pixel {
+            for _s in 0..samples_per_pixel {
                 let u = (i as f64 + random::<f64>()) / (image_width - 1) as f64;
                 let v = (j as f64 + random::<f64>()) / (image_height - 1) as f64;
                 let r = camera.get_ray(u, v);

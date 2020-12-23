@@ -127,6 +127,10 @@ impl Vec3 {
         return *self / self.length();
     }
 
+    pub fn reflect(&self, n: &Vec3) -> Vec3 {
+        return *self - 2.0 * (*n) * self.dot(n);
+    }
+
     pub fn random() -> Vec3 {
         return Vec3(
             2.0 * random::<f64>() - 1.0,

@@ -19,9 +19,25 @@ impl Material for Lambertian {
     fn scatter(&self, _ray_in: &Ray, hit_record: &HitRecord) -> Option<ScatteringRecord> {
         let target = hit_record.normal + Vec3::random_unit_vector();
         let scattered_ray = Ray { orig: hit_record.point, dir: target };
-        return Some(ScatteringRecord{
+        return Some(ScatteringRecord {
             ray: scattered_ray,
-            attenuation: self.albedo
-        })
+            attenuation: self.albedo,
+        });
+    }
+}
+
+pub struct Metal {
+    pub albedo: Color,
+    pub fuzz: f64,
+}
+
+impl Material for Metal {
+    fn scatter(&self, ray_in: &Ray, hit_record: &HitRecord) -> Option<ScatteringRecord> {
+        let dir = ray_in.dir.reflect(&hit_record.normal) + self.fuzz * Vec3::random_in_unit_sphere();
+        let scattered_ray = Ray { orig: hit_record.point, dir };
+        return Some(ScatteringRecord {
+            ray: scattered_ray,
+            attenuation: self.albedo,
+        });
     }
 }
