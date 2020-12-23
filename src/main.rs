@@ -8,7 +8,7 @@ use crate::ray::Ray;
 use crate::vec3::{Color, point};
 use rand::random;
 use std::rc::Rc;
-use crate::material::{Lambertian, Metal};
+use crate::material::{Lambertian, Metal, Dielectric};
 
 mod vec3;
 mod color;
@@ -54,12 +54,11 @@ fn main() {
     let material_ground = Rc::new(Lambertian {
         albedo: color(0.8, 0.8, 0.0)
     });
-    let material_center = Rc::new(Lambertian {
-        albedo: color(0.7, 0.3, 0.3)
+    let material_center = Rc::new(Dielectric {
+        index_of_refraction: 1.5,
     });
-    let material_left = Rc::new(Metal {
-        albedo: color(0.8, 0.8, 0.8),
-        fuzz: 0.3,
+    let material_left = Rc::new(Dielectric {
+        index_of_refraction: 1.5,
     });
     let material_right = Rc::new(Metal {
         albedo: color(0.8, 0.6, 0.2),

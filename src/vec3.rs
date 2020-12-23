@@ -136,6 +136,13 @@ impl Vec3 {
         return *self - 2.0 * (*n) * self.dot(n);
     }
 
+    pub fn refract(uv: &Vec3, n: &Vec3, etai_over_etat: f64) -> Vec3 {
+        let cos_theta = (-uv.dot(n)).min(1.0);
+        let r_out_perp = etai_over_etat * ((*uv) + cos_theta * (*n));
+        let r_out_par = -(1.0 - r_out_perp.length2()).abs().sqrt() * (*n);
+        return r_out_perp + r_out_par;
+    }
+
     pub fn random() -> Vec3 {
         return Vec3(
             2.0 * random::<f64>() - 1.0,
