@@ -13,12 +13,7 @@ mod color;
 mod ray;
 mod geometry;
 
-fn ray_color(ray: &Ray, world: &Hittable) -> Color {
-    // let sphere = Sphere {
-    //     radius: 0.5,
-    //     center: point(0.0, 0.0, -1.0),
-    // };
-
+fn ray_color(ray: &Ray, world: &dyn Hittable) -> Color {
     let hit_record = world.hit_by(ray, 0.0, f64::INFINITY);
     return match hit_record {
         Some(hit) =>
