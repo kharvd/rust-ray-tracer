@@ -21,15 +21,15 @@ mod sphere {
         pub fn hit_by(&self, ray: &Ray) -> f64 {
             let orig_to_center = ray.orig - self.center;
             let a = ray.dir.length2();
-            let b = 2.0 * ray.dir.dot(&orig_to_center);
+            let half_b = ray.dir.dot(&orig_to_center);
             let c = orig_to_center.length2() - self.radius * self.radius;
-            let discr = b * b - 4.0 * a * c;
+            let discr = half_b * half_b - a * c;
 
             if discr < 0.0 {
                 return -1.0;
             }
 
-            return (-b - discr.sqrt()) / (2.0 * a);
+            return (-half_b - discr.sqrt()) / a;
         }
 
         pub fn normal_at(&self, point: &Point) -> Vec3 {
