@@ -8,7 +8,7 @@ use crate::color::{color, print_color};
 use crate::ray::Ray;
 use crate::vec3::{Color, point};
 use crate::geometry::sphere::Sphere;
-use crate::geometry::Hittable;
+use crate::geometry::{Hittable, HitRecord};
 
 fn ray_color(ray: &Ray) -> Color {
     let sphere = Sphere {
@@ -16,15 +16,17 @@ fn ray_color(ray: &Ray) -> Color {
         center: point(0.0, 0.0, -1.0),
     };
 
-    let t = sphere.hit_by(ray);
-    if t > 0.0 {
-        let normal = sphere.normal_at(&ray.at(t));
-        return 0.5 * color(normal.0 + 1.0, normal.1 + 1.0, normal.2 + 1.0);
-    }
+    let hit_record = sphere.hit_by(ray);
+    return match hit_record {
+        Some(hit) =>
+            0.5 * color(hit.normal.0 + 1.0, hit.normal.1 + 1.0, hit.normal.2 + 1.0),
 
-    let normalized_dir = ray.dir.normalize();
-    let t = 0.5 * (normalized_dir.1 + 1.0);
-    return (1.0 - t) * color(1.0, 1.0, 1.0) + t * color(0.5, 0.7, 1.0);
+        _ => {
+            let normalized_dir = ray.dir.normalize();
+            let t = 0.5 * (normalized_dir.1 + 1.0);
+            (1.0 - t) * color(1.0, 1.0, 1.0) + t * color(0.5, 0.7, 1.0)
+        }
+    };
 }
 
 fn main() {
