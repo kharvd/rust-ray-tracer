@@ -5,7 +5,7 @@ use crate::color::{color, print_color};
 use crate::geometry::Hittable;
 use crate::geometry::sphere::Sphere;
 use crate::ray::Ray;
-use crate::vec3::{Color, point};
+use crate::vec3::{Color, point, Vec3};
 use rand::random;
 use std::rc::Rc;
 use crate::material::{Lambertian, Metal, Dielectric};
@@ -51,30 +51,56 @@ fn main() {
     let max_depth = 10;
 
     // World
-    let material_left = Rc::new(Lambertian {
-        albedo: color(0.0, 0.0, 1.0),
+    let material_ground = Rc::new(Lambertian {
+        albedo: color(0.8, 0.8, 0.0)
     });
-    let material_right = Rc::new(Lambertian {
-        albedo: color(1.0, 0.0, 0.0),
+    let material_center = Rc::new(Lambertian {
+        albedo: color(0.1, 0.2, 0.5),
     });
-
-    let R = (std::f64::consts::PI / 4.0).cos();
+    let material_left = Rc::new(Dielectric {
+        index_of_refraction: 1.5,
+    });
+    let material_right = Rc::new(Metal {
+        albedo: color(0.8, 0.6, 0.2),
+        fuzz: 0.0,
+    });
 
     let world: Vec<Box<dyn Hittable>> = vec![
         Box::new(Sphere {
-            radius: R,
-            center: point(-R, 0.0, -1.0),
-            material: material_left,
+            radius: 0.5,
+            center: point(0.0, 0.0, -1.0),
+            material: material_center,
         }),
         Box::new(Sphere {
-            radius: R,
-            center: point(R, 0.0, -1.0),
+            radius: 0.5,
+            center: point(-1.0, 0.0, -1.0),
+            material: material_left.clone(),
+        }),
+        Box::new(Sphere {
+            radius: -0.45,
+            center: point(-1.0, 0.0, -1.0),
+            material: material_left.clone(),
+        }),
+        Box::new(Sphere {
+            radius: 0.5,
+            center: point(1.0, 0.0, -1.0),
             material: material_right,
         }),
+        Box::new(Sphere {
+            radius: 100.0,
+            center: point(0.0, -100.5, -1.0),
+            material: material_ground,
+        })
     ];
 
     // Camera
-    let camera = Camera::create(90.0, 16.0 / 9.0);
+    let camera = Camera::create(
+        &point(0.0, 0.0, 4.0),
+        &point(0.0, 0.0, -1.0),
+        &Vec3(0.0, 1.0, 0.0),
+        20.0,
+        16.0 / 9.0,
+    );
 
     println!("P3\n{} {}\n255", image_width, image_height);
     for j in (0..image_height).rev() {
