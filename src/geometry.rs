@@ -24,6 +24,17 @@ pub trait Hittable {
     fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord>;
 }
 
+type HittableList = Vec<Box<dyn Hittable>>;
+
+impl Hittable for HittableList {
+    fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
+        return self.iter()
+            .map(|object| object.hit_by(ray, t_min, t_max))
+            .filter_map(|opt_rec| opt_rec)
+            .min_by(|rec1, rec2| rec1.t.partial_cmp(&rec2.t).unwrap());
+    }
+}
+
 pub mod sphere {
     use crate::vec3::{Point, Vec3};
     use crate::ray::Ray;
