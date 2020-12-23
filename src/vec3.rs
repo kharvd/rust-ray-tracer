@@ -127,6 +127,11 @@ impl Vec3 {
         return *self / self.length();
     }
 
+    pub fn near_zero(&self) -> bool {
+        let eps = 1e-8;
+        return self.0.abs() < eps && self.1.abs() < eps && self.2.abs() < eps;
+    }
+
     pub fn reflect(&self, n: &Vec3) -> Vec3 {
         return *self - 2.0 * (*n) * self.dot(n);
     }
