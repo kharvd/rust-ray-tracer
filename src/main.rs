@@ -1,42 +1,14 @@
 mod vec3;
 mod color;
 mod ray;
+mod geometry;
 
 use vec3::Vec3;
 use crate::color::{color, print_color};
 use crate::ray::Ray;
 use crate::vec3::{Color, point};
-use crate::sphere::Sphere;
-
-mod sphere {
-    use crate::vec3::{Point, Vec3};
-    use crate::ray::Ray;
-
-    pub struct Sphere {
-        pub center: Point,
-        pub radius: f64
-    }
-
-    impl Sphere {
-        pub fn hit_by(&self, ray: &Ray) -> f64 {
-            let orig_to_center = ray.orig - self.center;
-            let a = ray.dir.length2();
-            let half_b = ray.dir.dot(&orig_to_center);
-            let c = orig_to_center.length2() - self.radius * self.radius;
-            let discr = half_b * half_b - a * c;
-
-            if discr < 0.0 {
-                return -1.0;
-            }
-
-            return (-half_b - discr.sqrt()) / a;
-        }
-
-        pub fn normal_at(&self, point: &Point) -> Vec3 {
-            return (*point - self.center).normalize();
-        }
-    }
-}
+use crate::geometry::sphere::Sphere;
+use crate::geometry::Hittable;
 
 fn ray_color(ray: &Ray) -> Color {
     let sphere = Sphere {
@@ -80,7 +52,7 @@ fn main() {
             let v = j as f64 / (image_height - 1) as f64;
             let r = Ray {
                 orig: origin,
-                dir: lower_left_corner + u * horizontal + v * vertical - origin
+                dir: lower_left_corner + u * horizontal + v * vertical - origin,
             };
             let pix = ray_color(&r);
 
