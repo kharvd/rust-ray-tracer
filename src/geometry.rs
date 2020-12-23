@@ -6,6 +6,18 @@ pub struct HitRecord {
     pub point: Point,
     pub normal: Vec3,
     pub t: f64,
+    pub front_face: bool,
+}
+
+pub fn create_hit_record(ray: &Ray, point: Point, outward_normal: &Vec3, t: f64) -> HitRecord {
+    let front_face = ray.dir.dot(outward_normal) < 0.0;
+    let normal = if front_face { *outward_normal } else { -(*outward_normal) };
+    return HitRecord {
+        point,
+        t,
+        normal,
+        front_face,
+    };
 }
 
 pub trait Hittable {
@@ -15,7 +27,7 @@ pub trait Hittable {
 pub mod sphere {
     use crate::vec3::{Point, Vec3};
     use crate::ray::Ray;
-    use crate::geometry::{Hittable, HitRecord};
+    use crate::geometry::{Hittable, HitRecord, create_hit_record};
 
     pub struct Sphere {
         pub center: Point,
@@ -50,7 +62,7 @@ pub mod sphere {
 
             let point = ray.at(t);
             let normal = self.normal_at(&point);
-            return Some(HitRecord { point, normal, t });
+            return Some(create_hit_record(ray, point, &normal, t));
         }
     }
 

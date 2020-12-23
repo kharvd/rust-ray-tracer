@@ -1,4 +1,4 @@
-use std::ops::{Add, Sub, AddAssign, SubAssign, Mul, MulAssign, Div, DivAssign};
+use std::ops::{Add, Sub, AddAssign, SubAssign, Mul, MulAssign, Div, DivAssign, Neg};
 
 #[derive(Debug, Clone, Copy)]
 pub struct Vec3(pub f64, pub f64, pub f64);
@@ -11,7 +11,13 @@ pub fn point(x: f64, y: f64, z: f64) -> Point {
 
 pub type Color = Vec3;
 
+impl Neg for Vec3 {
+    type Output = Vec3;
 
+    fn neg(self) -> Self::Output {
+        return Vec3(-self.0, -self.1, -self.2);
+    }
+}
 
 impl Add<Vec3> for Vec3 {
     type Output = Vec3;
@@ -100,8 +106,8 @@ impl Vec3 {
         return Vec3(
             self.1 * other.2 - self.2 * other.1,
             self.2 * other.0 - self.0 * other.2,
-            self.0 * other.1 - self.1 * other.0
-        )
+            self.0 * other.1 - self.1 * other.0,
+        );
     }
 
     pub fn normalize(&self) -> Vec3 {
