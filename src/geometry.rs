@@ -99,7 +99,7 @@ pub mod sphere {
 
     impl Sphere {
         pub fn normal_at(&self, point: &Point) -> Vec3 {
-            return (*point - self.center).normalize();
+            return (*point - self.center) / self.radius;
         }
     }
 }

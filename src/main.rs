@@ -54,15 +54,15 @@ fn main() {
     let material_ground = Rc::new(Lambertian {
         albedo: color(0.8, 0.8, 0.0)
     });
-    let material_center = Rc::new(Dielectric {
-        index_of_refraction: 1.5,
+    let material_center = Rc::new(Lambertian {
+        albedo: color(0.1, 0.2, 0.5),
     });
     let material_left = Rc::new(Dielectric {
         index_of_refraction: 1.5,
     });
     let material_right = Rc::new(Metal {
         albedo: color(0.8, 0.6, 0.2),
-        fuzz: 1.0,
+        fuzz: 0.0,
     });
 
     let world: Vec<Box<dyn Hittable>> = vec![
@@ -74,7 +74,12 @@ fn main() {
         Box::new(Sphere {
             radius: 0.5,
             center: point(-1.0, 0.0, -1.0),
-            material: material_left,
+            material: material_left.clone(),
+        }),
+        Box::new(Sphere {
+            radius: -0.4,
+            center: point(-1.0, 0.0, -1.0),
+            material: material_left.clone(),
         }),
         Box::new(Sphere {
             radius: 0.5,
