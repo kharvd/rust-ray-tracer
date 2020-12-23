@@ -9,7 +9,7 @@ use crate::vec3::{Color, point};
 use crate::sphere::Sphere;
 
 mod sphere {
-    use crate::vec3::Point;
+    use crate::vec3::{Point, Vec3};
     use crate::ray::Ray;
 
     pub struct Sphere {
@@ -18,13 +18,22 @@ mod sphere {
     }
 
     impl Sphere {
-        pub fn is_hit_by(&self, ray: &Ray) -> bool {
+        pub fn hit_by(&self, ray: &Ray) -> f64 {
             let orig_to_center = ray.orig - self.center;
             let a = ray.dir.length2();
             let b = 2.0 * ray.dir.dot(&orig_to_center);
             let c = orig_to_center.length2() - self.radius * self.radius;
             let discr = b * b - 4.0 * a * c;
-            return discr >= 0.0;
+
+            if discr < 0.0 {
+                return -1.0;
+            }
+
+            return (-b - discr.sqrt()) / (2.0 * a);
+        }
+
+        pub fn normal_at(&self, point: &Point) -> Vec3 {
+            return (*point - self.center).normalize();
         }
     }
 }
@@ -35,8 +44,10 @@ fn ray_color(ray: &Ray) -> Color {
         center: point(0.0, 0.0, -1.0),
     };
 
-    if sphere.is_hit_by(ray) {
-        return color(1.0, 0.0, 0.0);
+    let t = sphere.hit_by(ray);
+    if t > 0.0 {
+        let normal = sphere.normal_at(&ray.at(t));
+        return 0.5 * color(normal.0 + 1.0, normal.1 + 1.0, normal.2 + 1.0);
     }
 
     let normalized_dir = ray.dir.normalize();
