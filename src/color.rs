@@ -16,11 +16,16 @@ fn clamp(x: f64, min: f64, max: f64) -> f64 {
 
 pub fn print_color(col: Color, samples_per_pixel: i32) {
     let scaled_col = col / samples_per_pixel as f64;
+    let gamma = 2.0;
+    let r = scaled_col.0.powf(1.0 / gamma);
+    let g = scaled_col.1.powf(1.0 / gamma);
+    let b = scaled_col.2.powf(1.0 / gamma);
+
     println!(
         "{} {} {}",
-        float_to_int(scaled_col.0),
-        float_to_int(scaled_col.1),
-        float_to_int(scaled_col.2)
+        float_to_int(r),
+        float_to_int(g),
+        float_to_int(b)
     );
 }
 
