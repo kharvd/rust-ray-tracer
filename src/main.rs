@@ -13,13 +13,13 @@ mod color;
 mod ray;
 mod geometry;
 
-fn ray_color(ray: &Ray) -> Color {
-    let sphere = Sphere {
-        radius: 0.5,
-        center: point(0.0, 0.0, -1.0),
-    };
+fn ray_color(ray: &Ray, world: &Hittable) -> Color {
+    // let sphere = Sphere {
+    //     radius: 0.5,
+    //     center: point(0.0, 0.0, -1.0),
+    // };
 
-    let hit_record = sphere.hit_by(ray, 0.0, f64::INFINITY);
+    let hit_record = world.hit_by(ray, 0.0, f64::INFINITY);
     return match hit_record {
         Some(hit) =>
             0.5 * color(hit.normal.0 + 1.0, hit.normal.1 + 1.0, hit.normal.2 + 1.0),
@@ -37,6 +37,18 @@ fn main() {
     let aspect_ratio = 16.0 / 9.0;
     let image_width = 400;
     let image_height = (image_width as f64 / aspect_ratio) as i32;
+
+    // World
+    let world: Vec<Box<dyn Hittable>> = vec![
+        Box::new(Sphere {
+            radius: 0.5,
+            center: point(0.0, 0.0, -1.0),
+        }),
+        Box::new(Sphere {
+            radius: 100.0,
+            center: point(0.0, -100.5, -1.0),
+        })
+    ];
 
     // Camera
     let viewport_height = 2.0;
@@ -59,7 +71,7 @@ fn main() {
                 orig: origin,
                 dir: lower_left_corner + u * horizontal + v * vertical - origin,
             };
-            let pix = ray_color(&r);
+            let pix = ray_color(&r, &world);
 
             print_color(pix);
         }
