@@ -9,12 +9,15 @@ use crate::geometry::sphere::Sphere;
 use crate::ray::Ray;
 use crate::vec3::{Color, point};
 use rand::random;
+use std::rc::Rc;
+use crate::material::Lambertian;
 
 mod vec3;
 mod color;
 mod ray;
 mod geometry;
 mod camera;
+mod material;
 
 fn ray_color(ray: &Ray, world: &dyn Hittable, depth: i32) -> Color {
     if depth <= 0 {
@@ -24,9 +27,13 @@ fn ray_color(ray: &Ray, world: &dyn Hittable, depth: i32) -> Color {
     let hit_record = world.hit_by(ray, 0.001, f64::INFINITY);
     return match hit_record {
         Some(rec) => {
-            let target = rec.point + rec.normal + Vec3::random_unit_vector();
-            let next_ray = Ray { orig: rec.point, dir: target - rec.point };
-            0.5 * ray_color(&next_ray, world, depth - 1)
+            match rec.material.scatter(ray, &rec) {
+                Some(scatter_rec) => {
+                    scatter_rec.attenuation * ray_color(&scatter_rec.ray, world, depth - 1)
+                }
+
+                None => color(0.0, 0.0, 0.0)
+            }
         }
 
         _ => {
@@ -50,10 +57,16 @@ fn main() {
         Box::new(Sphere {
             radius: 0.5,
             center: point(0.0, 0.0, -1.0),
+            material: Rc::new(Lambertian {
+                albedo: color(0.5, 0.0, 0.0),
+            }),
         }),
         Box::new(Sphere {
             radius: 100.0,
             center: point(0.0, -100.5, -1.0),
+            material: Rc::new(Lambertian {
+                albedo: color(0.5, 0.5, 0.5),
+            }),
         })
     ];
 

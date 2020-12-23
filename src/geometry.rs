@@ -1,16 +1,24 @@
 use crate::ray::Ray;
 use crate::vec3::{Point, Vec3};
+use crate::material::Material;
+use std::rc::Rc;
 
-#[derive(Debug, Clone, Copy)]
 pub struct HitRecord {
     pub point: Point,
     pub normal: Vec3,
     pub t: f64,
     pub front_face: bool,
+    pub material: Rc<dyn Material>,
 }
 
 impl HitRecord {
-    pub fn create(ray: &Ray, point: Point, outward_normal: &Vec3, t: f64) -> HitRecord {
+    pub fn create(
+        ray: &Ray,
+        point: Point,
+        outward_normal: &Vec3,
+        t: f64,
+        material: Rc<dyn Material>,
+    ) -> HitRecord {
         let front_face = ray.dir.dot(outward_normal) < 0.0;
         let normal = if front_face { *outward_normal } else { -(*outward_normal) };
         return HitRecord {
@@ -18,6 +26,7 @@ impl HitRecord {
             t,
             normal,
             front_face,
+            material,
         };
     }
 }
@@ -41,10 +50,13 @@ pub mod sphere {
     use crate::vec3::{Point, Vec3};
     use crate::ray::Ray;
     use crate::geometry::{Hittable, HitRecord};
+    use crate::material::Material;
+    use std::rc::Rc;
 
     pub struct Sphere {
         pub center: Point,
         pub radius: f64,
+        pub material: Rc<dyn Material>,
     }
 
     impl Hittable for Sphere {
@@ -75,7 +87,13 @@ pub mod sphere {
 
             let point = ray.at(t);
             let normal = self.normal_at(&point);
-            return Some(HitRecord::create(ray, point, &normal, t));
+            return Some(HitRecord::create(
+                ray,
+                point,
+                &normal,
+                t,
+                self.material.clone(),
+            ));
         }
     }
 
