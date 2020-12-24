@@ -1,9 +1,10 @@
 use crate::ray::Ray;
-use crate::vec3::{Point, Vec3};
+use crate::vec3::Vec3;
 use crate::material::Material;
+use crate::point3::Point3;
 
 pub struct HitRecord<'a> {
-    pub point: Point,
+    pub point: Point3,
     pub normal: Vec3,
     pub t: f64,
     pub front_face: bool,
@@ -13,7 +14,7 @@ pub struct HitRecord<'a> {
 impl<'a> HitRecord<'a> {
     pub fn create(
         ray: &Ray,
-        point: Point,
+        point: Point3,
         outward_normal: Vec3,
         t: f64,
         material: &'a dyn Material,
@@ -55,14 +56,15 @@ impl Hittable for HittableList {
 }
 
 pub mod sphere {
-    use crate::vec3::{Point, Vec3};
+    use crate::vec3::Vec3;
+    use crate::point3::Point3;
     use crate::ray::Ray;
     use crate::geometry::{Hittable, HitRecord};
     use crate::material::Material;
     use std::borrow::Borrow;
 
     pub struct Sphere {
-        pub center: Point,
+        pub center: Point3,
         pub radius: f64,
         pub material: Box<dyn Material>,
     }
@@ -106,7 +108,7 @@ pub mod sphere {
     }
 
     impl Sphere {
-        pub fn normal_at(&self, point: Point) -> Vec3 {
+        pub fn normal_at(&self, point: Point3) -> Vec3 {
             return (point - self.center) / self.radius;
         }
     }

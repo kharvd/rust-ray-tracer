@@ -4,12 +4,6 @@ use rand::{Rng, RngCore};
 #[derive(Debug, Clone, Copy)]
 pub struct Vec3(pub f64, pub f64, pub f64);
 
-pub type Point = Vec3;
-
-pub fn point(x: f64, y: f64, z: f64) -> Point {
-    return Vec3(x, y, z);
-}
-
 impl_op_ex!(+ |lhs: &Vec3, rhs: &Vec3| -> Vec3 { Vec3(lhs.0 + rhs.0, lhs.1 + rhs.1, lhs.2 + rhs.2) });
 impl_op_ex_commutative!(+ |lhs: &Vec3, rhs: f64| -> Vec3 { Vec3(lhs.0 + rhs, lhs.1 + rhs, lhs.2 + rhs) });
 impl_op_ex!(+= |lhs: &mut Vec3, rhs: &Vec3| { lhs.0 += rhs.0; lhs.1 += rhs.1; lhs.2 += rhs.2 });

@@ -7,10 +7,11 @@ use crate::color::{print_color, Color};
 use crate::geometry::{Hittable, HitRecord, HittableList};
 use crate::geometry::sphere::Sphere;
 use crate::ray::Ray;
-use crate::vec3::{point, Vec3};
+use crate::vec3::Vec3;
 use rand::{random, SeedableRng, RngCore, Rng};
 use crate::material::{Lambertian, Metal, Dielectric, Material};
 use rand::rngs::SmallRng;
+use crate::point3::Point3;
 
 mod vec3;
 mod color;
@@ -18,6 +19,8 @@ mod ray;
 mod geometry;
 mod camera;
 mod material;
+
+mod point3;
 
 fn ray_color(rng: &mut dyn RngCore, ray: &Ray, world: &dyn Hittable, depth: i32) -> Color {
     if depth <= 0 {
@@ -49,18 +52,18 @@ fn random_scene(rng: &mut dyn RngCore) -> HittableList {
 
     world.push(Box::new(Sphere {
         radius: 1000.0,
-        center: point(0.0, -1000.0, -1.0),
+        center: Point3::new(0.0, -1000.0, -1.0),
         material: Box::new(Lambertian {
             albedo: Color::new(0.5, 0.5, 0.5)
         }),
     }));
 
-    let p = point(4.0, 0.2, 0.0);
+    let p = Point3::new(4.0, 0.2, 0.0);
 
     for a in -11..11 {
         for b in -11..11 {
             let choose_mat = rng.gen::<f64>();
-            let center = point(
+            let center = Point3::new(
                 a as f64 + 0.9 * rng.gen::<f64>(),
                 0.2,
                 b as f64 + 0.9 * rng.gen::<f64>(),
@@ -96,7 +99,7 @@ fn random_scene(rng: &mut dyn RngCore) -> HittableList {
 
     world.push(Box::new(Sphere {
         radius: 1.0,
-        center: point(0.0, 1.0, 0.0),
+        center: Point3::new(0.0, 1.0, 0.0),
         material: Box::new(Dielectric {
             index_of_refraction: 1.5,
         }),
@@ -104,7 +107,7 @@ fn random_scene(rng: &mut dyn RngCore) -> HittableList {
 
     world.push(Box::new(Sphere {
         radius: 1.0,
-        center: point(-4.0, 1.0, 0.0),
+        center: Point3::new(-4.0, 1.0, 0.0),
         material: Box::new(Lambertian {
             albedo: Color::new(0.4, 0.2, 0.1),
         }),
@@ -112,7 +115,7 @@ fn random_scene(rng: &mut dyn RngCore) -> HittableList {
 
     world.push(Box::new(Sphere {
         radius: 1.0,
-        center: point(4.0, 1.0, 0.0),
+        center: Point3::new(4.0, 1.0, 0.0),
         material: Box::new(Metal {
             albedo: Color::new(0.7, 0.6, 0.5),
             fuzz: 0.0,
@@ -136,8 +139,8 @@ fn main() {
     let world = random_scene(&mut rng);
 
     // Camera
-    let lookfrom = point(13.0, 2.0, 3.0);
-    let lookat = point(0.0, 0.0, 0.0);
+    let lookfrom = Point3::new(13.0, 2.0, 3.0);
+    let lookat = Point3::new(0.0, 0.0, 0.0);
     let dist_to_focus = 10.0;
     let aperture = 0.1;
     let camera = Camera::create(

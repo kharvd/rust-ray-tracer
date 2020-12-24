@@ -1,10 +1,11 @@
-use crate::vec3::{Point, Vec3};
+use crate::vec3::Vec3;
 use crate::ray::Ray;
 use rand::RngCore;
+use crate::point3::Point3;
 
 pub struct Camera {
-    origin: Point,
-    lower_left_corner: Point,
+    origin: Point3,
+    lower_left_corner: Point3,
     horizontal: Vec3,
     vertical: Vec3,
     u: Vec3,
@@ -15,8 +16,8 @@ pub struct Camera {
 
 impl Camera {
     pub fn create(
-        lookfrom: Point,
-        lookat: Point,
+        lookfrom: Point3,
+        lookat: Point3,
         vup: Vec3,
         vfov_deg: f64,
         aspect_ratio: f64,
