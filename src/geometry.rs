@@ -113,3 +113,41 @@ pub mod sphere {
         }
     }
 }
+
+pub mod plane {
+    use crate::point3::Point3;
+    use crate::vec3::Vec3;
+    use crate::material::Material;
+    use crate::geometry::{Hittable, HitRecord};
+    use crate::ray::Ray;
+    use std::borrow::Borrow;
+
+    pub struct Plane {
+        pub center: Point3,
+        pub normal: Vec3,
+        pub material: Box<dyn Material>,
+    }
+
+    impl Hittable for Plane {
+        fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
+            let dir_dot_normal = ray.dir.dot(self.normal);
+            if dir_dot_normal.abs() < 1e-8 {
+                return None;
+            }
+
+            let orig_to_center = self.center - ray.orig;
+            let t = orig_to_center.dot(self.normal) / dir_dot_normal;
+            if t_min < t && t < t_max {
+                return Some(HitRecord::create(
+                    ray,
+                    ray.at(t),
+                    self.normal,
+                    t,
+                    self.material.borrow(),
+                ));
+            }
+
+            return None;
+        }
+    }
+}

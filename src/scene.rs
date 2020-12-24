@@ -12,6 +12,7 @@ use rand::{RngCore, Rng, SeedableRng};
 use std::fs::File;
 use std::io::Write;
 use rand::rngs::SmallRng;
+use crate::geometry::plane::Plane;
 
 #[derive(Debug, Serialize, Deserialize)]
 struct CameraSpec {
@@ -83,6 +84,11 @@ enum ObjectSpec {
         center: Point3,
         radius: f64,
         material: MaterialSpec,
+    },
+    PLANE {
+        center: Point3,
+        normal: Vec3,
+        material: MaterialSpec,
     }
 }
 
@@ -93,6 +99,13 @@ impl ObjectSpec {
                 Box::new(Sphere {
                     radius: *radius,
                     center: *center,
+                    material: material.to_material(),
+                })
+            }
+            ObjectSpec::PLANE { center, normal, material } => {
+                Box::new(Plane {
+                    center: *center,
+                    normal: *normal,
                     material: material.to_material(),
                 })
             }
