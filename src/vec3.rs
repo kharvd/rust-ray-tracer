@@ -10,8 +10,6 @@ pub fn point(x: f64, y: f64, z: f64) -> Point {
     return Vec3(x, y, z);
 }
 
-pub type Color = Vec3;
-
 impl Neg for Vec3 {
     type Output = Vec3;
 

@@ -8,6 +8,7 @@ edition = "2018"
 
 [dependencies]
 rand = { version = "0.8.0", features = ["small_rng"] }
+impl_ops = "0.1.1"
 
 [profile.release]
 debug = true

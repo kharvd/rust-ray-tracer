@@ -1,8 +1,8 @@
 use crate::ray::Ray;
 use crate::geometry::HitRecord;
-use crate::vec3::{Color, Vec3};
-use crate::color::color;
+use crate::vec3::Vec3;
 use rand::{random, RngCore};
+use crate::color::Color;
 
 pub struct ScatteringRecord {
     pub ray: Ray,
@@ -85,7 +85,7 @@ impl Material for Dielectric {
         let scattered_ray = Ray { orig: hit_record.point, dir };
         return Some(ScatteringRecord {
             ray: scattered_ray,
-            attenuation: color(1.0, 1.0, 1.0),
+            attenuation: Color::new(1.0, 1.0, 1.0),
         });
     }
 }

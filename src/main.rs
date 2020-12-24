@@ -1,11 +1,13 @@
+#[macro_use] extern crate impl_ops;
+
 use std::f64;
 
 use crate::camera::Camera;
-use crate::color::{color, print_color, random_color};
+use crate::color::{print_color, Color};
 use crate::geometry::{Hittable, HitRecord, HittableList};
 use crate::geometry::sphere::Sphere;
 use crate::ray::Ray;
-use crate::vec3::{Color, point, Vec3};
+use crate::vec3::{point, Vec3};
 use rand::{random, SeedableRng, RngCore, Rng};
 use crate::material::{Lambertian, Metal, Dielectric, Material};
 use rand::rngs::SmallRng;
@@ -19,7 +21,7 @@ mod material;
 
 fn ray_color(rng: &mut dyn RngCore, ray: &Ray, world: &dyn Hittable, depth: i32) -> Color {
     if depth <= 0 {
-        return color(0.0, 0.0, 0.0);
+        return Color::new(0.0, 0.0, 0.0);
     }
 
     let hit_record: Option<HitRecord> = world.hit_by(ray, 0.001, f64::INFINITY);
@@ -30,14 +32,14 @@ fn ray_color(rng: &mut dyn RngCore, ray: &Ray, world: &dyn Hittable, depth: i32)
                     scatter_rec.attenuation * ray_color(rng, &scatter_rec.ray, world, depth - 1)
                 }
 
-                None => color(0.0, 0.0, 0.0)
+                None => Color::new(0.0, 0.0, 0.0)
             }
         }
 
         _ => {
             let normalized_dir = ray.dir.normalize();
             let t = 0.5 * (normalized_dir.1 + 1.0);
-            (1.0 - t) * color(1.0, 1.0, 1.0) + t * color(0.5, 0.7, 1.0)
+            (1.0 - t) * Color::new(1.0, 1.0, 1.0) + t * Color::new(0.5, 0.7, 1.0)
         }
     };
 }
@@ -49,7 +51,7 @@ fn random_scene(rng: &mut dyn RngCore) -> HittableList {
         radius: 1000.0,
         center: point(0.0, -1000.0, -1.0),
         material: Box::new(Lambertian {
-            albedo: color(0.5, 0.5, 0.5)
+            albedo: Color::new(0.5, 0.5, 0.5)
         }),
     }));
 
@@ -66,12 +68,12 @@ fn random_scene(rng: &mut dyn RngCore) -> HittableList {
 
             if (center - p).length() > 0.9 {
                 let material: Box<dyn Material> = if choose_mat < 0.8 {
-                    let albedo = random_color(rng) * random_color(rng);
+                    let albedo = Color::random(rng) * Color::random(rng);
                     Box::new(Lambertian {
                         albedo,
                     })
                 } else if choose_mat < 0.95 {
-                    let albedo = random_color(rng) / 2.0 + 0.5;
+                    let albedo = Color::random(rng) / 2.0 + 0.5;
                     let fuzz = rng.gen_range(0.0..0.5);
                     Box::new(Metal {
                         albedo,
@@ -104,7 +106,7 @@ fn random_scene(rng: &mut dyn RngCore) -> HittableList {
         radius: 1.0,
         center: point(-4.0, 1.0, 0.0),
         material: Box::new(Lambertian {
-            albedo: color(0.4, 0.2, 0.1),
+            albedo: Color::new(0.4, 0.2, 0.1),
         }),
     }));
 
@@ -112,7 +114,7 @@ fn random_scene(rng: &mut dyn RngCore) -> HittableList {
         radius: 1.0,
         center: point(4.0, 1.0, 0.0),
         material: Box::new(Metal {
-            albedo: color(0.7, 0.6, 0.5),
+            albedo: Color::new(0.7, 0.6, 0.5),
             fuzz: 0.0,
         }),
     }));
@@ -125,10 +127,10 @@ fn main() {
 
     // Image
     let aspect_ratio = 3.0 / 2.0;
-    let image_width = 1200;
+    let image_width = 200;
     let image_height = (image_width as f64 / aspect_ratio) as i32;
-    let samples_per_pixel = 500;
-    let max_depth = 50;
+    let samples_per_pixel = 10;
+    let max_depth = 10;
 
     // World
     let world = random_scene(&mut rng);
@@ -152,7 +154,7 @@ fn main() {
     for j in (0..image_height).rev() {
         eprint!("\rScanlines remaining: {}", j);
         for i in 0..image_width {
-            let mut pix = color(0.0, 0.0, 0.0);
+            let mut pix = Color::new(0.0, 0.0, 0.0);
             for _s in 0..samples_per_pixel {
                 let u = (i as f64 + random::<f64>()) / (image_width - 1) as f64;
                 let v = (j as f64 + random::<f64>()) / (image_height - 1) as f64;

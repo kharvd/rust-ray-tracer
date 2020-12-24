@@ -1,7 +1,6 @@
 use crate::ray::Ray;
 use crate::vec3::{Point, Vec3};
 use crate::material::Material;
-use std::rc::Rc;
 
 pub struct HitRecord<'a> {
     pub point: Point,
