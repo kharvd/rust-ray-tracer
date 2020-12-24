@@ -11,6 +11,6 @@ impl Point3 {
     }
 }
 
-impl_op_ex_commutative!(+ |lhs: &Point3, rhs: &Vec3| -> Point3 { Point3(lhs.0 + rhs.0, lhs.1 + rhs.1, lhs.2 + rhs.2) });
+impl_op_ex!(+ |lhs: &Point3, rhs: &Vec3| -> Point3 { Point3(lhs.0 + rhs.0, lhs.1 + rhs.1, lhs.2 + rhs.2) });
 impl_op_ex!(- |lhs: &Point3, rhs: &Vec3| -> Point3 { Point3(lhs.0 - rhs.0, lhs.1 - rhs.1, lhs.2 - rhs.2) });
 impl_op_ex!(- |lhs: &Point3, rhs: &Point3| -> Vec3 { Vec3(lhs.0 - rhs.0, lhs.1 - rhs.1, lhs.2 - rhs.2) });
