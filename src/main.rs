@@ -2,12 +2,11 @@ use std::f64;
 
 use crate::camera::Camera;
 use crate::color::{color, print_color};
-use crate::geometry::Hittable;
+use crate::geometry::{Hittable, HitRecord};
 use crate::geometry::sphere::Sphere;
 use crate::ray::Ray;
 use crate::vec3::{Color, point, Vec3};
 use rand::{random, SeedableRng, RngCore};
-use std::rc::Rc;
 use crate::material::{Lambertian, Metal, Dielectric};
 use rand::rngs::SmallRng;
 
@@ -23,7 +22,7 @@ fn ray_color(rng: &mut dyn RngCore, ray: &Ray, world: &dyn Hittable, depth: i32)
         return color(0.0, 0.0, 0.0);
     }
 
-    let hit_record = world.hit_by(ray, 0.001, f64::INFINITY);
+    let hit_record: Option<HitRecord> = world.hit_by(ray, 0.001, f64::INFINITY);
     return match hit_record {
         Some(rec) => {
             match rec.material.scatter(rng, ray, &rec) {
@@ -54,16 +53,19 @@ fn main() {
     let max_depth = 10;
 
     // World
-    let material_ground = Rc::new(Lambertian {
+    let material_ground = Box::new(Lambertian {
         albedo: color(0.8, 0.8, 0.0)
     });
-    let material_center = Rc::new(Lambertian {
+    let material_center = Box::new(Lambertian {
         albedo: color(0.1, 0.2, 0.5),
     });
-    let material_left = Rc::new(Dielectric {
+    let material_left = Box::new(Dielectric {
         index_of_refraction: 1.5,
     });
-    let material_right = Rc::new(Metal {
+    let material_left1 = Box::new(Dielectric {
+        index_of_refraction: 1.5,
+    });
+    let material_right = Box::new(Metal {
         albedo: color(0.8, 0.6, 0.2),
         fuzz: 0.0,
     });
@@ -77,12 +79,12 @@ fn main() {
         Box::new(Sphere {
             radius: 0.5,
             center: point(-1.0, 0.0, -1.0),
-            material: material_left.clone(),
+            material: material_left,
         }),
         Box::new(Sphere {
             radius: -0.45,
             center: point(-1.0, 0.0, -1.0),
-            material: material_left.clone(),
+            material: material_left1,
         }),
         Box::new(Sphere {
             radius: 0.5,

@@ -3,22 +3,22 @@ use crate::vec3::{Point, Vec3};
 use crate::material::Material;
 use std::rc::Rc;
 
-pub struct HitRecord {
+pub struct HitRecord<'a> {
     pub point: Point,
     pub normal: Vec3,
     pub t: f64,
     pub front_face: bool,
-    pub material: Rc<dyn Material>,
+    pub material: &'a dyn Material,
 }
 
-impl HitRecord {
+impl<'a> HitRecord<'a> {
     pub fn create(
         ray: &Ray,
         point: Point,
         outward_normal: Vec3,
         t: f64,
-        material: Rc<dyn Material>,
-    ) -> HitRecord {
+        material: &'a dyn Material,
+    ) -> HitRecord<'a> {
         let front_face = ray.dir.dot(outward_normal) < 0.0;
         let normal = if front_face { outward_normal } else { -outward_normal };
         return HitRecord {
@@ -35,7 +35,7 @@ pub trait Hittable {
     fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord>;
 }
 
-type HittableList = Vec<Box<dyn Hittable>>;
+pub type HittableList = Vec<Box<dyn Hittable>>;
 
 impl Hittable for HittableList {
     fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
@@ -60,12 +60,12 @@ pub mod sphere {
     use crate::ray::Ray;
     use crate::geometry::{Hittable, HitRecord};
     use crate::material::Material;
-    use std::rc::Rc;
+    use std::borrow::Borrow;
 
     pub struct Sphere {
         pub center: Point,
         pub radius: f64,
-        pub material: Rc<dyn Material>,
+        pub material: Box<dyn Material>,
     }
 
     impl Hittable for Sphere {
@@ -101,7 +101,7 @@ pub mod sphere {
                 point,
                 normal,
                 t,
-                self.material.clone(),
+                self.material.borrow(),
             ));
         }
     }
