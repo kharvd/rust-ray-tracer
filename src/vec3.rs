@@ -28,11 +28,27 @@ impl Add<Vec3> for Vec3 {
     }
 }
 
+impl Add<f64> for Vec3 {
+    type Output = Vec3;
+
+    fn add(self, rhs: f64) -> Self::Output {
+        return Vec3(self.0 + rhs, self.1 + rhs, self.2 + rhs);
+    }
+}
+
 impl Sub<Vec3> for Vec3 {
     type Output = Vec3;
 
     fn sub(self, rhs: Vec3) -> Self::Output {
         return Vec3(self.0 - rhs.0, self.1 - rhs.1, self.2 - rhs.2);
+    }
+}
+
+impl Sub<f64> for Vec3 {
+    type Output = Vec3;
+
+    fn sub(self, rhs: f64) -> Self::Output {
+        return Vec3(self.0 - rhs, self.1 - rhs, self.2 - rhs);
     }
 }
 

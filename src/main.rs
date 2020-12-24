@@ -1,13 +1,13 @@
 use std::f64;
 
 use crate::camera::Camera;
-use crate::color::{color, print_color};
-use crate::geometry::{Hittable, HitRecord};
+use crate::color::{color, print_color, random_color};
+use crate::geometry::{Hittable, HitRecord, HittableList};
 use crate::geometry::sphere::Sphere;
 use crate::ray::Ray;
 use crate::vec3::{Color, point, Vec3};
-use rand::{random, SeedableRng, RngCore};
-use crate::material::{Lambertian, Metal, Dielectric};
+use rand::{random, SeedableRng, RngCore, Rng};
+use crate::material::{Lambertian, Metal, Dielectric, Material};
 use rand::rngs::SmallRng;
 
 mod vec3;
@@ -42,73 +42,108 @@ fn ray_color(rng: &mut dyn RngCore, ray: &Ray, world: &dyn Hittable, depth: i32)
     };
 }
 
+fn random_scene(rng: &mut dyn RngCore) -> HittableList {
+    let mut world: HittableList = Vec::new();
+
+    world.push(Box::new(Sphere {
+        radius: 1000.0,
+        center: point(0.0, -1000.0, -1.0),
+        material: Box::new(Lambertian {
+            albedo: color(0.5, 0.5, 0.5)
+        }),
+    }));
+
+    let p = point(4.0, 0.2, 0.0);
+
+    for a in -11..11 {
+        for b in -11..11 {
+            let choose_mat = rng.gen::<f64>();
+            let center = point(
+                a as f64 + 0.9 * rng.gen::<f64>(),
+                0.2,
+                b as f64 + 0.9 * rng.gen::<f64>(),
+            );
+
+            if (center - p).length() > 0.9 {
+                let material: Box<dyn Material> = if choose_mat < 0.8 {
+                    let albedo = random_color(rng) * random_color(rng);
+                    Box::new(Lambertian {
+                        albedo,
+                    })
+                } else if choose_mat < 0.95 {
+                    let albedo = random_color(rng) / 2.0 + 0.5;
+                    let fuzz = rng.gen_range(0.0..0.5);
+                    Box::new(Metal {
+                        albedo,
+                        fuzz,
+                    })
+                } else {
+                    Box::new(Dielectric {
+                        index_of_refraction: 1.5
+                    })
+                };
+
+                world.push(Box::new(Sphere {
+                    radius: 0.2,
+                    center,
+                    material,
+                }));
+            }
+        }
+    }
+
+    world.push(Box::new(Sphere {
+        radius: 1.0,
+        center: point(0.0, 1.0, 0.0),
+        material: Box::new(Dielectric {
+            index_of_refraction: 1.5,
+        }),
+    }));
+
+    world.push(Box::new(Sphere {
+        radius: 1.0,
+        center: point(-4.0, 1.0, 0.0),
+        material: Box::new(Lambertian {
+            albedo: color(0.4, 0.2, 0.1),
+        }),
+    }));
+
+    world.push(Box::new(Sphere {
+        radius: 1.0,
+        center: point(4.0, 1.0, 0.0),
+        material: Box::new(Metal {
+            albedo: color(0.7, 0.6, 0.5),
+            fuzz: 0.0,
+        }),
+    }));
+
+    return world;
+}
+
 fn main() {
     let mut rng = SmallRng::from_entropy();
 
     // Image
-    let aspect_ratio = 16.0 / 9.0;
-    let image_width = 400;
+    let aspect_ratio = 3.0 / 2.0;
+    let image_width = 1200;
     let image_height = (image_width as f64 / aspect_ratio) as i32;
-    let samples_per_pixel = 100;
-    let max_depth = 10;
+    let samples_per_pixel = 500;
+    let max_depth = 50;
 
     // World
-    let material_ground = Box::new(Lambertian {
-        albedo: color(0.8, 0.8, 0.0)
-    });
-    let material_center = Box::new(Lambertian {
-        albedo: color(0.1, 0.2, 0.5),
-    });
-    let material_left = Box::new(Dielectric {
-        index_of_refraction: 1.5,
-    });
-    let material_left1 = Box::new(Dielectric {
-        index_of_refraction: 1.5,
-    });
-    let material_right = Box::new(Metal {
-        albedo: color(0.8, 0.6, 0.2),
-        fuzz: 0.0,
-    });
-
-    let world: Vec<Box<dyn Hittable>> = vec![
-        Box::new(Sphere {
-            radius: 0.5,
-            center: point(0.0, 0.0, -1.0),
-            material: material_center,
-        }),
-        Box::new(Sphere {
-            radius: 0.5,
-            center: point(-1.0, 0.0, -1.0),
-            material: material_left,
-        }),
-        Box::new(Sphere {
-            radius: -0.45,
-            center: point(-1.0, 0.0, -1.0),
-            material: material_left1,
-        }),
-        Box::new(Sphere {
-            radius: 0.5,
-            center: point(1.0, 0.0, -1.0),
-            material: material_right,
-        }),
-        Box::new(Sphere {
-            radius: 100.0,
-            center: point(0.0, -100.5, -1.0),
-            material: material_ground,
-        })
-    ];
+    let world = random_scene(&mut rng);
 
     // Camera
-    let lookfrom = point(3.0, 3.0, 2.0);
-    let lookat = point(0.0, 0.0, -1.0);
-    let dist_to_focus = (lookfrom - lookat).length();
-    let aperture = 0.2;
+    let lookfrom = point(13.0, 2.0, 3.0);
+    let lookat = point(0.0, 0.0, 0.0);
+    let dist_to_focus = 10.0;
+    let aperture = 0.1;
     let camera = Camera::create(
         lookfrom,
         lookat,
         Vec3(0.0, 1.0, 0.0),
         20.0,
-        16.0 / 9.0,
+        aspect_ratio,
         aperture,
         dist_to_focus,
     );

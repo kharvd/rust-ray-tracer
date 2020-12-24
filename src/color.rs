@@ -1,4 +1,5 @@
 use crate::vec3::{Color, Vec3};
+use rand::{RngCore, Rng};
 
 fn float_to_int(v: f64) -> i32 {
     return (256.0 * clamp(v, 0.0, 0.999)) as i32;
@@ -31,4 +32,8 @@ pub fn print_color(col: Color, samples_per_pixel: i32) {
 
 pub fn color(r: f64, g: f64, b: f64) -> Color {
     return Vec3(r, g, b);
+}
+
+pub fn random_color(rng: &mut dyn RngCore) -> Color {
+    return Vec3(rng.gen(), rng.gen(), rng.gen());
 }
