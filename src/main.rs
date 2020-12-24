@@ -6,9 +6,10 @@ use crate::geometry::Hittable;
 use crate::geometry::sphere::Sphere;
 use crate::ray::Ray;
 use crate::vec3::{Color, point, Vec3};
-use rand::random;
+use rand::{random, SeedableRng, RngCore};
 use std::rc::Rc;
 use crate::material::{Lambertian, Metal, Dielectric};
+use rand::rngs::SmallRng;
 
 mod vec3;
 mod color;
@@ -17,7 +18,7 @@ mod geometry;
 mod camera;
 mod material;
 
-fn ray_color(ray: &Ray, world: &dyn Hittable, depth: i32) -> Color {
+fn ray_color(rng: &mut dyn RngCore, ray: &Ray, world: &dyn Hittable, depth: i32) -> Color {
     if depth <= 0 {
         return color(0.0, 0.0, 0.0);
     }
@@ -25,9 +26,9 @@ fn ray_color(ray: &Ray, world: &dyn Hittable, depth: i32) -> Color {
     let hit_record = world.hit_by(ray, 0.001, f64::INFINITY);
     return match hit_record {
         Some(rec) => {
-            match rec.material.scatter(ray, &rec) {
+            match rec.material.scatter(rng, ray, &rec) {
                 Some(scatter_rec) => {
-                    scatter_rec.attenuation * ray_color(&scatter_rec.ray, world, depth - 1)
+                    scatter_rec.attenuation * ray_color(rng, &scatter_rec.ray, world, depth - 1)
                 }
 
                 None => color(0.0, 0.0, 0.0)
@@ -43,6 +44,8 @@ fn ray_color(ray: &Ray, world: &dyn Hittable, depth: i32) -> Color {
 }
 
 fn main() {
+    let mut rng = SmallRng::from_entropy();
+
     // Image
     let aspect_ratio = 16.0 / 9.0;
     let image_width = 400;
@@ -116,8 +119,8 @@ fn main() {
             for _s in 0..samples_per_pixel {
                 let u = (i as f64 + random::<f64>()) / (image_width - 1) as f64;
                 let v = (j as f64 + random::<f64>()) / (image_height - 1) as f64;
-                let r = camera.get_ray(u, v);
-                pix += ray_color(&r, &world, max_depth);
+                let r = camera.get_ray(&mut rng, u, v);
+                pix += ray_color(&mut rng, &r, &world, max_depth);
             }
 
             print_color(pix, samples_per_pixel);

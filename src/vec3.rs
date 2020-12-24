@@ -1,5 +1,5 @@
 use std::ops::{Add, Sub, AddAssign, SubAssign, Mul, MulAssign, Div, DivAssign, Neg};
-use rand::random;
+use rand::{Rng, RngCore};
 
 #[derive(Debug, Clone, Copy)]
 pub struct Vec3(pub f64, pub f64, pub f64);
@@ -143,25 +143,25 @@ impl Vec3 {
         return r_out_perp + r_out_par;
     }
 
-    pub fn random() -> Vec3 {
+    pub fn random(rng: &mut dyn RngCore) -> Vec3 {
         return Vec3(
-            2.0 * random::<f64>() - 1.0,
-            2.0 * random::<f64>() - 1.0,
-            2.0 * random::<f64>() - 1.0,
+            2.0 * rng.gen::<f64>() - 1.0,
+            2.0 * rng.gen::<f64>() - 1.0,
+            2.0 * rng.gen::<f64>() - 1.0,
         );
     }
 
-    pub fn random_in_unit_sphere() -> Vec3 {
+    pub fn random_in_unit_sphere(rng: &mut dyn RngCore) -> Vec3 {
         loop {
-            let v = Vec3::random();
+            let v = Vec3::random(rng);
             if v.length2() < 1.0 {
                 return v;
             }
         }
     }
 
-    pub fn random_in_unit_disk() -> Vec3 {
-        let v = Vec3::random_in_unit_sphere();
+    pub fn random_in_unit_disk(rng: &mut dyn RngCore) -> Vec3 {
+        let v = Vec3::random_in_unit_sphere(rng);
         return Vec3(
             v.0,
             v.1,
@@ -169,8 +169,8 @@ impl Vec3 {
         );
     }
 
-    pub fn random_unit_vector() -> Vec3 {
-        return Vec3::random_in_unit_sphere().normalize();
+    pub fn random_unit_vector(rng: &mut dyn RngCore) -> Vec3 {
+        return Vec3::random_in_unit_sphere(rng).normalize();
     }
 }
 

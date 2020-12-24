@@ -2,7 +2,7 @@ use crate::ray::Ray;
 use crate::geometry::HitRecord;
 use crate::vec3::{Color, Vec3};
 use crate::color::color;
-use rand::random;
+use rand::{random, RngCore};
 
 pub struct ScatteringRecord {
     pub ray: Ray,
@@ -10,7 +10,7 @@ pub struct ScatteringRecord {
 }
 
 pub trait Material {
-    fn scatter(&self, ray_in: &Ray, hit_record: &HitRecord) -> Option<ScatteringRecord>;
+    fn scatter(&self, rng: &mut dyn RngCore, ray_in: &Ray, hit_record: &HitRecord) -> Option<ScatteringRecord>;
 }
 
 pub struct Lambertian {
@@ -18,8 +18,8 @@ pub struct Lambertian {
 }
 
 impl Material for Lambertian {
-    fn scatter(&self, _ray_in: &Ray, hit_record: &HitRecord) -> Option<ScatteringRecord> {
-        let mut target = hit_record.normal + Vec3::random_unit_vector();
+    fn scatter(&self, rng: &mut dyn RngCore, _ray_in: &Ray, hit_record: &HitRecord) -> Option<ScatteringRecord> {
+        let mut target = hit_record.normal + Vec3::random_unit_vector(rng);
 
         if target.near_zero() {
             target = hit_record.normal;
@@ -39,8 +39,8 @@ pub struct Metal {
 }
 
 impl Material for Metal {
-    fn scatter(&self, ray_in: &Ray, hit_record: &HitRecord) -> Option<ScatteringRecord> {
-        let dir = ray_in.dir.reflect(hit_record.normal) + self.fuzz * Vec3::random_in_unit_sphere();
+    fn scatter(&self, rng: &mut dyn RngCore, ray_in: &Ray, hit_record: &HitRecord) -> Option<ScatteringRecord> {
+        let dir = ray_in.dir.reflect(hit_record.normal) + self.fuzz * Vec3::random_in_unit_sphere(rng);
         let scattered_ray = Ray { orig: hit_record.point, dir };
         return Some(ScatteringRecord {
             ray: scattered_ray,
@@ -60,7 +60,7 @@ fn reflectance(cosine: f64, ref_idx: f64) -> f64 {
 }
 
 impl Material for Dielectric {
-    fn scatter(&self, ray_in: &Ray, hit_record: &HitRecord) -> Option<ScatteringRecord> {
+    fn scatter(&self, _rng: &mut dyn RngCore, ray_in: &Ray, hit_record: &HitRecord) -> Option<ScatteringRecord> {
         let refraction_ratio = if hit_record.front_face {
             1.0 / self.index_of_refraction
         } else {
