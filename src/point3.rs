@@ -1,8 +1,9 @@
 use std::ops;
 
+use serde::{Serialize, Deserialize};
 use crate::vec3::{Vec3};
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub struct Point3(pub f64, pub f64, pub f64);
 
 impl Point3 {

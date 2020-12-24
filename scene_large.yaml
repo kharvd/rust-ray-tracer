@@ -1,0 +1,5848 @@
+render_config:
+  image_width: 1200
+  image_height: 800
+  samples_per_pixel: 500
+  max_depth: 50
+camera:
+  lookfrom:
+    - 13.0
+    - 2.0
+    - 3.0
+  lookat:
+    - 0.0
+    - 0.0
+    - 0.0
+  vup:
+    - 0.0
+    - 1.0
+    - 0.0
+  vfov_deg: 20.0
+  aperture: 0.1
+  focus_dist: 10.0
+objects:
+  - type: SPHERE
+    center:
+      - 0.0
+      - -1000.0
+      - -1.0
+    radius: 1000.0
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5
+        g: 0.5
+        b: 0.5
+  - type: SPHERE
+    center:
+      - -10.179849213784076
+      - 0.2
+      - -10.615536353230695
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5833904195022202
+        g: 0.581599584599772
+        b: 0.12787998104170818
+  - type: SPHERE
+    center:
+      - -10.425746362755915
+      - 0.2
+      - -9.679058537609479
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.7178721155325039
+        g: 0.1903680314908901
+        b: 0.8342396508253275
+  - type: SPHERE
+    center:
+      - -10.69099126252239
+      - 0.2
+      - -8.40676487707525
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.06095780170684796
+        g: 0.42076593391328356
+        b: 0.1461668275181113
+  - type: SPHERE
+    center:
+      - -10.394884945066269
+      - 0.2
+      - -7.360367130251356
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.7295630095621597
+        g: 0.8418907848369789
+        b: 0.9780492658505777
+      fuzz: 0.2558176858036607
+  - type: SPHERE
+    center:
+      - -10.687756379986383
+      - 0.2
+      - -6.518869876723441
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.16509024207511656
+        g: 0.6817967402471314
+        b: 0.42308744239945958
+  - type: SPHERE
+    center:
+      - -10.603526446595652
+      - 0.2
+      - -5.127511539140941
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.19365137793195678
+        g: 0.48292385437979587
+        b: 0.20053969756547067
+  - type: SPHERE
+    center:
+      - -10.862311960569816
+      - 0.2
+      - -4.163083473566151
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.003250001631611795
+        g: 0.1718130299063532
+        b: 0.1606686844069803
+  - type: SPHERE
+    center:
+      - -10.380079623239102
+      - 0.2
+      - -3.483817871626875
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.7922215609245962
+        g: 0.5666992600227506
+        b: 0.907142552523674
+      fuzz: 0.1266595885313846
+  - type: SPHERE
+    center:
+      - -10.95936682024837
+      - 0.2
+      - -2.9240593762479238
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5322814831460914
+        g: 0.4252656150896498
+        b: 0.3994271351916122
+  - type: SPHERE
+    center:
+      - -10.937186429011437
+      - 0.2
+      - -1.7958867465923299
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2179537498338603
+        g: 0.3402523974247984
+        b: 0.036129960591746678
+  - type: SPHERE
+    center:
+      - -10.337645876286894
+      - 0.2
+      - -0.37341570787120517
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.613291818139622
+        g: 0.1484972836259876
+        b: 0.016009311865079615
+  - type: SPHERE
+    center:
+      - -10.540369104850889
+      - 0.2
+      - 0.030121989521287998
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.11173234383703139
+        g: 0.026457869106497606
+        b: 0.3419081174743658
+  - type: SPHERE
+    center:
+      - -10.453854331855359
+      - 0.2
+      - 1.120101324001933
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.3794311986861172
+        g: 0.2251121980647727
+        b: 0.16009397615950239
+  - type: SPHERE
+    center:
+      - -10.985455380526436
+      - 0.2
+      - 2.4757379070704945
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.12321664077271845
+        g: 0.3368914203941976
+        b: 0.2479917812679316
+  - type: SPHERE
+    center:
+      - -10.176760347358183
+      - 0.2
+      - 3.819362918038591
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.1577453325086084
+        g: 0.07850899395771173
+        b: 0.16196035497549425
+  - type: SPHERE
+    center:
+      - -10.950744264406766
+      - 0.2
+      - 4.449950506596614
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.13651496142041659
+        g: 0.26886299624134066
+        b: 0.06010943427010208
+  - type: SPHERE
+    center:
+      - -10.690898989916251
+      - 0.2
+      - 5.514213639113377
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.49958888324903785
+        g: 0.06356519893854773
+        b: 0.33371238438710895
+  - type: SPHERE
+    center:
+      - -10.86895112881748
+      - 0.2
+      - 6.077186102300071
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.005340103802661462
+        g: 0.20283671051687067
+        b: 0.47138623863446429
+  - type: SPHERE
+    center:
+      - -10.660007351347609
+      - 0.2
+      - 7.507470172519317
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.17670041283054287
+        g: 0.013022437989977947
+        b: 0.6169979978497843
+  - type: SPHERE
+    center:
+      - -10.788860366205493
+      - 0.2
+      - 8.390368324053372
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.04635880857751352
+        g: 0.37555325270509717
+        b: 0.027926955479745824
+  - type: SPHERE
+    center:
+      - -10.818677400888462
+      - 0.2
+      - 9.783698536284156
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.8666804724355677
+        g: 0.6832707105126508
+        b: 0.572229870747636
+      fuzz: 0.4697450287743914
+  - type: SPHERE
+    center:
+      - -10.834198388346075
+      - 0.2
+      - 10.26908564085137
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5158388329080846
+        g: 0.019764600319449104
+        b: 0.19747910528792154
+  - type: SPHERE
+    center:
+      - -9.871096390236425
+      - 0.2
+      - -10.193523918911302
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.1473877251172863
+        g: 0.32220668175509828
+        b: 0.14087010198115525
+  - type: SPHERE
+    center:
+      - -9.101242413994088
+      - 0.2
+      - -9.210409791561368
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.07385552563051295
+        g: 0.015540407584604881
+        b: 0.04653064809189891
+  - type: SPHERE
+    center:
+      - -9.405923658611379
+      - 0.2
+      - -8.357762433290713
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.7548256073385327
+        g: 0.9223379838140995
+        b: 0.5898431376744755
+      fuzz: 0.018986194427100146
+  - type: SPHERE
+    center:
+      - -9.125235321784674
+      - 0.2
+      - -7.501476688470066
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.03798736576204316
+        g: 0.07980764530518637
+        b: 0.2153189394676307
+  - type: SPHERE
+    center:
+      - -9.317247647298963
+      - 0.2
+      - -6.868460970560004
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.08078119981305132
+        g: 0.2536147333107032
+        b: 0.022441438546814155
+  - type: SPHERE
+    center:
+      - -9.90529546604825
+      - 0.2
+      - -5.247501986837673
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.7131529041489031
+        g: 0.04306688320259831
+        b: 0.09931276441136346
+  - type: SPHERE
+    center:
+      - -9.229200015326758
+      - 0.2
+      - -4.862899258269175
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.21927680762345179
+        g: 0.31888933054953208
+        b: 0.6545561368152745
+  - type: SPHERE
+    center:
+      - -9.638619116413294
+      - 0.2
+      - -3.229000630497253
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - -9.65198095392333
+      - 0.2
+      - -2.6809888437786264
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.8806278343975649
+        g: 0.5401176828640807
+        b: 0.5951253295792267
+      fuzz: 0.12001454784882615
+  - type: SPHERE
+    center:
+      - -9.28768888899086
+      - 0.2
+      - -1.7537922582441839
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.02304648525420826
+        g: 0.807483420218381
+        b: 0.007152582359812853
+  - type: SPHERE
+    center:
+      - -9.876419402386782
+      - 0.2
+      - -0.36547368009263139
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.9829449768366272
+        g: 0.6596368602678902
+        b: 0.5745327879801425
+      fuzz: 0.06530141987602045
+  - type: SPHERE
+    center:
+      - -9.360434641168109
+      - 0.2
+      - 0.8758704880218566
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.6931614706487314
+        g: 0.6174379938978154
+        b: 0.21853960251313979
+  - type: SPHERE
+    center:
+      - -9.40512987793952
+      - 0.2
+      - 1.7283312188786333
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.35561541025925577
+        g: 0.37597547278666
+        b: 0.37047852436237546
+  - type: SPHERE
+    center:
+      - -9.193574210561725
+      - 0.2
+      - 2.3102154614661289
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.4847835817394255
+        g: 0.24030762233037479
+        b: 0.36708089151671877
+  - type: SPHERE
+    center:
+      - -9.453904750649384
+      - 0.2
+      - 3.620332024809089
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2385840415811261
+        g: 0.48446684221526145
+        b: 0.045509616931281738
+  - type: SPHERE
+    center:
+      - -9.809490549489486
+      - 0.2
+      - 4.2139023023569399
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.4079894192125214
+        g: 0.1508221223832159
+        b: 0.0349240249219685
+  - type: SPHERE
+    center:
+      - -9.500834858972631
+      - 0.2
+      - 5.560130236959775
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.18981621205041628
+        g: 0.17078618420089262
+        b: 0.3538503846822732
+  - type: SPHERE
+    center:
+      - -9.931145817794249
+      - 0.2
+      - 6.525754969708028
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - -9.684702714969497
+      - 0.2
+      - 7.281961408678146
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.0014572098729115618
+        g: 0.0318008500207393
+        b: 0.17763134600567519
+  - type: SPHERE
+    center:
+      - -9.457143611198032
+      - 0.2
+      - 8.220994489415985
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.634636001611296
+        g: 0.15705776120493435
+        b: 0.23896762559475782
+  - type: SPHERE
+    center:
+      - -9.11789125128597
+      - 0.2
+      - 9.033458713026106
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5279916554429229
+        g: 0.6534449860233952
+        b: 0.0029456476739179186
+  - type: SPHERE
+    center:
+      - -9.109337128692383
+      - 0.2
+      - 10.247560548114809
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.9145654684850779
+        g: 0.7995013227490126
+        b: 0.8039481291740365
+      fuzz: 0.3999692249141693
+  - type: SPHERE
+    center:
+      - -8.931703622712407
+      - 0.2
+      - -10.835538904323809
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.020225704045950825
+        g: 0.3358623303976805
+        b: 0.007074374467697956
+  - type: SPHERE
+    center:
+      - -8.34631504206089
+      - 0.2
+      - -9.7776613354696
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.06324837323582326
+        g: 0.11413582609988415
+        b: 0.11399399748275779
+  - type: SPHERE
+    center:
+      - -8.372457877456933
+      - 0.2
+      - -8.409972345661489
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.09032804807181205
+        g: 0.7935615147649238
+        b: 0.8231528845115909
+  - type: SPHERE
+    center:
+      - -8.127134426532454
+      - 0.2
+      - -7.127913024525865
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.0698586779724116
+        g: 0.348585604932677
+        b: 0.1010787382174789
+  - type: SPHERE
+    center:
+      - -8.722166479420816
+      - 0.2
+      - -6.186650794585988
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.4291301127003912
+        g: 0.8156454395785852
+        b: 0.48606843275286379
+  - type: SPHERE
+    center:
+      - -8.292398714896783
+      - 0.2
+      - -5.687976889579484
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2437448651343716
+        g: 0.18101346777408845
+        b: 0.048899553556004868
+  - type: SPHERE
+    center:
+      - -8.561098090998782
+      - 0.2
+      - -4.383590079896693
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.02409375533418248
+        g: 0.3151317395900981
+        b: 0.00895262455921738
+  - type: SPHERE
+    center:
+      - -8.724442322783766
+      - 0.2
+      - -3.7773150299250428
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.8308607610788565
+        g: 0.7977178542756428
+        b: 0.22155520906636973
+  - type: SPHERE
+    center:
+      - -8.656312288923813
+      - 0.2
+      - -2.4439763138739805
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.0231500686261436
+        g: 0.49457233316257545
+        b: 0.10017302430447095
+  - type: SPHERE
+    center:
+      - -8.687525311119283
+      - 0.2
+      - -1.7896193700101322
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.6349486135651583
+        g: 0.8084744341172552
+        b: 0.6817503884833815
+      fuzz: 0.42094182882243938
+  - type: SPHERE
+    center:
+      - -8.63000538648382
+      - 0.2
+      - -0.33035559870475619
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.13419709644821113
+        g: 0.33992347324842356
+        b: 0.4351931829851304
+  - type: SPHERE
+    center:
+      - -8.160438519431596
+      - 0.2
+      - 0.7514872787798071
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.9173584029701284
+        g: 0.7429726397767603
+        b: 0.9310581106521995
+      fuzz: 0.24526889508273043
+  - type: SPHERE
+    center:
+      - -8.307844787621703
+      - 0.2
+      - 1.0776580257134588
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.734569102173382
+        g: 0.686947917696678
+        b: 0.8373609802163442
+      fuzz: 0.20220212259894233
+  - type: SPHERE
+    center:
+      - -8.468061236308664
+      - 0.2
+      - 2.894396611095268
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.7337806932576403
+        g: 0.04850133326061003
+        b: 0.07768797407970052
+  - type: SPHERE
+    center:
+      - -8.727355835041453
+      - 0.2
+      - 3.009600479765133
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.17659387389749876
+        g: 0.16662980195282874
+        b: 0.06632754334610829
+  - type: SPHERE
+    center:
+      - -8.931431554917128
+      - 0.2
+      - 4.886375721838258
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.0656025122763898
+        g: 0.09311631169303279
+        b: 0.186972686557401
+  - type: SPHERE
+    center:
+      - -8.26051957586012
+      - 0.2
+      - 5.860890569806204
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - -8.733198272348833
+      - 0.2
+      - 6.4476932474293309
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.19505267453652415
+        g: 0.4327780825716141
+        b: 0.10961765908169871
+  - type: SPHERE
+    center:
+      - -8.431284512130305
+      - 0.2
+      - 7.80484294174078
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.6645519047268163
+        g: 0.10100548091361503
+        b: 0.03417091798554886
+  - type: SPHERE
+    center:
+      - -8.277976866980478
+      - 0.2
+      - 8.54259872754065
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.07271175340361352
+        g: 0.24883805691060116
+        b: 0.03083862316920294
+  - type: SPHERE
+    center:
+      - -8.478992001853254
+      - 0.2
+      - 9.790709256833067
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.16124369084137084
+        g: 0.08133063940423092
+        b: 0.21485316601881863
+  - type: SPHERE
+    center:
+      - -8.919229607131726
+      - 0.2
+      - 10.202341961627573
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.020556087433809095
+        g: 0.05092180275973246
+        b: 0.7175219450566956
+  - type: SPHERE
+    center:
+      - -7.304967996765225
+      - 0.2
+      - -10.834495264167382
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.8095826175735503
+        g: 0.73688716637183
+        b: 0.8156373115088828
+      fuzz: 0.3371661697762781
+  - type: SPHERE
+    center:
+      - -7.888303279993609
+      - 0.2
+      - -9.452044397315535
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - -7.443893036273447
+      - 0.2
+      - -8.963535657088796
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.025947088972028459
+        g: 0.39964591705432397
+        b: 0.04757802633243064
+  - type: SPHERE
+    center:
+      - -7.641974243333045
+      - 0.2
+      - -7.550656456371237
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.43147096551284877
+        g: 0.545284133857938
+        b: 0.031982718244759008
+  - type: SPHERE
+    center:
+      - -7.283212806441976
+      - 0.2
+      - -6.854795453091182
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.4037593250410453
+        g: 0.06501850462344769
+        b: 0.5885379219544145
+  - type: SPHERE
+    center:
+      - -7.954495264389711
+      - 0.2
+      - -5.1373359964007199
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2185920846358789
+        g: 0.6453177868800806
+        b: 0.014327745170317295
+  - type: SPHERE
+    center:
+      - -7.346260083249135
+      - 0.2
+      - -4.733972507011856
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.20098876902819275
+        g: 0.7010574201766837
+        b: 0.02213251870421666
+  - type: SPHERE
+    center:
+      - -7.813633638518583
+      - 0.2
+      - -3.6980001625411185
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.9150802153279427
+        g: 0.9772270720700065
+        b: 0.9864070038325574
+      fuzz: 0.45097876306881659
+  - type: SPHERE
+    center:
+      - -7.607960974565377
+      - 0.2
+      - -2.2882215890341079
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.3922567543558398
+        g: 0.34602350279640739
+        b: 0.46449525895416568
+  - type: SPHERE
+    center:
+      - -7.435066754151746
+      - 0.2
+      - -1.8245326039384689
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.3755441126654921
+        g: 0.5971876771203245
+        b: 0.2953814266410528
+  - type: SPHERE
+    center:
+      - -7.706369586590327
+      - 0.2
+      - -0.23595567193600443
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.09860344549492595
+        g: 0.02836445548760518
+        b: 0.6641622710509486
+  - type: SPHERE
+    center:
+      - -7.427280208724025
+      - 0.2
+      - 0.6324331044553104
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.3017357759483208
+        g: 0.22095238403428409
+        b: 0.12359620089426535
+  - type: SPHERE
+    center:
+      - -7.393135560656482
+      - 0.2
+      - 1.2213187480051762
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.03177248931361947
+        g: 0.08042672103159952
+        b: 0.05227071234085381
+  - type: SPHERE
+    center:
+      - -7.3495041370840579
+      - 0.2
+      - 2.438435859018173
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.24855444745826775
+        g: 0.1127778623787342
+        b: 0.0791406515345087
+  - type: SPHERE
+    center:
+      - -7.291234620761985
+      - 0.2
+      - 3.681750669174238
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.618192703629471
+        g: 0.8931116563790409
+        b: 0.9871513569513923
+      fuzz: 0.1756190043361593
+  - type: SPHERE
+    center:
+      - -7.257038895953038
+      - 0.2
+      - 4.25269833167897
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.08514286937305944
+        g: 0.23606092622674358
+        b: 0.05570739897987164
+  - type: SPHERE
+    center:
+      - -7.31883318645834
+      - 0.2
+      - 5.621880324960771
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.41359544065460887
+        g: 0.19668430453699588
+        b: 0.4057429114842252
+  - type: SPHERE
+    center:
+      - -7.523148439313913
+      - 0.2
+      - 6.692187588891962
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2229133724443481
+        g: 0.44649951750970609
+        b: 0.0009495934119844896
+  - type: SPHERE
+    center:
+      - -7.7764075422038119
+      - 0.2
+      - 7.367744221048946
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.6250007512409277
+        g: 0.24819388574899596
+        b: 0.2619480019711873
+  - type: SPHERE
+    center:
+      - -7.235301339961363
+      - 0.2
+      - 8.811451681026107
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.786395331078543
+        g: 0.21408777053512824
+        b: 0.028641774626517216
+  - type: SPHERE
+    center:
+      - -7.325723398302451
+      - 0.2
+      - 9.818125444190125
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.04618567316355841
+        g: 0.3529609704536994
+        b: 0.41391259832312629
+  - type: SPHERE
+    center:
+      - -7.854113215607555
+      - 0.2
+      - 10.679806851660704
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.040269700763253268
+        g: 0.004909025681402445
+        b: 0.016238118529850157
+  - type: SPHERE
+    center:
+      - -6.670432350969409
+      - 0.2
+      - -10.595195573233797
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.11935274766343214
+        g: 0.13016189401975607
+        b: 0.15946181206116748
+  - type: SPHERE
+    center:
+      - -6.922623049840294
+      - 0.2
+      - -9.411353956843718
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.9552453665222733
+        g: 0.5570430260344423
+        b: 0.8377480607167424
+      fuzz: 0.2738957662958479
+  - type: SPHERE
+    center:
+      - -6.533497451525084
+      - 0.2
+      - -8.53336353761714
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.010884465981356499
+        g: 0.3266689523172918
+        b: 0.23701609580568126
+  - type: SPHERE
+    center:
+      - -6.218123476121889
+      - 0.2
+      - -7.318671126649574
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.0010363578500594514
+        g: 0.07933786899879988
+        b: 0.4823008453563977
+  - type: SPHERE
+    center:
+      - -6.2310145271154149
+      - 0.2
+      - -6.28228945249221
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.9360988203692521
+        g: 0.771968467062353
+        b: 0.6370400263898925
+      fuzz: 0.17255455788150066
+  - type: SPHERE
+    center:
+      - -6.82940092303654
+      - 0.2
+      - -5.633668551519325
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.8334582844852477
+        g: 0.12570616814143963
+        b: 0.8263258199374186
+  - type: SPHERE
+    center:
+      - -6.438909227759294
+      - 0.2
+      - -4.678017077308983
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.07989613854852054
+        g: 0.5895915836173513
+        b: 0.8603642874187906
+  - type: SPHERE
+    center:
+      - -6.57354132098831
+      - 0.2
+      - -3.203145661642269
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.0917287043091238
+        g: 0.09890416054102756
+        b: 0.19381620558806465
+  - type: SPHERE
+    center:
+      - -6.808012871122253
+      - 0.2
+      - -2.8102586154556525
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.08062675482729236
+        g: 0.2961745173128497
+        b: 0.4635216132194414
+  - type: SPHERE
+    center:
+      - -6.707077162704227
+      - 0.2
+      - -1.2697424749880265
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.3732474868002373
+        g: 0.45255774658682526
+        b: 0.11166910462611829
+  - type: SPHERE
+    center:
+      - -6.134305479265245
+      - 0.2
+      - -0.6803351392592625
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.03042463660294562
+        g: 0.17464648700795006
+        b: 0.31214087705089968
+  - type: SPHERE
+    center:
+      - -6.61309164657938
+      - 0.2
+      - 0.45796213363762619
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.875846707845544
+        g: 0.8830994127783702
+        b: 0.9121501014657009
+      fuzz: 0.16084612682769107
+  - type: SPHERE
+    center:
+      - -6.474421091557269
+      - 0.2
+      - 1.2660801205146873
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.7295096425307894
+        g: 0.6347285614192679
+        b: 0.5096337300498139
+      fuzz: 0.11556360613106431
+  - type: SPHERE
+    center:
+      - -6.22156019483333
+      - 0.2
+      - 2.8603921714075675
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - -6.474790037658286
+      - 0.2
+      - 3.4920342090527587
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.9588012301323672
+        g: 0.8718522658698468
+        b: 0.8386444292450098
+      fuzz: 0.3650889720345225
+  - type: SPHERE
+    center:
+      - -6.763575078967069
+      - 0.2
+      - 4.04203185220289
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.03594961444632285
+        g: 0.032841355093818348
+        b: 0.07472197753894075
+  - type: SPHERE
+    center:
+      - -6.894293442590786
+      - 0.2
+      - 5.724987144164203
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.13454023382836395
+        g: 0.06204995975536606
+        b: 0.3988277549051965
+  - type: SPHERE
+    center:
+      - -6.198765421468685
+      - 0.2
+      - 6.781252663452733
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.6113694861854747
+        g: 0.139278661438043
+        b: 0.06269983212946023
+  - type: SPHERE
+    center:
+      - -6.54915211561234
+      - 0.2
+      - 7.498560926561815
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.7156743724211333
+        g: 0.8987009772366356
+        b: 0.7657436661390999
+      fuzz: 0.3716863882176914
+  - type: SPHERE
+    center:
+      - -6.470486895078723
+      - 0.2
+      - 8.19581240903497
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.39105399531210596
+        g: 0.019967630902055067
+        b: 0.20821859655414155
+  - type: SPHERE
+    center:
+      - -6.684637940335041
+      - 0.2
+      - 9.872699356089127
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.1256131742949301
+        g: 0.046165330496437968
+        b: 0.027476227115429538
+  - type: SPHERE
+    center:
+      - -6.778488427067344
+      - 0.2
+      - 10.065812437691666
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.11398930353458527
+        g: 0.3469979068153886
+        b: 0.16911872053724218
+  - type: SPHERE
+    center:
+      - -5.13913456628479
+      - 0.2
+      - -10.171414334420219
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.019378677513787927
+        g: 0.416573225864342
+        b: 0.2962812362005721
+  - type: SPHERE
+    center:
+      - -5.189173429328013
+      - 0.2
+      - -9.814350935752965
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.74915662164138
+        g: 0.44434804675287939
+        b: 0.12229632888240622
+  - type: SPHERE
+    center:
+      - -5.880384335045624
+      - 0.2
+      - -8.598131274653334
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.004784516222171914
+        g: 0.5833308748109918
+        b: 0.061181903797834728
+  - type: SPHERE
+    center:
+      - -5.665237996843538
+      - 0.2
+      - -7.698079797288209
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.14151562484178127
+        g: 0.33122145993641757
+        b: 0.28167838993562235
+  - type: SPHERE
+    center:
+      - -5.513822072879286
+      - 0.2
+      - -6.9519549566284148
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.0014299326734305216
+        g: 0.04162707890950229
+        b: 0.06662575742641079
+  - type: SPHERE
+    center:
+      - -5.4274714074516929
+      - 0.2
+      - -5.137865619625888
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.15626624805532758
+        g: 0.1839894833376929
+        b: 0.3920221894239289
+  - type: SPHERE
+    center:
+      - -5.543751150567763
+      - 0.2
+      - -4.136113660764949
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.06205419577588127
+        g: 0.4088092644103033
+        b: 0.7216437882167007
+  - type: SPHERE
+    center:
+      - -5.995818839797698
+      - 0.2
+      - -3.578152326810999
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.15034589954529099
+        g: 0.17709575209485876
+        b: 0.47946730675479296
+  - type: SPHERE
+    center:
+      - -5.6738905975048949
+      - 0.2
+      - -2.4459242815425688
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.20578657467712295
+        g: 0.24127047911962774
+        b: 0.2427393679371516
+  - type: SPHERE
+    center:
+      - -5.112703538161213
+      - 0.2
+      - -1.8748788921411355
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.0001351470302637814
+        g: 0.21059233415273838
+        b: 0.2406740002906754
+  - type: SPHERE
+    center:
+      - -5.454503046242468
+      - 0.2
+      - -0.6902505238233225
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.05112171441078267
+        g: 0.033895064551426348
+        b: 0.12112315536616583
+  - type: SPHERE
+    center:
+      - -5.462082526883865
+      - 0.2
+      - 0.45989396249051137
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.03355799449471111
+        g: 0.2495712126217615
+        b: 0.16689659215712558
+  - type: SPHERE
+    center:
+      - -5.7567697426213109
+      - 0.2
+      - 1.5631639028595675
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.7807198555837036
+        g: 0.4413267819111765
+        b: 0.601908682036823
+  - type: SPHERE
+    center:
+      - -5.655402908551291
+      - 0.2
+      - 2.487400859118662
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.271939982400565
+        g: 0.23921978086624849
+        b: 0.38449975974172137
+  - type: SPHERE
+    center:
+      - -5.6402836984025159
+      - 0.2
+      - 3.7885480017902477
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5402055600770699
+        g: 0.2346133067939193
+        b: 0.06922538686226361
+  - type: SPHERE
+    center:
+      - -5.287101647520258
+      - 0.2
+      - 4.701519683585223
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.017621813253404427
+        g: 0.1749490593467955
+        b: 0.06614141973237813
+  - type: SPHERE
+    center:
+      - -5.331700280065042
+      - 0.2
+      - 5.782630791416521
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.6805498665281227
+        g: 0.09758491704560439
+        b: 0.5158038268497286
+  - type: SPHERE
+    center:
+      - -5.214603044310856
+      - 0.2
+      - 6.25772799154395
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.39504917864301616
+        g: 0.7224163470223314
+        b: 0.7227380602499816
+  - type: SPHERE
+    center:
+      - -5.113716676234573
+      - 0.2
+      - 7.063763573923049
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.4850620052013392
+        g: 0.5481725291027669
+        b: 0.10997906630259644
+  - type: SPHERE
+    center:
+      - -5.6946701164269
+      - 0.2
+      - 8.236442100276016
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.7135060112283349
+        g: 0.7646119191544777
+        b: 0.02411390403564735
+  - type: SPHERE
+    center:
+      - -5.47162192231751
+      - 0.2
+      - 9.133602477672558
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.02859487211624939
+        g: 0.009050388439692312
+        b: 0.7043188005217977
+  - type: SPHERE
+    center:
+      - -5.295603736702082
+      - 0.2
+      - 10.186368213517725
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.23723279089585493
+        g: 0.601631387954382
+        b: 0.2325173882251292
+  - type: SPHERE
+    center:
+      - -4.909142838252533
+      - 0.2
+      - -10.342587775780816
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.3967043447300466
+        g: 0.30050068487600858
+        b: 0.7847140861377399
+  - type: SPHERE
+    center:
+      - -4.295521588333366
+      - 0.2
+      - -9.157048634638003
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.6580161632650035
+        g: 0.6210776105476383
+        b: 0.8049441335398673
+      fuzz: 0.12123159944281348
+  - type: SPHERE
+    center:
+      - -4.556878206349161
+      - 0.2
+      - -8.241369516996475
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.06043202218979954
+        g: 0.4225565498173523
+        b: 0.2609498071672112
+  - type: SPHERE
+    center:
+      - -4.757634369934121
+      - 0.2
+      - -7.498614009927365
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - -4.824027007688891
+      - 0.2
+      - -6.5603022383451379
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2175803876428133
+        g: 0.04301844434991421
+        b: 0.0047261137152806958
+  - type: SPHERE
+    center:
+      - -4.763892685114248
+      - 0.2
+      - -5.417217259826882
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2152983681015916
+        g: 0.08012353021567378
+        b: 0.2670814393845649
+  - type: SPHERE
+    center:
+      - -4.732119167330293
+      - 0.2
+      - -4.776733533343306
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.1463361461686216
+        g: 0.7358278254604364
+        b: 0.33090877255163617
+  - type: SPHERE
+    center:
+      - -4.818734395149528
+      - 0.2
+      - -3.6563042437446398
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5115799704489996
+        g: 0.19540413117245943
+        b: 0.37129204010979746
+  - type: SPHERE
+    center:
+      - -4.938578239157898
+      - 0.2
+      - -2.858623108894112
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.6233505587090492
+        g: 0.5410686300656843
+        b: 0.742075506864516
+      fuzz: 0.4162864592912897
+  - type: SPHERE
+    center:
+      - -4.464215959648388
+      - 0.2
+      - -1.3227644973582329
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.16158534339511095
+        g: 0.4809490848312761
+        b: 0.019481927436001645
+  - type: SPHERE
+    center:
+      - -4.713515710328928
+      - 0.2
+      - -0.10185038297725457
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.18176644456208525
+        g: 0.07544872396140402
+        b: 0.08240883164967458
+  - type: SPHERE
+    center:
+      - -4.22651368459806
+      - 0.2
+      - 0.8324762732391899
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.5316654913156995
+        g: 0.8844029749524897
+        b: 0.7741963815755315
+      fuzz: 0.3201934670275234
+  - type: SPHERE
+    center:
+      - -4.869982737135897
+      - 0.2
+      - 1.1705397393331352
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.09719584456161576
+        g: 0.0608952608955559
+        b: 0.4753235008617109
+  - type: SPHERE
+    center:
+      - -4.631209327298025
+      - 0.2
+      - 2.17512774757226
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.32488623308704747
+        g: 0.3148527629270139
+        b: 0.20935418533241383
+  - type: SPHERE
+    center:
+      - -4.429348034122503
+      - 0.2
+      - 3.1988223104496886
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.6254905349034898
+        g: 0.3140465313200389
+        b: 0.05211228588241071
+  - type: SPHERE
+    center:
+      - -4.3646816783174329
+      - 0.2
+      - 4.408188196300021
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.04929057499850461
+        g: 0.6615066186859909
+        b: 0.007711106614223756
+  - type: SPHERE
+    center:
+      - -4.612809486808995
+      - 0.2
+      - 5.041131519303797
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.38438127945191988
+        g: 0.134863138528208
+        b: 0.6093681397827594
+  - type: SPHERE
+    center:
+      - -4.308602780399211
+      - 0.2
+      - 6.39694963965114
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.5046383586249663
+        g: 0.6608521092571413
+        b: 0.9371629483073833
+      fuzz: 0.18976323846689414
+  - type: SPHERE
+    center:
+      - -4.379069010198027
+      - 0.2
+      - 7.760043719000719
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.1395724888978813
+        g: 0.01369159608437223
+        b: 0.3162884988631746
+  - type: SPHERE
+    center:
+      - -4.372637220533635
+      - 0.2
+      - 8.51716552976403
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.14002723786331359
+        g: 0.07830499933570404
+        b: 0.3857227495808479
+  - type: SPHERE
+    center:
+      - -4.8858783078330119
+      - 0.2
+      - 9.467175152381495
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.29812267910080528
+        g: 0.8013501990435064
+        b: 0.518138464532358
+  - type: SPHERE
+    center:
+      - -4.49293763894467
+      - 0.2
+      - 10.47597275269065
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.8228489858396908
+        g: 0.09250038737995616
+        b: 0.00010010452013540358
+  - type: SPHERE
+    center:
+      - -3.214511063860432
+      - 0.2
+      - -10.910378893534912
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.09406650645800373
+        g: 0.012323124126598383
+        b: 0.0014845691491783766
+  - type: SPHERE
+    center:
+      - -3.937847490706937
+      - 0.2
+      - -9.63663931430407
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.32350842906715579
+        g: 0.6761044813578467
+        b: 0.23500530045271179
+  - type: SPHERE
+    center:
+      - -3.524713919445276
+      - 0.2
+      - -8.666307145743913
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.9707667766372801
+        g: 0.7380544722927467
+        b: 0.7939100003690053
+      fuzz: 0.2222765312432915
+  - type: SPHERE
+    center:
+      - -3.8593737583819944
+      - 0.2
+      - -7.578438165644776
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.9320502819968597
+        g: 0.7483286582836091
+        b: 0.841592827918559
+      fuzz: 0.23079143122884084
+  - type: SPHERE
+    center:
+      - -3.4094764552335299
+      - 0.2
+      - -6.938061945325683
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.14125800067955758
+        g: 0.1456461932983082
+        b: 0.19218288879766297
+  - type: SPHERE
+    center:
+      - -3.2398009006228265
+      - 0.2
+      - -5.139273705490396
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.41494497601575056
+        g: 0.002770793553792483
+        b: 0.17465624433290898
+  - type: SPHERE
+    center:
+      - -3.277836178922512
+      - 0.2
+      - -4.151867538474676
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.7382262008393081
+        g: 0.8059400792120968
+        b: 0.5018811209050789
+      fuzz: 0.11205697680608307
+  - type: SPHERE
+    center:
+      - -3.8076455157693798
+      - 0.2
+      - -3.5716892024782
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.32045853604026977
+        g: 0.025322866516047799
+        b: 0.23002688287695215
+  - type: SPHERE
+    center:
+      - -3.7764874697046619
+      - 0.2
+      - -2.4338452527448219
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.7758817213232854
+        g: 0.916247698149185
+        b: 0.7625679480844544
+      fuzz: 0.05323796622953736
+  - type: SPHERE
+    center:
+      - -3.2061363762028658
+      - 0.2
+      - -1.1411867611905502
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.9027439226219781
+        g: 0.08349463840067842
+        b: 0.19107811655264396
+  - type: SPHERE
+    center:
+      - -3.209772100339631
+      - 0.2
+      - -0.13108167522715576
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2132276643057515
+        g: 0.09235662286761402
+        b: 0.005447677745834623
+  - type: SPHERE
+    center:
+      - -3.9252826381023224
+      - 0.2
+      - 0.8993351005927781
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.783874868117517
+        g: 0.6307191697655632
+        b: 0.8493079616299455
+      fuzz: 0.4343228442316742
+  - type: SPHERE
+    center:
+      - -3.295477132657159
+      - 0.2
+      - 1.2833631072289147
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.4100876140777983
+        g: 0.11981714118506681
+        b: 0.31353333277520759
+  - type: SPHERE
+    center:
+      - -3.778364890173367
+      - 0.2
+      - 2.6721431717397046
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5800723158650902
+        g: 0.24175223382869549
+        b: 0.08831425749110257
+  - type: SPHERE
+    center:
+      - -3.587631433798342
+      - 0.2
+      - 3.284856424458039
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.010042946417946345
+        g: 0.17399689606870315
+        b: 0.22815139589195269
+  - type: SPHERE
+    center:
+      - -3.610361566214416
+      - 0.2
+      - 4.433429160253971
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.0485875629019482
+        g: 0.24951025030488833
+        b: 0.02589559778794012
+  - type: SPHERE
+    center:
+      - -3.4134954615613628
+      - 0.2
+      - 5.094919553603803
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.6924671670102417
+        g: 0.5891074311177508
+        b: 0.9789414373838217
+      fuzz: 0.07911969494132509
+  - type: SPHERE
+    center:
+      - -3.518776478247692
+      - 0.2
+      - 6.159191683395393
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.11910511828860654
+        g: 0.00802317606526852
+        b: 0.06882230372042789
+  - type: SPHERE
+    center:
+      - -3.161091508726187
+      - 0.2
+      - 7.55761271246315
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - -3.442499661596301
+      - 0.2
+      - 8.022637617177047
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.7686348234886992
+        g: 0.30268299506696658
+        b: 0.149345641722561
+  - type: SPHERE
+    center:
+      - -3.6503953979295495
+      - 0.2
+      - 9.673135366433668
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - -3.1765739365240739
+      - 0.2
+      - 10.42207800303615
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.4301403352438949
+        g: 0.7585206001845121
+        b: 0.03514090551084361
+  - type: SPHERE
+    center:
+      - -2.7492260523455638
+      - 0.2
+      - -10.794796437624577
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.10381182938160866
+        g: 0.01521643345091829
+        b: 0.03601742280597932
+  - type: SPHERE
+    center:
+      - -2.4457459809053234
+      - 0.2
+      - -9.97923531850688
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.00016840767386476258
+        g: 0.12627637867314182
+        b: 0.4921851362210199
+  - type: SPHERE
+    center:
+      - -2.374227398900672
+      - 0.2
+      - -8.395004661380498
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.25265393642911418
+        g: 0.5231592951317159
+        b: 0.012363819803094562
+  - type: SPHERE
+    center:
+      - -2.509533529087155
+      - 0.2
+      - -7.334984691506328
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.8848991312774029
+        g: 0.2955130989789691
+        b: 0.0860557315273605
+  - type: SPHERE
+    center:
+      - -2.520521702895745
+      - 0.2
+      - -6.339654286927903
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.20199182786791679
+        g: 0.19015774009325626
+        b: 0.057763667098970409
+  - type: SPHERE
+    center:
+      - -2.9445064405945366
+      - 0.2
+      - -5.520592991766184
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.512446019109864
+        g: 0.19511788554061325
+        b: 0.20345340755683925
+  - type: SPHERE
+    center:
+      - -2.55757023891399
+      - 0.2
+      - -4.318511949858144
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - -2.624331828919595
+      - 0.2
+      - -3.816885253138591
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.38644712100277175
+        g: 0.8961448332927762
+        b: 0.138894729118663
+  - type: SPHERE
+    center:
+      - -2.186949109401028
+      - 0.2
+      - -2.5413654662540479
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.012025571650995056
+        g: 0.13188479569749515
+        b: 0.06499518365135546
+  - type: SPHERE
+    center:
+      - -2.435246196414464
+      - 0.2
+      - -1.7183090415888023
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.06933555970763077
+        g: 0.4773708618458406
+        b: 0.07203370070476344
+  - type: SPHERE
+    center:
+      - -2.601187220819536
+      - 0.2
+      - -0.2857943568450916
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2531968907166722
+        g: 0.8907264746301687
+        b: 0.16237032524257279
+  - type: SPHERE
+    center:
+      - -2.945560997406755
+      - 0.2
+      - 0.7641954230128986
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.579167310901411
+        g: 0.810812711033627
+        b: 0.8176535212387046
+      fuzz: 0.18462239992157238
+  - type: SPHERE
+    center:
+      - -2.4186787369874755
+      - 0.2
+      - 1.3630483243136176
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.009279436625279298
+        g: 0.5497440292953814
+        b: 0.008867039016959344
+  - type: SPHERE
+    center:
+      - -2.393681747809633
+      - 0.2
+      - 2.6387224496213417
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.45770046103574688
+        g: 0.07490875457678016
+        b: 0.0959611206471336
+  - type: SPHERE
+    center:
+      - -2.4132719869080176
+      - 0.2
+      - 3.008539160666935
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.590283026785001
+        g: 0.02316578342146562
+        b: 0.5260757420645915
+  - type: SPHERE
+    center:
+      - -2.6887272097925227
+      - 0.2
+      - 4.7362343573178
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.4276349728287817
+        g: 0.2514752237310839
+        b: 0.05558032576201236
+  - type: SPHERE
+    center:
+      - -2.5669960962132234
+      - 0.2
+      - 5.485269758698809
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.023409754193898584
+        g: 0.08292803896965333
+        b: 0.01762278126010907
+  - type: SPHERE
+    center:
+      - -2.459729930670356
+      - 0.2
+      - 6.540269755271772
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.954522766576843
+        g: 0.9052207397739505
+        b: 0.618871773045671
+      fuzz: 0.029697703011585809
+  - type: SPHERE
+    center:
+      - -2.6986646706483325
+      - 0.2
+      - 7.742552853102496
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.03100058502141402
+        g: 0.220812812556487
+        b: 0.14449218380948096
+  - type: SPHERE
+    center:
+      - -2.1764957349140348
+      - 0.2
+      - 8.626158542623364
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.16111329543947465
+        g: 0.0005961245421450474
+        b: 0.24861571202333658
+  - type: SPHERE
+    center:
+      - -2.8496562947702754
+      - 0.2
+      - 9.687414280705355
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.950347714669339
+        g: 0.7855574054164162
+        b: 0.8853239080520484
+      fuzz: 0.0807556541513923
+  - type: SPHERE
+    center:
+      - -2.2283764772830469
+      - 0.2
+      - 10.633123240999936
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.007303717544781788
+        g: 0.020666087587816175
+        b: 0.30490567365091955
+  - type: SPHERE
+    center:
+      - -1.284344188536405
+      - 0.2
+      - -10.114496032705369
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.257327764476139
+        g: 0.5058121372821931
+        b: 0.11284806775629168
+  - type: SPHERE
+    center:
+      - -1.8885740871878863
+      - 0.2
+      - -9.703574250381829
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2678806185827141
+        g: 0.9003698063349309
+        b: 0.11754687931339404
+  - type: SPHERE
+    center:
+      - -1.5507782311454715
+      - 0.2
+      - -8.328529591236832
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.8517501650221382
+        g: 0.7989030289296926
+        b: 0.9484176097278358
+      fuzz: 0.09377995121541472
+  - type: SPHERE
+    center:
+      - -1.1667576541163297
+      - 0.2
+      - -7.6399052697846729
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.5554623536575186
+        g: 0.816021511299672
+        b: 0.574603985365689
+      fuzz: 0.014556171722301281
+  - type: SPHERE
+    center:
+      - -1.179349927856773
+      - 0.2
+      - -6.345480295302137
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.8778841694703471
+        g: 0.28137971477294906
+        b: 0.27088472214855777
+  - type: SPHERE
+    center:
+      - -1.9143125957329015
+      - 0.2
+      - -5.810480915764451
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.03843632958638017
+        g: 0.09516077335542717
+        b: 0.7118994701204896
+  - type: SPHERE
+    center:
+      - -1.8152776615163453
+      - 0.2
+      - -4.326187333916669
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.021087036373324938
+        g: 0.034059650664298928
+        b: 0.36741104108524028
+  - type: SPHERE
+    center:
+      - -1.3523129746113765
+      - 0.2
+      - -3.5047807528244698
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.10501015039154846
+        g: 0.22367197957979458
+        b: 0.2538700565934385
+  - type: SPHERE
+    center:
+      - -1.8191196687807084
+      - 0.2
+      - -2.566799774216043
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.6014734106600947
+        g: 0.6183977676527556
+        b: 0.7733460839205899
+      fuzz: 0.00039942397679937347
+  - type: SPHERE
+    center:
+      - -1.2522126487863735
+      - 0.2
+      - -1.6223317034449912
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.16169515458817669
+        g: 0.027266439081373423
+        b: 0.49398724627971948
+  - type: SPHERE
+    center:
+      - -1.7997495718792729
+      - 0.2
+      - -0.39097132283293936
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.022992018336102379
+        g: 0.5394517692633886
+        b: 0.0756492049434091
+  - type: SPHERE
+    center:
+      - -1.2661663962000216
+      - 0.2
+      - 0.3786904147854025
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.07239840324763375
+        g: 0.7577899350771215
+        b: 0.019056742619982249
+  - type: SPHERE
+    center:
+      - -1.5700429045137819
+      - 0.2
+      - 1.8816045036886684
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.23798507913806078
+        g: 0.08777969830199181
+        b: 0.028196117328242583
+  - type: SPHERE
+    center:
+      - -1.6763913095714023
+      - 0.2
+      - 2.2562877759974238
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - -1.353084187043847
+      - 0.2
+      - 3.481641410881885
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.07684355234073374
+        g: 0.39048669701476138
+        b: 0.38737319714889098
+  - type: SPHERE
+    center:
+      - -1.2955297178498962
+      - 0.2
+      - 4.646495269668167
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2395627583311783
+        g: 0.3587293328607731
+        b: 0.37605121410456779
+  - type: SPHERE
+    center:
+      - -1.9525266094835383
+      - 0.2
+      - 5.44837694420369
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.31198717069167827
+        g: 0.13350405664499186
+        b: 0.18370061265573443
+  - type: SPHERE
+    center:
+      - -1.671943905235333
+      - 0.2
+      - 6.350751141402884
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.0795397818114281
+        g: 0.07400413133560226
+        b: 0.047339563425290529
+  - type: SPHERE
+    center:
+      - -1.2543738773145008
+      - 0.2
+      - 7.38377146270174
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.48566870375172679
+        g: 0.4664548734134669
+        b: 0.04114383421143523
+  - type: SPHERE
+    center:
+      - -1.4757920784776735
+      - 0.2
+      - 8.338962436379694
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.03343065029012422
+        g: 0.6848740331377807
+        b: 0.10473958967200368
+  - type: SPHERE
+    center:
+      - -1.8214150297496253
+      - 0.2
+      - 9.331013042037832
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.028940930619892344
+        g: 0.5634619090146201
+        b: 0.12267712744913495
+  - type: SPHERE
+    center:
+      - -1.3743400371079969
+      - 0.2
+      - 10.352340087434542
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - -0.9908761910415218
+      - 0.2
+      - -10.836707835427966
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - -0.39246997994575785
+      - 0.2
+      - -9.723003635931585
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.041960122304748357
+        g: 0.23556710956967795
+        b: 0.26567723888766855
+  - type: SPHERE
+    center:
+      - -0.6029518026814705
+      - 0.2
+      - -8.503595878433187
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.1202192816790505
+        g: 0.07908920708773214
+        b: 0.06730670322228447
+  - type: SPHERE
+    center:
+      - -0.6010126687149182
+      - 0.2
+      - -7.381114265470603
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.30865473431186077
+        g: 0.2838253114313011
+        b: 0.009082169552246817
+  - type: SPHERE
+    center:
+      - -0.5151498133848242
+      - 0.2
+      - -6.306820183046973
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.971691727776791
+        g: 0.21531873966304986
+        b: 0.03714051948756351
+  - type: SPHERE
+    center:
+      - -0.4078544244238138
+      - 0.2
+      - -5.739665245122481
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.1470931261246788
+        g: 0.10781804170767628
+        b: 0.04611463760334448
+  - type: SPHERE
+    center:
+      - -0.1082787596915139
+      - 0.2
+      - -4.480888185821684
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.8538855576644204
+        g: 0.5808451728079764
+        b: 0.9272850890372291
+      fuzz: 0.06797993391422652
+  - type: SPHERE
+    center:
+      - -0.3238517342735331
+      - 0.2
+      - -3.7276367016097744
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.13021147726481817
+        g: 0.37547903053419509
+        b: 0.06256612980169768
+  - type: SPHERE
+    center:
+      - -0.3114187082463722
+      - 0.2
+      - -2.699288516405508
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.22603112028220194
+        g: 0.37292795556275146
+        b: 0.050533331068911658
+  - type: SPHERE
+    center:
+      - -0.8886489165994315
+      - 0.2
+      - -1.849766807771003
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2537157198668841
+        g: 0.095779975860361
+        b: 0.04343249133631615
+  - type: SPHERE
+    center:
+      - -0.4092188597042604
+      - 0.2
+      - -0.5167328211025533
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.7852928023284891
+        g: 0.0024821343738040838
+        b: 0.16248977974342072
+  - type: SPHERE
+    center:
+      - -0.746833012541974
+      - 0.2
+      - 0.447264366052944
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.19092622442242902
+        g: 0.029144191119799016
+        b: 0.2203048903660133
+  - type: SPHERE
+    center:
+      - -0.5188522334098877
+      - 0.2
+      - 1.4517596374149578
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.20025075444099536
+        g: 0.6244672769680032
+        b: 0.009743141208707047
+  - type: SPHERE
+    center:
+      - -0.5563676469620366
+      - 0.2
+      - 2.2643258519141318
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.14789071780544386
+        g: 0.388127597516838
+        b: 0.09591355783692227
+  - type: SPHERE
+    center:
+      - -0.2620825620382873
+      - 0.2
+      - 3.084019808162861
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.15470103871100758
+        g: 0.038851575061132608
+        b: 0.44510265864780598
+  - type: SPHERE
+    center:
+      - -0.9661790794332342
+      - 0.2
+      - 4.805239466230333
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.059387873695204079
+        g: 0.3839198304446429
+        b: 0.08353201353802162
+  - type: SPHERE
+    center:
+      - -0.5244615634038101
+      - 0.2
+      - 5.211569491361209
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.60335988180911
+        g: 0.42961882919985358
+        b: 0.05479856399030249
+  - type: SPHERE
+    center:
+      - -0.36613554141387719
+      - 0.2
+      - 6.868286165593561
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.006035161356372451
+        g: 0.157419171902164
+        b: 0.34369841980015866
+  - type: SPHERE
+    center:
+      - -0.8665975397856761
+      - 0.2
+      - 7.58175154535931
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.043337836225166178
+        g: 0.004726779072942744
+        b: 0.2796773082402152
+  - type: SPHERE
+    center:
+      - -0.20107765582874438
+      - 0.2
+      - 8.538172628958068
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.908260481161941
+        g: 0.7357520838574602
+        b: 0.9564636628648542
+      fuzz: 0.3805007048664558
+  - type: SPHERE
+    center:
+      - -0.4406358691295005
+      - 0.2
+      - 9.405100840050292
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.6054651463374309
+        g: 0.5001414317793017
+        b: 0.6851829625103294
+  - type: SPHERE
+    center:
+      - -0.43843524656455437
+      - 0.2
+      - 10.665746151944287
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.14528726992462777
+        g: 0.004606368148645055
+        b: 0.3530149272545314
+  - type: SPHERE
+    center:
+      - 0.5202716879213615
+      - 0.2
+      - -10.941393621688292
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5860100237127678
+        g: 0.03922427982440721
+        b: 0.3378128192920244
+  - type: SPHERE
+    center:
+      - 0.08966108589628534
+      - 0.2
+      - -9.344075906933013
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.18907573193403755
+        g: 0.2092689154572752
+        b: 0.06971337346116194
+  - type: SPHERE
+    center:
+      - 0.08093922778721467
+      - 0.2
+      - -8.31410875867937
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.05655347558883365
+        g: 0.053599355710177248
+        b: 0.0012668631262236503
+  - type: SPHERE
+    center:
+      - 0.6670542101327456
+      - 0.2
+      - -7.403002818515765
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.1336912659660001
+        g: 0.3154966044814401
+        b: 0.3129477400809425
+  - type: SPHERE
+    center:
+      - 0.33697390553787495
+      - 0.2
+      - -6.222966957426561
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.15276777106005655
+        g: 0.1949848359076121
+        b: 0.18151533597454529
+  - type: SPHERE
+    center:
+      - 0.3245154629947848
+      - 0.2
+      - -5.471365810337702
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.3546712308460903
+        g: 0.43304195492620858
+        b: 0.4782976000131203
+  - type: SPHERE
+    center:
+      - 0.6445945584497732
+      - 0.2
+      - -4.967543188552798
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5026931154323651
+        g: 0.19025379551666045
+        b: 0.0034413200979678747
+  - type: SPHERE
+    center:
+      - 0.5177119580568048
+      - 0.2
+      - -3.979613290539198
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.08001994119794978
+        g: 0.2858729141426198
+        b: 0.043535709271317297
+  - type: SPHERE
+    center:
+      - 0.4043634576331376
+      - 0.2
+      - -2.590884513134103
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.5951677130961997
+        g: 0.7037078998300014
+        b: 0.6989089963236548
+      fuzz: 0.007709575459725282
+  - type: SPHERE
+    center:
+      - 0.6780211308769621
+      - 0.2
+      - -1.996801606417572
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5141609357044117
+        g: 0.48713844271263775
+        b: 0.3383344957463885
+  - type: SPHERE
+    center:
+      - 0.31695669148504149
+      - 0.2
+      - -0.7896977132615839
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5654695931454437
+        g: 0.042576720136772359
+        b: 0.02675206859006869
+  - type: SPHERE
+    center:
+      - 0.21136382719627248
+      - 0.2
+      - 0.05871398608544365
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2798900170444356
+        g: 0.3755101286409442
+        b: 0.4284002422344422
+  - type: SPHERE
+    center:
+      - 0.025804620866760287
+      - 0.2
+      - 1.4591457774945123
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.08651197374363344
+        g: 0.1357172497005116
+        b: 0.10521558194193537
+  - type: SPHERE
+    center:
+      - 0.23447571064824039
+      - 0.2
+      - 2.4412270144109016
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.7243771853669836
+        g: 0.5208054597800661
+        b: 0.9032352816383632
+      fuzz: 0.09245332934323536
+  - type: SPHERE
+    center:
+      - 0.6232426095344599
+      - 0.2
+      - 3.3108551103295595
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.04769972404651284
+        g: 0.5145057161983672
+        b: 0.03542184959506241
+  - type: SPHERE
+    center:
+      - 0.5970446966159277
+      - 0.2
+      - 4.260836882969787
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.16934118060732049
+        g: 0.5408182599922108
+        b: 0.11076470609459388
+  - type: SPHERE
+    center:
+      - 0.6423685172173528
+      - 0.2
+      - 5.766318499549602
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.4787030873084979
+        g: 0.05904046246483362
+        b: 0.00003503607509451224
+  - type: SPHERE
+    center:
+      - 0.7410471875204586
+      - 0.2
+      - 6.654700436881526
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.7862098847959815
+        g: 0.7245177255743464
+        b: 0.6888110514961799
+      fuzz: 0.09671556395749725
+  - type: SPHERE
+    center:
+      - 0.43223264579430106
+      - 0.2
+      - 7.69457733345665
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.008503595674600373
+        g: 0.44917771581083346
+        b: 0.01252536627083871
+  - type: SPHERE
+    center:
+      - 0.308789744699674
+      - 0.2
+      - 8.564097364601075
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.9629909032869413
+        g: 0.934622005768734
+        b: 0.5097686105623287
+      fuzz: 0.36487832932359978
+  - type: SPHERE
+    center:
+      - 0.35392311770096288
+      - 0.2
+      - 9.570779406446136
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.043386988743446337
+        g: 0.67160614311866
+        b: 0.38030780121928089
+  - type: SPHERE
+    center:
+      - 0.7721364393334192
+      - 0.2
+      - 10.512768592031846
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.3455711294934101
+        g: 0.030276818015619067
+        b: 0.13510124166413624
+  - type: SPHERE
+    center:
+      - 1.777455903413713
+      - 0.2
+      - -10.71780606004159
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.31463817449948835
+        g: 0.2166041666095922
+        b: 0.29323060288497596
+  - type: SPHERE
+    center:
+      - 1.2940402796638678
+      - 0.2
+      - -9.628896003878025
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.7704909552317252
+        g: 0.08832720117280132
+        b: 0.11589133174775182
+  - type: SPHERE
+    center:
+      - 1.3013150263518405
+      - 0.2
+      - -8.204873592886102
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.1900318399811336
+        g: 0.4136792587021237
+        b: 0.04924682473105985
+  - type: SPHERE
+    center:
+      - 1.7211571964821527
+      - 0.2
+      - -7.8701363545368079
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - 1.3148128854023063
+      - 0.2
+      - -6.526184510051734
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.6637785575294712
+        g: 0.48768794113640337
+        b: 0.009434824585212986
+  - type: SPHERE
+    center:
+      - 1.6165460837423685
+      - 0.2
+      - -5.516284624343798
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - 1.6058174802567967
+      - 0.2
+      - -4.701072691855463
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.6728602664221574
+        g: 0.5507404144615964
+        b: 0.8868630927843172
+      fuzz: 0.25028958882609955
+  - type: SPHERE
+    center:
+      - 1.7796565820368605
+      - 0.2
+      - -3.412869543284293
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.022143268597743634
+        g: 0.02929073249190109
+        b: 0.3504656329753875
+  - type: SPHERE
+    center:
+      - 1.6463965793248879
+      - 0.2
+      - -2.101577393276135
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.13001349482161138
+        g: 0.4353809337923044
+        b: 0.79086351772784
+  - type: SPHERE
+    center:
+      - 1.0537302029071918
+      - 0.2
+      - -1.1639466299109165
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.16536289055076165
+        g: 0.5491788435925769
+        b: 0.19528481145971655
+  - type: SPHERE
+    center:
+      - 1.2336520460646748
+      - 0.2
+      - -0.3186504823008619
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.008788038881186133
+        g: 0.0695809746581034
+        b: 0.2053634653913516
+  - type: SPHERE
+    center:
+      - 1.375387433668694
+      - 0.2
+      - 0.5071792704381082
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.06659970272548382
+        g: 0.20711451295641687
+        b: 0.415891379283578
+  - type: SPHERE
+    center:
+      - 1.7789487689779378
+      - 0.2
+      - 1.3100259912815553
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.3144085436788296
+        g: 0.002110668031995736
+        b: 0.1868815508063098
+  - type: SPHERE
+    center:
+      - 1.4518228225100239
+      - 0.2
+      - 2.3243179795461166
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.17169397273669052
+        g: 0.01454131260690841
+        b: 0.25676730439359748
+  - type: SPHERE
+    center:
+      - 1.5750496873834453
+      - 0.2
+      - 3.0225955314002306
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.12831139152388239
+        g: 0.8083284093143887
+        b: 0.3414193282271889
+  - type: SPHERE
+    center:
+      - 1.488455425516004
+      - 0.2
+      - 4.279675493203955
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.9693041738106356
+        g: 0.5245871831598752
+        b: 0.5767108445646773
+      fuzz: 0.1911698433242076
+  - type: SPHERE
+    center:
+      - 1.8168541952019873
+      - 0.2
+      - 5.569036988053652
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5436476754718285
+        g: 0.18000690023987005
+        b: 0.05408609044801835
+  - type: SPHERE
+    center:
+      - 1.5759034639245245
+      - 0.2
+      - 6.237210561304496
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.3029242451345675
+        g: 0.13608419532375674
+        b: 0.31016271643525297
+  - type: SPHERE
+    center:
+      - 1.0393619357125666
+      - 0.2
+      - 7.264114087031973
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - 1.2598122589459058
+      - 0.2
+      - 8.629642169650497
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.010811881405070771
+        g: 0.2777934526704413
+        b: 0.08021324832261676
+  - type: SPHERE
+    center:
+      - 1.857307232013024
+      - 0.2
+      - 9.715134522468379
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.07899189254844909
+        g: 0.006701568202011412
+        b: 0.09012312207273937
+  - type: SPHERE
+    center:
+      - 1.2761574597106078
+      - 0.2
+      - 10.735014707486292
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.6021054018938308
+        g: 0.8394447195537981
+        b: 0.5167343178180548
+      fuzz: 0.06705816477633187
+  - type: SPHERE
+    center:
+      - 2.066761769030321
+      - 0.2
+      - -10.669074988373925
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.39230421192370037
+        g: 0.31711914196436638
+        b: 0.008175501474185996
+  - type: SPHERE
+    center:
+      - 2.1067106235697254
+      - 0.2
+      - -9.237764753060385
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.31226348042747256
+        g: 0.3985422050460967
+        b: 0.008743291925703089
+  - type: SPHERE
+    center:
+      - 2.389561219504757
+      - 0.2
+      - -8.18356451430067
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.6059354572788206
+        g: 0.3996245980868832
+        b: 0.16081510420295129
+  - type: SPHERE
+    center:
+      - 2.062711315107767
+      - 0.2
+      - -7.75149681798117
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.039054709750939508
+        g: 0.4164145653032674
+        b: 0.2611281945690071
+  - type: SPHERE
+    center:
+      - 2.5057513225012779
+      - 0.2
+      - -6.453405197950313
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.553542844062962
+        g: 0.7430172145574248
+        b: 0.9938410713583609
+      fuzz: 0.24097566441218788
+  - type: SPHERE
+    center:
+      - 2.382429208626652
+      - 0.2
+      - -5.481713146333748
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.10685342153930887
+        g: 0.10549836911664369
+        b: 0.34153889841546988
+  - type: SPHERE
+    center:
+      - 2.5069785255192458
+      - 0.2
+      - -4.720706981883271
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.22615341727985706
+        g: 0.2325616572230391
+        b: 0.16748983373793639
+  - type: SPHERE
+    center:
+      - 2.8268147001326948
+      - 0.2
+      - -3.468728907083668
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.8373155068464044
+        g: 0.5723621428503884
+        b: 0.6648385129219497
+      fuzz: 0.08491137509019564
+  - type: SPHERE
+    center:
+      - 2.0066080322898607
+      - 0.2
+      - -2.733112169841927
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.42766249268347758
+        g: 0.47580861736246579
+        b: 0.049612049960974968
+  - type: SPHERE
+    center:
+      - 2.328565281129474
+      - 0.2
+      - -1.5617432139045258
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.734885645749536
+        g: 0.690268461263322
+        b: 0.6124069319092239
+      fuzz: 0.03910984480509705
+  - type: SPHERE
+    center:
+      - 2.7123383983012565
+      - 0.2
+      - -0.4944716909257575
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.6394921113219839
+        g: 0.019429299069976426
+        b: 0.2443166338348716
+  - type: SPHERE
+    center:
+      - 2.8753665138332655
+      - 0.2
+      - 0.8384661610795052
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.6312026482369777
+        g: 0.07612372783514567
+        b: 0.21447032446700277
+  - type: SPHERE
+    center:
+      - 2.868700917405972
+      - 0.2
+      - 1.3773947196158095
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.9923832799462347
+        g: 0.8795616767642023
+        b: 0.06972784732982283
+  - type: SPHERE
+    center:
+      - 2.3858117260184139
+      - 0.2
+      - 2.2054774824012828
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.6731655448462923
+        g: 0.979506223765235
+        b: 0.8721474496371195
+      fuzz: 0.08175040932212108
+  - type: SPHERE
+    center:
+      - 2.0452840836756036
+      - 0.2
+      - 3.257119897370787
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.013262019130841435
+        g: 0.41806689036064029
+        b: 0.12045630274229012
+  - type: SPHERE
+    center:
+      - 2.510074178851661
+      - 0.2
+      - 4.2698189142360889
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.8812235345012126
+        g: 0.1453025221068792
+        b: 0.3473146725383527
+  - type: SPHERE
+    center:
+      - 2.8892163922545475
+      - 0.2
+      - 5.521734542233576
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.017687059715241546
+        g: 0.5889669183264752
+        b: 0.5777675759163031
+  - type: SPHERE
+    center:
+      - 2.8025197135145607
+      - 0.2
+      - 6.189696039170599
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.37023545890831696
+        g: 0.49904673124469847
+        b: 0.5662770732820883
+  - type: SPHERE
+    center:
+      - 2.3001584149531988
+      - 0.2
+      - 7.1305111564883429
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.04910445337414445
+        g: 0.22404039988360584
+        b: 0.17364841678875926
+  - type: SPHERE
+    center:
+      - 2.006008157484374
+      - 0.2
+      - 8.008921419566848
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.004228943133427853
+        g: 0.12032010555582157
+        b: 0.11402993450270861
+  - type: SPHERE
+    center:
+      - 2.0162685468216066
+      - 0.2
+      - 9.350492489683152
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5499688560583524
+        g: 0.21700720514999054
+        b: 0.18805143019925064
+  - type: SPHERE
+    center:
+      - 2.4353293077987545
+      - 0.2
+      - 10.031504668853693
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.7970678504477992
+        g: 0.18508642529088868
+        b: 0.2549300389414404
+  - type: SPHERE
+    center:
+      - 3.751289590077359
+      - 0.2
+      - -10.271150602200061
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.4518965501115804
+        g: 0.06176758047134847
+        b: 0.029024623078380993
+  - type: SPHERE
+    center:
+      - 3.405704975811413
+      - 0.2
+      - -9.491016260863118
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.09588569781173413
+        g: 0.07584763039601551
+        b: 0.008610847475426917
+  - type: SPHERE
+    center:
+      - 3.7217974192188536
+      - 0.2
+      - -8.889235238748425
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.06827892419821817
+        g: 0.5307284660576441
+        b: 0.10919314631867819
+  - type: SPHERE
+    center:
+      - 3.7835685217467844
+      - 0.2
+      - -7.589710923954673
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.0844366421403249
+        g: 0.07608251029377035
+        b: 0.005784057771552865
+  - type: SPHERE
+    center:
+      - 3.7968967640965918
+      - 0.2
+      - -6.804358853543987
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.6306058953287266
+        g: 0.028961650444866147
+        b: 0.2105463384133082
+  - type: SPHERE
+    center:
+      - 3.523707204596222
+      - 0.2
+      - -5.326894206356284
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.22077823717319806
+        g: 0.12843631216035843
+        b: 0.09507650212127047
+  - type: SPHERE
+    center:
+      - 3.8190065152068124
+      - 0.2
+      - -4.761658868174815
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.31413229487314078
+        g: 0.2099576044327727
+        b: 0.06926055772107374
+  - type: SPHERE
+    center:
+      - 3.7904037676912636
+      - 0.2
+      - -3.4304475502027467
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - 3.4007251224549437
+      - 0.2
+      - -2.40799941237671
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.0003686370930519068
+        g: 0.011873851383964912
+        b: 0.0016161373249949107
+  - type: SPHERE
+    center:
+      - 3.4264044791479244
+      - 0.2
+      - -1.9868022137329249
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - 3.073153010552057
+      - 0.2
+      - -0.6537561250162938
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5528235921873038
+        g: 0.05687171207230971
+        b: 0.004159264647630271
+  - type: SPHERE
+    center:
+      - 3.286131814050562
+      - 0.2
+      - 0.7580112108602101
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.9869198557750123
+        g: 0.5965682269467569
+        b: 0.8561999501161248
+      fuzz: 0.44188343319453896
+  - type: SPHERE
+    center:
+      - 3.541799365153447
+      - 0.2
+      - 1.751731426615483
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.06148986937817563
+        g: 0.05491125367199982
+        b: 0.2065204725548871
+  - type: SPHERE
+    center:
+      - 3.5792615759865828
+      - 0.2
+      - 2.861327469285963
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2673749339887104
+        g: 0.3700319444683915
+        b: 0.025982991094029237
+  - type: SPHERE
+    center:
+      - 3.535683895329864
+      - 0.2
+      - 3.3737968945431677
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.1312979644292416
+        g: 0.6740629437542614
+        b: 0.3972836803826559
+  - type: SPHERE
+    center:
+      - 3.4010443954399847
+      - 0.2
+      - 4.500641163357341
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.13339351840788758
+        g: 0.2720829550055692
+        b: 0.18151761915936424
+  - type: SPHERE
+    center:
+      - 3.18979521992035
+      - 0.2
+      - 5.321751501701785
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.031508474494766989
+        g: 0.010579549470533427
+        b: 0.4743250539111707
+  - type: SPHERE
+    center:
+      - 3.3362653875390295
+      - 0.2
+      - 6.1789975671104229
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.7351819633694919
+        g: 0.5083528046459787
+        b: 0.5342246706447826
+      fuzz: 0.4305357596586247
+  - type: SPHERE
+    center:
+      - 3.063412611060879
+      - 0.2
+      - 7.493252268790027
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.4690653666678472
+        g: 0.16855236284683165
+        b: 0.2989647742380792
+  - type: SPHERE
+    center:
+      - 3.1266422388219885
+      - 0.2
+      - 8.837326269086166
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.09449590535816237
+        g: 0.008502728383682859
+        b: 0.09533440311734734
+  - type: SPHERE
+    center:
+      - 3.6055033068043444
+      - 0.2
+      - 9.313177165533676
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.13135676542254136
+        g: 0.3993067298481453
+        b: 0.4870261786245003
+  - type: SPHERE
+    center:
+      - 3.2177379813175888
+      - 0.2
+      - 10.317984463472572
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.053666691043676117
+        g: 0.35729366022897088
+        b: 0.08091678443896122
+  - type: SPHERE
+    center:
+      - 4.265138361324474
+      - 0.2
+      - -10.17342723164358
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.28347224150335106
+        g: 0.6104435192947039
+        b: 0.31935856662530467
+  - type: SPHERE
+    center:
+      - 4.482855240240794
+      - 0.2
+      - -9.55283962546671
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.3940048140245228
+        g: 0.5341000010810517
+        b: 0.06979938316024426
+  - type: SPHERE
+    center:
+      - 4.504910809454347
+      - 0.2
+      - -8.902241526272249
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.10568961020216494
+        g: 0.1472006138975586
+        b: 0.21930651507497277
+  - type: SPHERE
+    center:
+      - 4.790907380939129
+      - 0.2
+      - -7.986583941816265
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.26491630402201746
+        g: 0.3359873371282987
+        b: 0.5981666188169371
+  - type: SPHERE
+    center:
+      - 4.728834823055229
+      - 0.2
+      - -6.491763918264922
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.18753174200299198
+        g: 0.20331572065238863
+        b: 0.217529507796441
+  - type: SPHERE
+    center:
+      - 4.541673823447379
+      - 0.2
+      - -5.320735952970059
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.37989402428422466
+        g: 0.044736013800051748
+        b: 0.108076936089011
+  - type: SPHERE
+    center:
+      - 4.205986969712356
+      - 0.2
+      - -4.574617040074976
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.13132619270316912
+        g: 0.010035668400552305
+        b: 0.07300280378807443
+  - type: SPHERE
+    center:
+      - 4.280313882660897
+      - 0.2
+      - -3.943180377401221
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - 4.045091891418866
+      - 0.2
+      - -2.6586489366956647
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.7024139806394785
+        g: 0.16172099588344725
+        b: 0.3129311758868628
+  - type: SPHERE
+    center:
+      - 4.386242989507485
+      - 0.2
+      - -1.94965235086306
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2703160291513147
+        g: 0.3892218261462713
+        b: 0.4473119603318213
+  - type: SPHERE
+    center:
+      - 4.144128812381216
+      - 0.2
+      - 1.370094996922401
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.08599313446290843
+        g: 0.6433781476065974
+        b: 0.44070010654693578
+  - type: SPHERE
+    center:
+      - 4.631023586636693
+      - 0.2
+      - 2.811014283692883
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.3456366334889792
+        g: 0.022472858039455976
+        b: 0.24878464875212906
+  - type: SPHERE
+    center:
+      - 4.7913580522808669
+      - 0.2
+      - 3.6790233334133006
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.7306296928421312
+        g: 0.5587106793822212
+        b: 0.915760220632907
+      fuzz: 0.022527314415887846
+  - type: SPHERE
+    center:
+      - 4.835746151623032
+      - 0.2
+      - 4.5708316815364748
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.004120119508460168
+        g: 0.15485614975914367
+        b: 0.07482059282902184
+  - type: SPHERE
+    center:
+      - 4.712655849218463
+      - 0.2
+      - 5.877589083998683
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.4200551066456612
+        g: 0.07009242899380755
+        b: 0.2310350565034771
+  - type: SPHERE
+    center:
+      - 4.8384635862634079
+      - 0.2
+      - 6.863826309604418
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.7443325847028561
+        g: 0.7229938184031852
+        b: 0.6297152120808303
+      fuzz: 0.39414825430889457
+  - type: SPHERE
+    center:
+      - 4.430619110538276
+      - 0.2
+      - 7.291804859104622
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.5261121506654889
+        g: 0.6063928039075281
+        b: 0.6178556055484481
+      fuzz: 0.4101825068938445
+  - type: SPHERE
+    center:
+      - 4.742532183143824
+      - 0.2
+      - 8.767286311799392
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.01476314701906239
+        g: 0.5471034003349056
+        b: 0.6745203911643991
+  - type: SPHERE
+    center:
+      - 4.527967085845166
+      - 0.2
+      - 9.145093760822573
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.1929420948474258
+        g: 0.01243362105636474
+        b: 0.4112390714979799
+  - type: SPHERE
+    center:
+      - 4.831239562203764
+      - 0.2
+      - 10.517601879924103
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.7044129248111896
+        g: 0.4405224749310085
+        b: 0.017131813297391483
+  - type: SPHERE
+    center:
+      - 5.407834038548502
+      - 0.2
+      - -10.250044554751538
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.3761593880816331
+        g: 0.24627744923382328
+        b: 0.16975432854358803
+  - type: SPHERE
+    center:
+      - 5.677009581125779
+      - 0.2
+      - -9.181385492507604
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - 5.69200096968227
+      - 0.2
+      - -8.387080621257735
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.11216504613343696
+        g: 0.07302337322348047
+        b: 0.324161452033026
+  - type: SPHERE
+    center:
+      - 5.852973659119525
+      - 0.2
+      - -7.222819650612633
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.01359763012934823
+        g: 0.1570072157441869
+        b: 0.4279629518660877
+  - type: SPHERE
+    center:
+      - 5.372657091765254
+      - 0.2
+      - -6.655282133634668
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.005200577833037011
+        g: 0.41521872765033937
+        b: 0.06401670299835472
+  - type: SPHERE
+    center:
+      - 5.357649430643796
+      - 0.2
+      - -5.515429942063942
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.07874564796348749
+        g: 0.05179744027022403
+        b: 0.06377041090225434
+  - type: SPHERE
+    center:
+      - 5.231090099675617
+      - 0.2
+      - -4.475624040008035
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.7839322119944582
+        g: 0.6884807406597073
+        b: 0.7014948016725682
+      fuzz: 0.3328818578923064
+  - type: SPHERE
+    center:
+      - 5.780296322038152
+      - 0.2
+      - -3.2708470074529929
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.4213187426489644
+        g: 0.07157779892499254
+        b: 0.045736788846541798
+  - type: SPHERE
+    center:
+      - 5.288625303103619
+      - 0.2
+      - -2.964277630505272
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5955983539342581
+        g: 0.38219612876367056
+        b: 0.03931444680204622
+  - type: SPHERE
+    center:
+      - 5.2238680448782379
+      - 0.2
+      - -1.9935190378171204
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2757911040523303
+        g: 0.2616520988136801
+        b: 0.14216022166245208
+  - type: SPHERE
+    center:
+      - 5.286115388530596
+      - 0.2
+      - -0.8636886780858089
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.15705775172412246
+        g: 0.7330057161488617
+        b: 0.0011523376971133996
+  - type: SPHERE
+    center:
+      - 5.365317475206212
+      - 0.2
+      - 0.337941989279555
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.4507686954638098
+        g: 0.1405298151105468
+        b: 0.348353250849961
+  - type: SPHERE
+    center:
+      - 5.732917287337775
+      - 0.2
+      - 1.414485902068773
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5427992441341174
+        g: 0.21709374289730905
+        b: 0.3121970659461886
+  - type: SPHERE
+    center:
+      - 5.767196596813372
+      - 0.2
+      - 2.1893688645016335
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - 5.398323599588812
+      - 0.2
+      - 3.3812010998589745
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.011990412390421823
+        g: 0.2107395755203421
+        b: 0.16933062207581324
+  - type: SPHERE
+    center:
+      - 5.442362728505612
+      - 0.2
+      - 4.808026551267424
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.20945461963949819
+        g: 0.20524444653064828
+        b: 0.08524651983595284
+  - type: SPHERE
+    center:
+      - 5.115701587636503
+      - 0.2
+      - 5.561448191463287
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.12421351423692712
+        g: 0.4262204235051203
+        b: 0.0074274105667838379
+  - type: SPHERE
+    center:
+      - 5.471686393063524
+      - 0.2
+      - 6.727748145062432
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.3162039597299653
+        g: 0.24619288566782389
+        b: 0.007248904409891447
+  - type: SPHERE
+    center:
+      - 5.262501068459696
+      - 0.2
+      - 7.256148968371759
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.6092801833626493
+        g: 0.39867740110547836
+        b: 0.18822044406649944
+  - type: SPHERE
+    center:
+      - 5.387575910195818
+      - 0.2
+      - 8.19417583515096
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.06896732635508803
+        g: 0.3951273330213782
+        b: 0.40081341381248639
+  - type: SPHERE
+    center:
+      - 5.6272856915218869
+      - 0.2
+      - 9.88206509426997
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.9818180296664563
+        g: 0.6337854084508405
+        b: 0.5072675991399639
+      fuzz: 0.16974532233269735
+  - type: SPHERE
+    center:
+      - 5.1585414784955179
+      - 0.2
+      - 10.822523480469222
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.6059235778918395
+        g: 0.5899001320523305
+        b: 0.6319246435469305
+      fuzz: 0.36314097359808486
+  - type: SPHERE
+    center:
+      - 6.521636675680204
+      - 0.2
+      - -10.202699983620306
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.02554155354549577
+        g: 0.5289185292484098
+        b: 0.27391390247263666
+  - type: SPHERE
+    center:
+      - 6.193725223800092
+      - 0.2
+      - -9.89042614735173
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.24194327383408963
+        g: 0.4075016491763199
+        b: 0.027522694653025028
+  - type: SPHERE
+    center:
+      - 6.864226260664713
+      - 0.2
+      - -8.730263165045777
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.037330124405369719
+        g: 0.0693973599233346
+        b: 0.15185643576935019
+  - type: SPHERE
+    center:
+      - 6.598456490897959
+      - 0.2
+      - -7.793621485241091
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.08094129182258121
+        g: 0.1512754219543612
+        b: 0.005247941906370434
+  - type: SPHERE
+    center:
+      - 6.034273610082898
+      - 0.2
+      - -6.649898464771805
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.23632760412086963
+        g: 0.20485698745260887
+        b: 0.0668171068211821
+  - type: SPHERE
+    center:
+      - 6.577012242585058
+      - 0.2
+      - -5.434660324583
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.03417663695663016
+        g: 0.260490715333096
+        b: 0.30912642039293916
+  - type: SPHERE
+    center:
+      - 6.099318097654228
+      - 0.2
+      - -4.9374818911227609
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.11759605649806777
+        g: 0.27145981157278128
+        b: 0.6979545684803409
+  - type: SPHERE
+    center:
+      - 6.236273373746612
+      - 0.2
+      - -3.599464424323091
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.4281582687077679
+        g: 0.27658555973496398
+        b: 0.0008142166806194615
+  - type: SPHERE
+    center:
+      - 6.0169600979979889
+      - 0.2
+      - -2.5374954296314518
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.08252472904228539
+        g: 0.1810806652539605
+        b: 0.19627859541272128
+  - type: SPHERE
+    center:
+      - 6.831816642994667
+      - 0.2
+      - -1.9305337502336034
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.7409749007242039
+        g: 0.9600807600767847
+        b: 0.507543495604046
+      fuzz: 0.17435762111085197
+  - type: SPHERE
+    center:
+      - 6.795078043782238
+      - 0.2
+      - -0.6191498821182009
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.7125042203848397
+        g: 0.18112769152994125
+        b: 0.42978591489727388
+  - type: SPHERE
+    center:
+      - 6.748495673949111
+      - 0.2
+      - 0.7645039312618663
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.025303581395215957
+        g: 0.4546266978184361
+        b: 0.061059965999150467
+  - type: SPHERE
+    center:
+      - 6.064553345303766
+      - 0.2
+      - 1.4352697058819402
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.7923184277221733
+        g: 0.8333910238910587
+        b: 0.907430590061037
+      fuzz: 0.08612718445168399
+  - type: SPHERE
+    center:
+      - 6.406650951857343
+      - 0.2
+      - 2.2185514463395057
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.6704398343698076
+        g: 0.5050300550358391
+        b: 0.5176547147850404
+      fuzz: 0.45442157607804425
+  - type: SPHERE
+    center:
+      - 6.745097278594594
+      - 0.2
+      - 3.8541032157922725
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2773621108552743
+        g: 0.021307077789470238
+        b: 0.01545494903049331
+  - type: SPHERE
+    center:
+      - 6.001197330460435
+      - 0.2
+      - 4.539048253650835
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.10178383251909225
+        g: 0.4145262620179122
+        b: 0.38543781455827449
+  - type: SPHERE
+    center:
+      - 6.8518101081570779
+      - 0.2
+      - 5.444506149182051
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - 6.205412170485883
+      - 0.2
+      - 6.139509953306648
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.5406242504874902
+        g: 0.6960495720033049
+        b: 0.5888108801644926
+      fuzz: 0.17169296488027664
+  - type: SPHERE
+    center:
+      - 6.886016207622464
+      - 0.2
+      - 7.425806892037443
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.010508546265126495
+        g: 0.47899332512031198
+        b: 0.06362068486401113
+  - type: SPHERE
+    center:
+      - 6.150127056518145
+      - 0.2
+      - 8.809423101541509
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.49689437853376086
+        g: 0.2264177642847246
+        b: 0.39348188503295125
+  - type: SPHERE
+    center:
+      - 6.764969780935946
+      - 0.2
+      - 9.153707609527033
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.4917614616556951
+        g: 0.06324488183299952
+        b: 0.04051321119140896
+  - type: SPHERE
+    center:
+      - 6.492383284974681
+      - 0.2
+      - 10.407206609093889
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.04591324248753048
+        g: 0.41330046894457286
+        b: 0.09946653488224459
+  - type: SPHERE
+    center:
+      - 7.524039082551877
+      - 0.2
+      - -10.428957472989934
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5398099999132915
+        g: 0.4570857131162731
+        b: 0.07564537103796153
+  - type: SPHERE
+    center:
+      - 7.379230979156623
+      - 0.2
+      - -9.187426931387974
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.3722036644692099
+        g: 0.06310573082089378
+        b: 0.5487829700577648
+  - type: SPHERE
+    center:
+      - 7.209087535276805
+      - 0.2
+      - -8.576459925152193
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.36254357050756028
+        g: 0.022941782083719297
+        b: 0.24242900468077856
+  - type: SPHERE
+    center:
+      - 7.141273884169841
+      - 0.2
+      - -7.699757601300321
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.05910645079964751
+        g: 0.17999240368195486
+        b: 0.11963414730591664
+  - type: SPHERE
+    center:
+      - 7.235349716706519
+      - 0.2
+      - -6.248870035439332
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.42098664224468437
+        g: 0.01999913110628893
+        b: 0.17727730674282453
+  - type: SPHERE
+    center:
+      - 7.3605401445203599
+      - 0.2
+      - -5.717128044341891
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.0837191210059869
+        g: 0.4972759260106659
+        b: 0.03489055498880411
+  - type: SPHERE
+    center:
+      - 7.126520210918333
+      - 0.2
+      - -4.56529403163743
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.26642155875894527
+        g: 0.05464051267461594
+        b: 0.0030892639388872876
+  - type: SPHERE
+    center:
+      - 7.459067361760394
+      - 0.2
+      - -3.1120952340944658
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - 7.690088939129564
+      - 0.2
+      - -2.716471843077126
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.28262204230684737
+        g: 0.02187970754451891
+        b: 0.02120280487598464
+  - type: SPHERE
+    center:
+      - 7.854247262010058
+      - 0.2
+      - -1.6078349530289549
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.006655383427189983
+        g: 0.11815306872848056
+        b: 0.7459736045260085
+  - type: SPHERE
+    center:
+      - 7.00225078741968
+      - 0.2
+      - -0.853437482654849
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.20359789870464618
+        g: 0.11521374126379583
+        b: 0.18234098376237307
+  - type: SPHERE
+    center:
+      - 7.819863487109123
+      - 0.2
+      - 0.6160843155571743
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.7125345744212155
+        g: 0.9848005621349278
+        b: 0.5671755317794205
+      fuzz: 0.41210782702998696
+  - type: SPHERE
+    center:
+      - 7.48148667850802
+      - 0.2
+      - 1.7845430388256794
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.14082358296095796
+        g: 0.08798471126457441
+        b: 0.0012246797046892515
+  - type: SPHERE
+    center:
+      - 7.596621522098179
+      - 0.2
+      - 2.4237535159632226
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.4320731084052459
+        g: 0.24363439201648305
+        b: 0.8557195778835066
+  - type: SPHERE
+    center:
+      - 7.252569731862464
+      - 0.2
+      - 3.426309410541868
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.06033823883684644
+        g: 0.24645912829960685
+        b: 0.1877819229801868
+  - type: SPHERE
+    center:
+      - 7.547228224064055
+      - 0.2
+      - 4.154940005426236
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.5833480538451393
+        g: 0.8654568723217
+        b: 0.5307501416166609
+      fuzz: 0.057104792197373858
+  - type: SPHERE
+    center:
+      - 7.180101169646053
+      - 0.2
+      - 5.7460098707420299
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.8482904649929878
+        g: 0.8828647979084543
+        b: 0.9949911943840568
+      fuzz: 0.3499739017332969
+  - type: SPHERE
+    center:
+      - 7.797466299864037
+      - 0.2
+      - 6.518395784643759
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2907811659634517
+        g: 0.35950816041313135
+        b: 0.07129682662469139
+  - type: SPHERE
+    center:
+      - 7.175762075700807
+      - 0.2
+      - 7.870316024044543
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.16106544900819076
+        g: 0.004790194629837119
+        b: 0.27017787727528927
+  - type: SPHERE
+    center:
+      - 7.1098807912359309
+      - 0.2
+      - 8.010470210583702
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.4512241415071758
+        g: 0.6457255851424386
+        b: 0.4428259991995269
+  - type: SPHERE
+    center:
+      - 7.443210184689822
+      - 0.2
+      - 9.244266477668676
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.9513287410430821
+        g: 0.12539997604032022
+        b: 0.14240367526753204
+  - type: SPHERE
+    center:
+      - 7.6574328205382848
+      - 0.2
+      - 10.700721906106694
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5445051495198492
+        g: 0.19258097572150055
+        b: 0.02637236946598389
+  - type: SPHERE
+    center:
+      - 8.204494231677823
+      - 0.2
+      - -10.42035061159242
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.04489677553714475
+        g: 0.08541665075356946
+        b: 0.1906733736349291
+  - type: SPHERE
+    center:
+      - 8.726556539589997
+      - 0.2
+      - -9.546419727585102
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2734501714248505
+        g: 0.8294267350243537
+        b: 0.2600540294255293
+  - type: SPHERE
+    center:
+      - 8.756629469387383
+      - 0.2
+      - -8.95149571782587
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.09442796285258425
+        g: 0.24423953455303139
+        b: 0.15397494111147146
+  - type: SPHERE
+    center:
+      - 8.24649044041611
+      - 0.2
+      - -7.9880601014539549
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5257740745479098
+        g: 0.20873717999951284
+        b: 0.07485416596427376
+  - type: SPHERE
+    center:
+      - 8.773772132079732
+      - 0.2
+      - -6.340411648119372
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2071653363563236
+        g: 0.5362666811100991
+        b: 0.4320406859108582
+  - type: SPHERE
+    center:
+      - 8.608338965686182
+      - 0.2
+      - -5.68223861004728
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.24484752934399446
+        g: 0.46089665560824297
+        b: 0.0791006589632917
+  - type: SPHERE
+    center:
+      - 8.898786246595007
+      - 0.2
+      - -4.108413833197222
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.22116108567365126
+        g: 0.18684350995099242
+        b: 0.1453637246563087
+  - type: SPHERE
+    center:
+      - 8.771676833000918
+      - 0.2
+      - -3.723273473888075
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.3378816037572997
+        g: 0.3941921217610101
+        b: 0.03532639959273898
+  - type: SPHERE
+    center:
+      - 8.439869533187494
+      - 0.2
+      - -2.3333120961165685
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2808073084218515
+        g: 0.07626912124832122
+        b: 0.1467683265593029
+  - type: SPHERE
+    center:
+      - 8.826691544502822
+      - 0.2
+      - -1.717407829623882
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.39037092414404697
+        g: 0.19154556047435654
+        b: 0.21368055410605966
+  - type: SPHERE
+    center:
+      - 8.740793874781018
+      - 0.2
+      - -0.10037825398997191
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.032498888317777297
+        g: 0.09237904521516853
+        b: 0.27699969505929125
+  - type: SPHERE
+    center:
+      - 8.160571311872218
+      - 0.2
+      - 0.5991207894708309
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2531499302818194
+        g: 0.05090012523883439
+        b: 0.02968169103022978
+  - type: SPHERE
+    center:
+      - 8.871118851036464
+      - 0.2
+      - 1.7389000354387168
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.0002684121815712413
+        g: 0.5489835382057581
+        b: 0.3337924458546178
+  - type: SPHERE
+    center:
+      - 8.85384880148208
+      - 0.2
+      - 2.140814666624469
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.05246962009124906
+        g: 0.013216351522166017
+        b: 0.3942318179534672
+  - type: SPHERE
+    center:
+      - 8.87935173065431
+      - 0.2
+      - 3.745681729413427
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.257050838232147
+        g: 0.24168623123750167
+        b: 0.1574735982166799
+  - type: SPHERE
+    center:
+      - 8.325032051667794
+      - 0.2
+      - 4.323521401535841
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.016853633391156636
+        g: 0.020014680750972716
+        b: 0.1161193473346559
+  - type: SPHERE
+    center:
+      - 8.227230095478074
+      - 0.2
+      - 5.860512643404779
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.3272924448990535
+        g: 0.14708925090299328
+        b: 0.4793841808679806
+  - type: SPHERE
+    center:
+      - 8.559510933784328
+      - 0.2
+      - 6.293586218620209
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.778636546037415
+        g: 0.05464044950610461
+        b: 0.04141988471333412
+  - type: SPHERE
+    center:
+      - 8.827718815346464
+      - 0.2
+      - 7.542565150275042
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.8602247882034823
+        g: 0.013033438757349756
+        b: 0.020865654943550407
+  - type: SPHERE
+    center:
+      - 8.104969771656302
+      - 0.2
+      - 8.608091520979189
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.05958880361966507
+        g: 0.3132309823845256
+        b: 0.07235101666042977
+  - type: SPHERE
+    center:
+      - 8.835856058406968
+      - 0.2
+      - 9.88275810643184
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.5116701279049338
+        g: 0.8262714964492565
+        b: 0.9510447237099998
+      fuzz: 0.4463309479658353
+  - type: SPHERE
+    center:
+      - 8.249600260380224
+      - 0.2
+      - 10.046348686530779
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.0719959063604359
+        g: 0.2083235304753129
+        b: 0.07623639308051668
+  - type: SPHERE
+    center:
+      - 9.559352557936859
+      - 0.2
+      - -10.878210422495723
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.05449365228421632
+        g: 0.3561993346347801
+        b: 0.0989295504986648
+  - type: SPHERE
+    center:
+      - 9.24273018789454
+      - 0.2
+      - -9.129761857445784
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - 9.699605886945026
+      - 0.2
+      - -8.442407486411622
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.017905887167883336
+        g: 0.10163274159018353
+        b: 0.0005689919091312985
+  - type: SPHERE
+    center:
+      - 9.836535731071438
+      - 0.2
+      - -7.528493010475175
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.1861581828835568
+        g: 0.21960317091830798
+        b: 0.39719212548597207
+  - type: SPHERE
+    center:
+      - 9.0065640287057
+      - 0.2
+      - -6.188792234822443
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.003937605996394429
+        g: 0.1560440775396064
+        b: 0.09896319809867074
+  - type: SPHERE
+    center:
+      - 9.607667873548984
+      - 0.2
+      - -5.154109936256331
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.4248541581540832
+        g: 0.7530142837790608
+        b: 0.0449203345676182
+  - type: SPHERE
+    center:
+      - 9.427234028424655
+      - 0.2
+      - -4.1159913364545279
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.14486388865779366
+        g: 0.05764841388005368
+        b: 0.02095616502510164
+  - type: SPHERE
+    center:
+      - 9.511431712259068
+      - 0.2
+      - -3.127975446313643
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.18296314731540226
+        g: 0.050164734639096899
+        b: 0.25268879730243307
+  - type: SPHERE
+    center:
+      - 9.22443542711419
+      - 0.2
+      - -2.9778625244295378
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5642917206946777
+        g: 0.10084199153420755
+        b: 0.07603944109145086
+  - type: SPHERE
+    center:
+      - 9.518202438568546
+      - 0.2
+      - -1.4606667295740135
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.10024798799325945
+        g: 0.08151251485611649
+        b: 0.3864979951757073
+  - type: SPHERE
+    center:
+      - 9.841560464997407
+      - 0.2
+      - -0.35212129856121357
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.10509610787726441
+        g: 0.24876532994997156
+        b: 0.6078537388128714
+  - type: SPHERE
+    center:
+      - 9.714093258283864
+      - 0.2
+      - 0.3033181323673414
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5191669725355343
+        g: 0.07371427815326889
+        b: 0.19564710138419454
+  - type: SPHERE
+    center:
+      - 9.650609197993266
+      - 0.2
+      - 1.2445638437765346
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.5513159887283234
+        g: 0.9538940387570878
+        b: 0.8108523988290015
+      fuzz: 0.16525607015649847
+  - type: SPHERE
+    center:
+      - 9.215910236143042
+      - 0.2
+      - 2.143776317189903
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.7234671220850252
+        g: 0.03532922978451351
+        b: 0.5932428962502808
+  - type: SPHERE
+    center:
+      - 9.317023708224447
+      - 0.2
+      - 3.8749896470148994
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.20244866845944443
+        g: 0.13135888644596895
+        b: 0.23887888629488736
+  - type: SPHERE
+    center:
+      - 9.394440344248986
+      - 0.2
+      - 4.820884508100802
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.579047484200625
+        g: 0.09572294584174479
+        b: 0.05759849663385473
+  - type: SPHERE
+    center:
+      - 9.779675409972809
+      - 0.2
+      - 5.362751310718885
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.6338839959374452
+        g: 0.8386498953948196
+        b: 0.9951816252359179
+      fuzz: 0.37160237293819156
+  - type: SPHERE
+    center:
+      - 9.509882213613489
+      - 0.2
+      - 6.7553076174599628
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.819989676946802
+        g: 0.912294955241587
+        b: 0.8602878747763678
+      fuzz: 0.12677576644417655
+  - type: SPHERE
+    center:
+      - 9.15976760679599
+      - 0.2
+      - 7.0397253474678609
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.00206634352727306
+        g: 0.6775886793956818
+        b: 0.435579366958328
+  - type: SPHERE
+    center:
+      - 9.684014771333244
+      - 0.2
+      - 8.723126865800435
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - 9.425099503435053
+      - 0.2
+      - 9.421206363549267
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.8628595436673319
+        g: 0.06365955035578316
+        b: 0.11893500849815617
+  - type: SPHERE
+    center:
+      - 9.420239660581864
+      - 0.2
+      - 10.109541537750856
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.045902324438290068
+        g: 0.2909623357719066
+        b: 0.10112949564549695
+  - type: SPHERE
+    center:
+      - 10.614857087792649
+      - 0.2
+      - -10.863544445373029
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.9097347240671376
+        g: 0.8871258384624664
+        b: 0.9115015835618394
+      fuzz: 0.4374531237559123
+  - type: SPHERE
+    center:
+      - 10.251005400548208
+      - 0.2
+      - -9.893534283297936
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.01545868911287802
+        g: 0.0003618204234690516
+        b: 0.24906191394224695
+  - type: SPHERE
+    center:
+      - 10.770765121969017
+      - 0.2
+      - -8.501326624881104
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.22959975632405159
+        g: 0.0003372974975302209
+        b: 0.1336228205754612
+  - type: SPHERE
+    center:
+      - 10.890037796351553
+      - 0.2
+      - -7.638353422369058
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.07206998879165004
+        g: 0.32385898777361407
+        b: 0.5690529275814158
+  - type: SPHERE
+    center:
+      - 10.309528126629285
+      - 0.2
+      - -6.558975333600088
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.00630897843445322
+        g: 0.49958547293207847
+        b: 0.11787459749331918
+  - type: SPHERE
+    center:
+      - 10.024935201366152
+      - 0.2
+      - -5.556407699468411
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.06034241537163411
+        g: 0.218132475316185
+        b: 0.1737768356345417
+  - type: SPHERE
+    center:
+      - 10.063537549339652
+      - 0.2
+      - -4.846201600130796
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.2046156630203598
+        g: 0.38027255416551827
+        b: 0.15416593585384145
+  - type: SPHERE
+    center:
+      - 10.562759325180567
+      - 0.2
+      - -3.381575549039151
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.25989699105170258
+        g: 0.23510300174593025
+        b: 0.7953888116931447
+  - type: SPHERE
+    center:
+      - 10.327088382247484
+      - 0.2
+      - -2.472010024713412
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.6691501797790975
+        g: 0.6858481979464949
+        b: 0.5824489125144317
+      fuzz: 0.44842014938858557
+  - type: SPHERE
+    center:
+      - 10.63742801408914
+      - 0.2
+      - -1.742200364863197
+    radius: 0.2
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - 10.331419024680838
+      - 0.2
+      - -0.13727124247093593
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.47593225395759006
+        g: 0.1874337665123545
+        b: 0.5111665977702454
+  - type: SPHERE
+    center:
+      - 10.375944667890943
+      - 0.2
+      - 0.4048388436604251
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.02074828524830097
+        g: 0.15992619382293536
+        b: 0.08751497065066759
+  - type: SPHERE
+    center:
+      - 10.794787341605245
+      - 0.2
+      - 1.7523793857972117
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.09195524633205844
+        g: 0.15446688076316945
+        b: 0.44052170436656798
+  - type: SPHERE
+    center:
+      - 10.752466045682658
+      - 0.2
+      - 2.526917879538335
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.6728079814066009
+        g: 0.3921539988234097
+        b: 0.048184724084720489
+  - type: SPHERE
+    center:
+      - 10.108362019761083
+      - 0.2
+      - 3.67340898033937
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.7311070096042591
+        g: 0.5697082414298051
+        b: 0.6454605773764739
+      fuzz: 0.2753096240995073
+  - type: SPHERE
+    center:
+      - 10.899913693382488
+      - 0.2
+      - 4.547252270442096
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.33540133155791349
+        g: 0.018197395712343215
+        b: 0.14579037295792184
+  - type: SPHERE
+    center:
+      - 10.377210577073339
+      - 0.2
+      - 5.0387767327412968
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.11988603487836783
+        g: 0.24981454106098184
+        b: 0.0821193183875499
+  - type: SPHERE
+    center:
+      - 10.428718426284979
+      - 0.2
+      - 6.880174303904903
+    radius: 0.2
+    material:
+      type: METAL
+      albedo:
+        r: 0.632448352378469
+        g: 0.5749847328925095
+        b: 0.6027631177573987
+      fuzz: 0.26440209099211045
+  - type: SPHERE
+    center:
+      - 10.732613521763286
+      - 0.2
+      - 7.154993248438591
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.0054200570325558489
+        g: 0.06065286738905336
+        b: 0.03548043669220625
+  - type: SPHERE
+    center:
+      - 10.627665161224757
+      - 0.2
+      - 8.401417157895008
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.5379218227138565
+        g: 0.08649681739879102
+        b: 0.06583848257282116
+  - type: SPHERE
+    center:
+      - 10.035049928090622
+      - 0.2
+      - 9.274707681792789
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.06371506232963953
+        g: 0.5560850602938787
+        b: 0.6899280605914642
+  - type: SPHERE
+    center:
+      - 10.586088143411887
+      - 0.2
+      - 10.266490937599395
+    radius: 0.2
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.05087701057964695
+        g: 0.05088828626005696
+        b: 0.24060080383536107
+  - type: SPHERE
+    center:
+      - 0.0
+      - 1.0
+      - 0.0
+    radius: 1.0
+    material:
+      type: DIELECTRIC
+      index_of_refraction: 1.5
+  - type: SPHERE
+    center:
+      - -4.0
+      - 1.0
+      - 0.0
+    radius: 1.0
+    material:
+      type: LAMBERTIAN
+      albedo:
+        r: 0.4
+        g: 0.2
+        b: 0.1
+  - type: SPHERE
+    center:
+      - 4.0
+      - 1.0
+      - 0.0
+    radius: 1.0
+    material:
+      type: METAL
+      albedo:
+        r: 0.7
+        g: 0.6
+        b: 0.5
+      fuzz: 0.0

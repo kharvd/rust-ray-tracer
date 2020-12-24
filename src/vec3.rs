@@ -1,7 +1,8 @@
 use std::ops;
+use serde::{Serialize, Deserialize};
 use rand::{Rng, RngCore};
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub struct Vec3(pub f64, pub f64, pub f64);
 
 impl_op_ex!(+ |lhs: &Vec3, rhs: &Vec3| -> Vec3 { Vec3(lhs.0 + rhs.0, lhs.1 + rhs.1, lhs.2 + rhs.2) });

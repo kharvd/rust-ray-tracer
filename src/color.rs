@@ -1,5 +1,6 @@
 use rand::{RngCore, Rng};
 use std::ops;
+use serde::{Serialize, Deserialize};
 
 fn float_to_int(v: f64) -> i32 {
     return (256.0 * clamp(v, 0.0, 0.999)) as i32;
@@ -15,7 +16,7 @@ fn clamp(x: f64, min: f64, max: f64) -> f64 {
     };
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub struct Color {
     pub r: f64,
     pub g: f64,
