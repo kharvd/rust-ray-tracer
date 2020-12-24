@@ -1,4 +1,4 @@
-use std::ops::{Add, Sub, AddAssign, SubAssign, Mul, MulAssign, Div, DivAssign, Neg};
+use std::ops;
 use rand::{Rng, RngCore};
 
 #[derive(Debug, Clone, Copy)]
@@ -10,111 +10,23 @@ pub fn point(x: f64, y: f64, z: f64) -> Point {
     return Vec3(x, y, z);
 }
 
-impl Neg for Vec3 {
-    type Output = Vec3;
+impl_op_ex!(+ |lhs: &Vec3, rhs: &Vec3| -> Vec3 { Vec3(lhs.0 + rhs.0, lhs.1 + rhs.1, lhs.2 + rhs.2) });
+impl_op_ex_commutative!(+ |lhs: &Vec3, rhs: f64| -> Vec3 { Vec3(lhs.0 + rhs, lhs.1 + rhs, lhs.2 + rhs) });
+impl_op_ex!(+= |lhs: &mut Vec3, rhs: &Vec3| { lhs.0 += rhs.0; lhs.1 += rhs.1; lhs.2 += rhs.2 });
 
-    fn neg(self) -> Self::Output {
-        return Vec3(-self.0, -self.1, -self.2);
-    }
-}
+impl_op_ex!(- |lhs: &Vec3, rhs: &Vec3| -> Vec3 { Vec3(lhs.0 - rhs.0, lhs.1 - rhs.1, lhs.2 - rhs.2) });
+impl_op_ex!(- |lhs: &Vec3, rhs: f64| -> Vec3 { Vec3(lhs.0 - rhs, lhs.1 - rhs, lhs.2 - rhs) });
+impl_op_ex!(- |lhs: f64, rhs: &Vec3| -> Vec3 { Vec3(lhs - rhs.0, lhs - rhs.1, lhs - rhs.2) });
+impl_op_ex!(-= |lhs: &mut Vec3, rhs: &Vec3| { lhs.0 -= rhs.0; lhs.1 -= rhs.1; lhs.2 -= rhs.2 });
 
-impl Add<Vec3> for Vec3 {
-    type Output = Vec3;
+impl_op_ex!(- |lhs: &Vec3| -> Vec3 { Vec3(-lhs.0, -lhs.1, -lhs.2) });
 
-    fn add(self, rhs: Vec3) -> Self::Output {
-        return Vec3(self.0 + rhs.0, self.1 + rhs.1, self.2 + rhs.2);
-    }
-}
+impl_op_ex!(* |lhs: &Vec3, rhs: &Vec3| -> Vec3 { Vec3(lhs.0 * rhs.0, lhs.1 * rhs.1, lhs.2 * rhs.2) });
+impl_op_ex_commutative!(* |lhs: &Vec3, rhs: f64| -> Vec3 { Vec3(lhs.0 * rhs, lhs.1 * rhs, lhs.2 * rhs) });
+impl_op_ex!(*= |lhs: &mut Vec3, rhs: f64| { lhs.0 *= rhs; lhs.1 *= rhs; lhs.2 *= rhs; });
 
-impl Add<f64> for Vec3 {
-    type Output = Vec3;
-
-    fn add(self, rhs: f64) -> Self::Output {
-        return Vec3(self.0 + rhs, self.1 + rhs, self.2 + rhs);
-    }
-}
-
-impl Sub<Vec3> for Vec3 {
-    type Output = Vec3;
-
-    fn sub(self, rhs: Vec3) -> Self::Output {
-        return Vec3(self.0 - rhs.0, self.1 - rhs.1, self.2 - rhs.2);
-    }
-}
-
-impl Sub<f64> for Vec3 {
-    type Output = Vec3;
-
-    fn sub(self, rhs: f64) -> Self::Output {
-        return Vec3(self.0 - rhs, self.1 - rhs, self.2 - rhs);
-    }
-}
-
-impl AddAssign<Vec3> for Vec3 {
-    fn add_assign(&mut self, rhs: Vec3) {
-        self.0 += rhs.0;
-        self.1 += rhs.1;
-        self.2 += rhs.2;
-    }
-}
-
-impl SubAssign<Vec3> for Vec3 {
-    fn sub_assign(&mut self, rhs: Vec3) {
-        self.0 -= rhs.0;
-        self.1 -= rhs.1;
-        self.2 -= rhs.2;
-    }
-}
-
-impl Mul<f64> for Vec3 {
-    type Output = Vec3;
-
-    fn mul(self, rhs: f64) -> Self::Output {
-        return Vec3(self.0 * rhs, self.1 * rhs, self.2 * rhs);
-    }
-}
-
-impl Mul<Vec3> for f64 {
-    type Output = Vec3;
-
-    fn mul(self, rhs: Vec3) -> Self::Output {
-        return rhs * self;
-    }
-}
-
-impl Mul<Vec3> for Vec3 {
-    type Output = Vec3;
-
-    fn mul(self, rhs: Vec3) -> Self::Output {
-        return Vec3(
-            self.0 * rhs.0,
-            self.1 * rhs.1,
-            self.2 * rhs.2,
-        );
-    }
-}
-
-impl Div<f64> for Vec3 {
-    type Output = Vec3;
-
-    fn div(self, rhs: f64) -> Self::Output {
-        return self * (1.0 / rhs);
-    }
-}
-
-impl MulAssign<f64> for Vec3 {
-    fn mul_assign(&mut self, rhs: f64) {
-        self.0 *= rhs;
-        self.1 *= rhs;
-        self.2 *= rhs;
-    }
-}
-
-impl DivAssign<f64> for Vec3 {
-    fn div_assign(&mut self, rhs: f64) {
-        *self *= 1.0 / rhs;
-    }
-}
+impl_op_ex!(/ |lhs: &Vec3, rhs: f64| -> Vec3 { Vec3(lhs.0 / rhs, lhs.1 / rhs, lhs.2 / rhs) });
+impl_op_ex!(/= |lhs: &mut Vec3, rhs: f64| { lhs.0 /= rhs; lhs.1 /= rhs; lhs.2 /= rhs; });
 
 impl Vec3 {
     pub fn length(&self) -> f64 {
