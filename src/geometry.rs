@@ -15,12 +15,12 @@ impl HitRecord {
     pub fn create(
         ray: &Ray,
         point: Point,
-        outward_normal: &Vec3,
+        outward_normal: Vec3,
         t: f64,
         material: Rc<dyn Material>,
     ) -> HitRecord {
         let front_face = ray.dir.dot(outward_normal) < 0.0;
-        let normal = if front_face { *outward_normal } else { -(*outward_normal) };
+        let normal = if front_face { outward_normal } else { -outward_normal };
         return HitRecord {
             point,
             t,
@@ -63,7 +63,7 @@ pub mod sphere {
         fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
             let orig_to_center = ray.orig - self.center;
             let a = ray.dir.length2();
-            let half_b = ray.dir.dot(&orig_to_center);
+            let half_b = ray.dir.dot(orig_to_center);
             let c = orig_to_center.length2() - self.radius * self.radius;
             let discr = half_b * half_b - a * c;
 
@@ -86,11 +86,11 @@ pub mod sphere {
             };
 
             let point = ray.at(t);
-            let normal = self.normal_at(&point);
+            let normal = self.normal_at(point);
             return Some(HitRecord::create(
                 ray,
                 point,
-                &normal,
+                normal,
                 t,
                 self.material.clone(),
             ));
@@ -98,8 +98,8 @@ pub mod sphere {
     }
 
     impl Sphere {
-        pub fn normal_at(&self, point: &Point) -> Vec3 {
-            return (*point - self.center) / self.radius;
+        pub fn normal_at(&self, point: Point) -> Vec3 {
+            return (point - self.center) / self.radius;
         }
     }
 }

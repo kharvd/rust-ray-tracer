@@ -108,14 +108,14 @@ impl Vec3 {
     }
 
     pub fn length2(&self) -> f64 {
-        return self.dot(self);
+        return self.dot(*self);
     }
 
-    pub fn dot(&self, other: &Vec3) -> f64 {
+    pub fn dot(&self, other: Vec3) -> f64 {
         return self.0 * other.0 + self.1 * other.1 + self.2 * other.2;
     }
 
-    pub fn cross(&self, other: &Vec3) -> Vec3 {
+    pub fn cross(&self, other: Vec3) -> Vec3 {
         return Vec3(
             self.1 * other.2 - self.2 * other.1,
             self.2 * other.0 - self.0 * other.2,
@@ -132,14 +132,14 @@ impl Vec3 {
         return self.0.abs() < eps && self.1.abs() < eps && self.2.abs() < eps;
     }
 
-    pub fn reflect(&self, n: &Vec3) -> Vec3 {
-        return *self - 2.0 * (*n) * self.dot(n);
+    pub fn reflect(&self, n: Vec3) -> Vec3 {
+        return *self - 2.0 * n * self.dot(n);
     }
 
-    pub fn refract(uv: &Vec3, n: &Vec3, etai_over_etat: f64) -> Vec3 {
+    pub fn refract(uv: Vec3, n: Vec3, etai_over_etat: f64) -> Vec3 {
         let cos_theta = (-uv.dot(n)).min(1.0);
-        let r_out_perp = etai_over_etat * ((*uv) + cos_theta * (*n));
-        let r_out_par = -(1.0 - r_out_perp.length2()).abs().sqrt() * (*n);
+        let r_out_perp = etai_over_etat * (uv + cos_theta * n);
+        let r_out_par = -(1.0 - r_out_perp.length2()).abs().sqrt() * n;
         return r_out_perp + r_out_par;
     }
 

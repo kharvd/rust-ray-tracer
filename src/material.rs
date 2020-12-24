@@ -40,7 +40,7 @@ pub struct Metal {
 
 impl Material for Metal {
     fn scatter(&self, ray_in: &Ray, hit_record: &HitRecord) -> Option<ScatteringRecord> {
-        let dir = ray_in.dir.reflect(&hit_record.normal) + self.fuzz * Vec3::random_in_unit_sphere();
+        let dir = ray_in.dir.reflect(hit_record.normal) + self.fuzz * Vec3::random_in_unit_sphere();
         let scattered_ray = Ray { orig: hit_record.point, dir };
         return Some(ScatteringRecord {
             ray: scattered_ray,
@@ -68,7 +68,7 @@ impl Material for Dielectric {
         };
 
         let unit_direction = ray_in.dir.normalize();
-        let cos_theta = (-unit_direction.dot(&hit_record.normal)).min(1.0);
+        let cos_theta = (-unit_direction.dot(hit_record.normal)).min(1.0);
         let sin_theta = (1.0 - cos_theta.powi(2)).sqrt();
 
         let cannot_refract = refraction_ratio * sin_theta > 1.0;
@@ -77,9 +77,9 @@ impl Material for Dielectric {
             reflectance(cos_theta, refraction_ratio) > random::<f64>();
 
         let dir = if should_reflect {
-            unit_direction.reflect(&hit_record.normal)
+            unit_direction.reflect(hit_record.normal)
         } else {
-            Vec3::refract(&unit_direction, &hit_record.normal, refraction_ratio)
+            Vec3::refract(unit_direction, hit_record.normal, refraction_ratio)
         };
 
         let scattered_ray = Ray { orig: hit_record.point, dir };

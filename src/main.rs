@@ -99,9 +99,9 @@ fn main() {
     let dist_to_focus = (lookfrom - lookat).length();
     let aperture = 0.2;
     let camera = Camera::create(
-        &lookfrom,
-        &lookat,
-        &Vec3(0.0, 1.0, 0.0),
+        lookfrom,
+        lookat,
+        Vec3(0.0, 1.0, 0.0),
         20.0,
         16.0 / 9.0,
         aperture,
