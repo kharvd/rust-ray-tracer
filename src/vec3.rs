@@ -160,6 +160,15 @@ impl Vec3 {
         }
     }
 
+    pub fn random_in_unit_disk() -> Vec3 {
+        let v = Vec3::random_in_unit_sphere();
+        return Vec3(
+            v.0,
+            v.1,
+            0.0,
+        );
+    }
+
     pub fn random_unit_vector() -> Vec3 {
         return Vec3::random_in_unit_sphere().normalize();
     }

@@ -94,12 +94,18 @@ fn main() {
     ];
 
     // Camera
+    let lookfrom = point(3.0, 3.0, 2.0);
+    let lookat = point(0.0, 0.0, -1.0);
+    let dist_to_focus = (lookfrom - lookat).length();
+    let aperture = 0.2;
     let camera = Camera::create(
-        &point(0.0, 0.0, 4.0),
-        &point(0.0, 0.0, -1.0),
+        &lookfrom,
+        &lookat,
         &Vec3(0.0, 1.0, 0.0),
         20.0,
         16.0 / 9.0,
+        aperture,
+        dist_to_focus,
     );
 
     println!("P3\n{} {}\n255", image_width, image_height);
