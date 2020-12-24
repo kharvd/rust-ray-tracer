@@ -39,10 +39,19 @@ type HittableList = Vec<Box<dyn Hittable>>;
 
 impl Hittable for HittableList {
     fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
-        return self.iter()
-            .map(|object| object.hit_by(ray, t_min, t_max))
-            .filter_map(|opt_rec| opt_rec)
-            .min_by(|rec1, rec2| rec1.t.partial_cmp(&rec2.t).unwrap());
+        let mut closest_t = t_max;
+        let mut closest_found: Option<HitRecord> = None;
+        for object in self {
+            if let Some(rec) = object.hit_by(ray, t_min, t_max) {
+                let curr_t = rec.t;
+                if closest_t > curr_t {
+                    closest_found.replace(rec);
+                    closest_t = curr_t;
+                }
+            }
+        }
+
+        return closest_found;
     }
 }
 
