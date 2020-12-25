@@ -3,22 +3,47 @@ use crate::geometry::HitRecord;
 use crate::vec3::Vec3;
 use rand::{random, RngCore};
 use crate::color::Color;
+use serde::{Serialize, Deserialize};
 
 pub struct ScatteringRecord {
     pub ray: Ray,
     pub attenuation: Color,
 }
 
-pub trait Material {
-    fn scatter(&self, rng: &mut dyn RngCore, ray_in: &Ray, hit_record: &HitRecord) -> Option<ScatteringRecord>;
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
+#[serde(tag = "type")]
+pub enum Material {
+    LAMBERTIAN { albedo: Color },
+    METAL {
+        albedo: Color,
+        fuzz: f64,
+    },
+    DIELECTRIC {
+        index_of_refraction: f64,
+    },
 }
 
-pub struct Lambertian {
-    pub albedo: Color,
-}
+impl Material {
+    pub fn scatter(&self,
+                   rng: &mut dyn RngCore,
+                   ray_in: &Ray,
+                   hit_record: &HitRecord
+    ) -> Option<ScatteringRecord> {
+        match *self {
+            Material::LAMBERTIAN { albedo } =>
+                Material::scatter_lambertian(rng, hit_record, albedo),
+            Material::METAL { albedo, fuzz } =>
+                Material::scatter_metal(rng, ray_in, hit_record, albedo, fuzz),
+            Material::DIELECTRIC { index_of_refraction } =>
+                Material::scatter_dielectric(ray_in, hit_record, index_of_refraction),
+        }
+    }
 
-impl Material for Lambertian {
-    fn scatter(&self, rng: &mut dyn RngCore, _ray_in: &Ray, hit_record: &HitRecord) -> Option<ScatteringRecord> {
+    fn scatter_lambertian(
+        rng: &mut dyn RngCore,
+        hit_record: &HitRecord,
+        albedo: Color
+    ) -> Option<ScatteringRecord> {
         let mut target = hit_record.normal + Vec3::random_unit_vector(rng);
 
         if target.near_zero() {
@@ -28,43 +53,34 @@ impl Material for Lambertian {
         let scattered_ray = Ray { orig: hit_record.point, dir: target };
         return Some(ScatteringRecord {
             ray: scattered_ray,
-            attenuation: self.albedo,
+            attenuation: albedo,
         });
     }
-}
 
-pub struct Metal {
-    pub albedo: Color,
-    pub fuzz: f64,
-}
-
-impl Material for Metal {
-    fn scatter(&self, rng: &mut dyn RngCore, ray_in: &Ray, hit_record: &HitRecord) -> Option<ScatteringRecord> {
-        let dir = ray_in.dir.reflect(hit_record.normal) + self.fuzz * Vec3::random_in_unit_sphere(rng);
+    fn scatter_metal(
+        rng: &mut dyn RngCore,
+        ray_in: &Ray,
+        hit_record: &HitRecord,
+        albedo: Color,
+        fuzz: f64
+    ) -> Option<ScatteringRecord> {
+        let dir = ray_in.dir.reflect(hit_record.normal) + fuzz * Vec3::random_in_unit_sphere(rng);
         let scattered_ray = Ray { orig: hit_record.point, dir };
         return Some(ScatteringRecord {
             ray: scattered_ray,
-            attenuation: self.albedo,
+            attenuation: albedo,
         });
     }
-}
 
-pub struct Dielectric {
-    pub index_of_refraction: f64,
-}
-
-fn reflectance(cosine: f64, ref_idx: f64) -> f64 {
-    // Use Schlick's approximation for reflectance.
-    let r0 = ((1.0 - ref_idx) / (1.0 + ref_idx)).powi(2);
-    return r0 + (1.0 - r0) * (1.0 - cosine).powi(5);
-}
-
-impl Material for Dielectric {
-    fn scatter(&self, _rng: &mut dyn RngCore, ray_in: &Ray, hit_record: &HitRecord) -> Option<ScatteringRecord> {
+    fn scatter_dielectric(
+        ray_in: &Ray,
+        hit_record: &HitRecord,
+        index_of_refraction: f64
+    ) -> Option<ScatteringRecord> {
         let refraction_ratio = if hit_record.front_face {
-            1.0 / self.index_of_refraction
+            1.0 / index_of_refraction
         } else {
-            self.index_of_refraction
+            index_of_refraction
         };
 
         let unit_direction = ray_in.dir.normalize();
@@ -88,4 +104,10 @@ impl Material for Dielectric {
             attenuation: Color::new(1.0, 1.0, 1.0),
         });
     }
+}
+
+fn reflectance(cosine: f64, ref_idx: f64) -> f64 {
+    // Use Schlick's approximation for reflectance.
+    let r0 = ((1.0 - ref_idx) / (1.0 + ref_idx)).powi(2);
+    return r0 + (1.0 - r0) * (1.0 - cosine).powi(5);
 }

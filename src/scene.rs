@@ -5,7 +5,6 @@ use crate::color::Color;
 use std::{fs, io};
 use std::error::Error;
 use crate::camera::Camera;
-use crate::material::{Material, Lambertian, Metal, Dielectric};
 use crate::geometry::{Hittable, HittableList};
 use crate::geometry::sphere::Sphere;
 use rand::{RngCore, Rng, SeedableRng};
@@ -13,6 +12,7 @@ use std::fs::File;
 use std::io::Write;
 use rand::rngs::SmallRng;
 use crate::geometry::plane::Plane;
+use crate::material::Material;
 
 #[derive(Debug, Serialize, Deserialize)]
 struct CameraSpec {
@@ -41,54 +41,16 @@ impl CameraSpec {
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(tag = "type")]
-enum MaterialSpec {
-    LAMBERTIAN {
-        albedo: Color,
-    },
-    METAL {
-        albedo: Color,
-        fuzz: f64,
-    },
-    DIELECTRIC {
-        index_of_refraction: f64,
-    },
-}
-
-impl MaterialSpec {
-    fn to_material(&self) -> Box<dyn Material> {
-        match *self {
-            MaterialSpec::LAMBERTIAN { albedo } => {
-                Box::new(Lambertian {
-                    albedo
-                })
-            }
-            MaterialSpec::METAL { albedo, fuzz } => {
-                Box::new(Metal {
-                    albedo,
-                    fuzz,
-                })
-            }
-            MaterialSpec::DIELECTRIC { index_of_refraction } => {
-                Box::new(Dielectric {
-                    index_of_refraction,
-                })
-            }
-        }
-    }
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-#[serde(tag = "type")]
 enum ObjectSpec {
     SPHERE {
         center: Point3,
         radius: f64,
-        material: MaterialSpec,
+        material: Material,
     },
     PLANE {
         center: Point3,
         normal: Vec3,
-        material: MaterialSpec,
+        material: Material,
     }
 }
 
@@ -99,14 +61,14 @@ impl ObjectSpec {
                 Box::new(Sphere {
                     radius: *radius,
                     center: *center,
-                    material: material.to_material(),
+                    material: *material,
                 })
             }
             ObjectSpec::PLANE { center, normal, material } => {
                 Box::new(Plane {
                     center: *center,
                     normal: *normal,
-                    material: material.to_material(),
+                    material: *material,
                 })
             }
         }
@@ -156,7 +118,7 @@ fn random_large_scene(rng: &mut dyn RngCore) -> SceneSpec {
     objects.push(ObjectSpec::SPHERE {
         radius: 1000.0,
         center: Point3::new(0.0, -1000.0, -1.0),
-        material: MaterialSpec::LAMBERTIAN {
+        material: Material::LAMBERTIAN {
             albedo: Color::new(0.5, 0.5, 0.5)
         },
     });
@@ -173,20 +135,20 @@ fn random_large_scene(rng: &mut dyn RngCore) -> SceneSpec {
             );
 
             if (center - p).length() > 0.9 {
-                let material: MaterialSpec = if choose_mat < 0.8 {
+                let material: Material = if choose_mat < 0.8 {
                     let albedo = Color::random(rng) * Color::random(rng);
-                    MaterialSpec::LAMBERTIAN {
+                    Material::LAMBERTIAN {
                         albedo,
                     }
                 } else if choose_mat < 0.95 {
                     let albedo = Color::random(rng) / 2.0 + 0.5;
                     let fuzz = rng.gen_range(0.0..0.5);
-                    MaterialSpec::METAL {
+                    Material::METAL {
                         albedo,
                         fuzz,
                     }
                 } else {
-                    MaterialSpec::DIELECTRIC {
+                    Material::DIELECTRIC {
                         index_of_refraction: 1.5
                     }
                 };
@@ -203,7 +165,7 @@ fn random_large_scene(rng: &mut dyn RngCore) -> SceneSpec {
     objects.push(ObjectSpec::SPHERE {
         radius: 1.0,
         center: Point3::new(0.0, 1.0, 0.0),
-        material: MaterialSpec::DIELECTRIC {
+        material: Material::DIELECTRIC {
             index_of_refraction: 1.5,
         },
     });
@@ -211,7 +173,7 @@ fn random_large_scene(rng: &mut dyn RngCore) -> SceneSpec {
     objects.push(ObjectSpec::SPHERE {
         radius: 1.0,
         center: Point3::new(-4.0, 1.0, 0.0),
-        material: MaterialSpec::LAMBERTIAN {
+        material: Material::LAMBERTIAN {
             albedo: Color::new(0.4, 0.2, 0.1),
         },
     });
@@ -219,7 +181,7 @@ fn random_large_scene(rng: &mut dyn RngCore) -> SceneSpec {
     objects.push(ObjectSpec::SPHERE {
         radius: 1.0,
         center: Point3::new(4.0, 1.0, 0.0),
-        material: MaterialSpec::METAL {
+        material: Material::METAL {
             albedo: Color::new(0.7, 0.6, 0.5),
             fuzz: 0.0,
         },
