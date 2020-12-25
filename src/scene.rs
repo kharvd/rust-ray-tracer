@@ -5,13 +5,11 @@ use crate::color::Color;
 use std::{fs, io};
 use std::error::Error;
 use crate::camera::Camera;
-use crate::geometry::{Hittable, HittableList};
-use crate::geometry::sphere::Sphere;
+use crate::geometry::Hittable;
 use rand::{RngCore, Rng, SeedableRng};
 use std::fs::File;
 use std::io::Write;
 use rand::rngs::SmallRng;
-use crate::geometry::plane::Plane;
 use crate::material::Material;
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -39,42 +37,6 @@ impl CameraSpec {
     }
 }
 
-#[derive(Debug, Serialize, Deserialize)]
-#[serde(tag = "type")]
-enum ObjectSpec {
-    SPHERE {
-        center: Point3,
-        radius: f64,
-        material: Material,
-    },
-    PLANE {
-        center: Point3,
-        normal: Vec3,
-        material: Material,
-    }
-}
-
-impl ObjectSpec {
-    fn to_hittable(&self) -> Box<dyn Hittable> {
-        match self {
-            ObjectSpec::SPHERE { radius, center, material } => {
-                Box::new(Sphere {
-                    radius: *radius,
-                    center: *center,
-                    material: *material,
-                })
-            }
-            ObjectSpec::PLANE { center, normal, material } => {
-                Box::new(Plane {
-                    center: *center,
-                    normal: *normal,
-                    material: *material,
-                })
-            }
-        }
-    }
-}
-
 #[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub struct RenderConfig {
     pub image_width: i32,
@@ -87,7 +49,7 @@ pub struct RenderConfig {
 struct SceneSpec {
     pub render_config: RenderConfig,
     pub camera: CameraSpec,
-    pub objects: Vec<ObjectSpec>,
+    pub objects: Vec<Hittable>,
 }
 
 impl SceneSpec {
@@ -95,7 +57,7 @@ impl SceneSpec {
         return Scene {
             render_config: self.render_config,
             camera: self.camera.to_camera(self.render_config),
-            world: self.objects.iter().map(|o| o.to_hittable()).collect(),
+            world: self.objects.clone(),
         };
     }
 }
@@ -103,7 +65,7 @@ impl SceneSpec {
 pub struct Scene {
     pub render_config: RenderConfig,
     pub camera: Camera,
-    pub world: HittableList,
+    pub world: Vec<Hittable>,
 }
 
 pub fn read_scene(filename: &str) -> Result<Scene, Box<dyn Error>> {
@@ -113,9 +75,9 @@ pub fn read_scene(filename: &str) -> Result<Scene, Box<dyn Error>> {
 }
 
 fn random_large_scene_spec(rng: &mut dyn RngCore) -> SceneSpec {
-    let mut objects: Vec<ObjectSpec> = Vec::new();
+    let mut objects: Vec<Hittable> = Vec::new();
 
-    objects.push(ObjectSpec::SPHERE {
+    objects.push(Hittable::SPHERE {
         radius: 1000.0,
         center: Point3::new(0.0, -1000.0, -1.0),
         material: Material::LAMBERTIAN {
@@ -153,7 +115,7 @@ fn random_large_scene_spec(rng: &mut dyn RngCore) -> SceneSpec {
                     }
                 };
 
-                objects.push(ObjectSpec::SPHERE {
+                objects.push(Hittable::SPHERE {
                     radius: 0.2,
                     center,
                     material,
@@ -162,7 +124,7 @@ fn random_large_scene_spec(rng: &mut dyn RngCore) -> SceneSpec {
         }
     }
 
-    objects.push(ObjectSpec::SPHERE {
+    objects.push(Hittable::SPHERE {
         radius: 1.0,
         center: Point3::new(0.0, 1.0, 0.0),
         material: Material::DIELECTRIC {
@@ -170,7 +132,7 @@ fn random_large_scene_spec(rng: &mut dyn RngCore) -> SceneSpec {
         },
     });
 
-    objects.push(ObjectSpec::SPHERE {
+    objects.push(Hittable::SPHERE {
         radius: 1.0,
         center: Point3::new(-4.0, 1.0, 0.0),
         material: Material::LAMBERTIAN {
@@ -178,7 +140,7 @@ fn random_large_scene_spec(rng: &mut dyn RngCore) -> SceneSpec {
         },
     });
 
-    objects.push(ObjectSpec::SPHERE {
+    objects.push(Hittable::SPHERE {
         radius: 1.0,
         center: Point3::new(4.0, 1.0, 0.0),
         material: Material::METAL {
