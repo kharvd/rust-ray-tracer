@@ -1,4 +1,4 @@
-use crate::scene::{Scene, random_large_scene};
+use crate::scene::Scene;
 use crate::color::{Color, print_color};
 use rand::rngs::SmallRng;
 use rand::{SeedableRng, Rng, RngCore};
@@ -52,30 +52,4 @@ pub fn render_scene(scene: &Scene) {
             print_color(pix, scene.render_config.samples_per_pixel);
         }
     }
-}
-
-
-extern crate test;
-
-use test::Bencher;
-use crate::point3::Point3;
-use rand::prelude::StdRng;
-
-#[bench]
-fn bench_ray_color(b: &mut Bencher) {
-    let mut rng = SmallRng::seed_from_u64(42123);
-    let scene = random_large_scene(&mut rng);
-
-    let image_width = scene.render_config.image_width;
-    let image_height = scene.render_config.image_height;
-    let i = 200;
-    let j = 300;
-
-    let u = (i as f64 + rng.gen::<f64>()) / (image_width - 1) as f64;
-    let v = (j as f64 + rng.gen::<f64>()) / (image_height - 1) as f64;
-    let r = scene.camera.get_ray(&mut rng, u, v);
-
-    b.iter(|| {
-        ray_color(&mut rng, &r, &scene.world, 10)
-    });
 }

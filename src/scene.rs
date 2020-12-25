@@ -172,12 +172,12 @@ pub fn random_large_scene(rng: &mut dyn RngCore) -> Scene {
     return random_large_scene_spec(rng).to_scene()
 }
 
-fn write_scene_spec(filename: &str, scene_spec: &SceneSpec) -> Result<(), io::Error> {
+fn _write_scene_spec(filename: &str, scene_spec: &SceneSpec) -> Result<(), io::Error> {
     let mut file = File::create(filename)?;
     file.write_all(serde_yaml::to_string(scene_spec).unwrap().as_bytes())
 }
 
-pub fn write_large_random_scene(filename: &str) -> Result<(), io::Error> {
+pub fn _write_large_random_scene(filename: &str) -> Result<(), io::Error> {
     let spec = random_large_scene_spec(&mut SmallRng::from_entropy());
-    write_scene_spec(filename, &spec)
+    _write_scene_spec(filename, &spec)
 }
