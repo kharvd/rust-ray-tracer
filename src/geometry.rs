@@ -60,7 +60,7 @@ pub mod sphere {
     use crate::point3::Point3;
     use crate::ray::Ray;
     use crate::geometry::{Hittable, HitRecord};
-    use crate::material::Material;
+    use crate::material::{Material, Lambertian};
     use std::borrow::Borrow;
 
     pub struct Sphere {
@@ -112,12 +112,38 @@ pub mod sphere {
             return (point - self.center) / self.radius;
         }
     }
+
+    extern crate test;
+    use test::Bencher;
+    use rand::rngs::SmallRng;
+    use rand::{SeedableRng, Rng};
+    use crate::color::Color;
+
+    #[bench]
+    fn bench_sphere_hit_by(b: &mut Bencher) {
+        let mut rng = SmallRng::from_entropy();
+        let sphere = Sphere {
+            center: Point3(rng.gen(), rng.gen(), rng.gen()),
+            radius: rng.gen::<f64>() * 50.0,
+            material: Box::new(Lambertian {
+                albedo: Color::new(0.5, 0.5, 0.5),
+            }),
+        };
+
+        b.iter(|| {
+            let ray = Ray {
+                orig: Point3(rng.gen(), rng.gen(), rng.gen()),
+                dir: Vec3::random(&mut rng),
+            };
+            sphere.hit_by(&ray, 0.001, std::f64::INFINITY);
+        });
+    }
 }
 
 pub mod plane {
     use crate::point3::Point3;
     use crate::vec3::Vec3;
-    use crate::material::Material;
+    use crate::material::{Material, Lambertian};
     use crate::geometry::{Hittable, HitRecord};
     use crate::ray::Ray;
     use std::borrow::Borrow;
@@ -149,5 +175,31 @@ pub mod plane {
 
             return None;
         }
+    }
+
+    extern crate test;
+    use test::Bencher;
+    use rand::rngs::SmallRng;
+    use rand::{SeedableRng, Rng};
+    use crate::color::Color;
+
+    #[bench]
+    fn bench_plane_hit_by(b: &mut Bencher) {
+        let mut rng = SmallRng::from_entropy();
+        let plane = Plane {
+            center: Point3(rng.gen(), rng.gen(), rng.gen()),
+            normal: Vec3::random(&mut rng),
+            material: Box::new(Lambertian {
+                albedo: Color::new(0.5, 0.5, 0.5),
+            }),
+        };
+
+        b.iter(|| {
+            let ray = Ray {
+                orig: Point3(rng.gen(), rng.gen(), rng.gen()),
+                dir: Vec3::random(&mut rng),
+            };
+            plane.hit_by(&ray, 0.001, std::f64::INFINITY);
+        });
     }
 }
