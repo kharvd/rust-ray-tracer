@@ -5,8 +5,10 @@ use rand::{SeedableRng, Rng, RngCore};
 use crate::ray::Ray;
 use crate::geometry::{Hittable, HitRecord};
 use std::f64;
+use crate::lighting::{LightSource, PointLight};
+use crate::point3::Point3;
 
-fn ray_color(rng: &mut dyn RngCore, ray: &Ray, world: &dyn Hittable, depth: i32) -> Color {
+fn ray_color(rng: &mut dyn RngCore, ray: &Ray, light: &dyn LightSource, world: &dyn Hittable, depth: i32) -> Color {
     if depth <= 0 {
         return Color::new(0.0, 0.0, 0.0);
     }
@@ -16,7 +18,18 @@ fn ray_color(rng: &mut dyn RngCore, ray: &Ray, world: &dyn Hittable, depth: i32)
         Some(rec) => {
             match rec.material.scatter(rng, ray, &rec) {
                 Some(scatter_rec) => {
-                    scatter_rec.attenuation * ray_color(rng, &scatter_rec.ray, world, depth - 1)
+                    let illum_rec = light.illuminate(rec.point);
+                    let shadow_ray_hit = world.hit_by(&illum_rec.ray, 0.001, illum_rec.t);
+                    let illum_weight = if shadow_ray_hit.is_some() {
+                        0.0
+                    } else {
+                        illum_rec.intensity
+                    };
+
+                    let scattered_color = ray_color(rng, &scatter_rec.ray, light, world, depth - 1);
+                    let illum_color = illum_rec.color;
+
+                    scatter_rec.attenuation * ((1.0 - illum_weight) * scattered_color + illum_weight * illum_color)
                 }
 
                 None => Color::new(0.0, 0.0, 0.0)
@@ -27,6 +40,7 @@ fn ray_color(rng: &mut dyn RngCore, ray: &Ray, world: &dyn Hittable, depth: i32)
             let normalized_dir = ray.dir.normalize();
             let t = 0.5 * (normalized_dir.1 + 1.0);
             (1.0 - t) * Color::new(1.0, 1.0, 1.0) + t * Color::new(0.5, 0.7, 1.0)
+            // Color::new(0.0, 0.0, 0.0)
         }
     };
 }
@@ -37,6 +51,12 @@ pub fn render_scene(scene: &Scene) {
     let image_width = scene.render_config.image_width;
     let image_height = scene.render_config.image_height;
 
+    let light = PointLight {
+        color: Color::new(1.0, 1.0, 1.0),
+        center: Point3::new(2.0, 2.0, 1.0),
+        intensity: 0.5,
+    };
+
     println!("P3\n{} {}\n255", image_width, image_height);
     for j in (0..image_height).rev() {
         eprint!("\rScanlines remaining: {}", j);
@@ -46,7 +66,7 @@ pub fn render_scene(scene: &Scene) {
                 let u = (i as f64 + rng.gen::<f64>()) / (image_width - 1) as f64;
                 let v = (j as f64 + rng.gen::<f64>()) / (image_height - 1) as f64;
                 let r = scene.camera.get_ray(&mut rng, u, v);
-                pix += ray_color(&mut rng, &r, &scene.world, scene.render_config.max_depth);
+                pix += ray_color(&mut rng, &r, &light, &scene.world, scene.render_config.max_depth);
             }
 
             print_color(pix, scene.render_config.samples_per_pixel);

@@ -1,7 +1,7 @@
 render_config:
   image_width: 400
   image_height: 300
-  samples_per_pixel: 100
+  samples_per_pixel: 400
   max_depth: 50
 camera:
   lookfrom:
@@ -32,9 +32,9 @@ objects:
     material:
       type: LAMBERTIAN
       albedo:
-        - 0.8
-        - 0.8
-        - 0.0
+        - 0.5
+        - 0.5
+        - 0.5
   - type: SPHERE
     center:
       - 0.0
