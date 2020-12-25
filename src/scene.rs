@@ -112,7 +112,7 @@ pub fn read_scene(filename: &str) -> Result<Scene, Box<dyn Error>> {
     Ok(scene_spec.to_scene())
 }
 
-fn random_large_scene(rng: &mut dyn RngCore) -> SceneSpec {
+fn random_large_scene_spec(rng: &mut dyn RngCore) -> SceneSpec {
     let mut objects: Vec<ObjectSpec> = Vec::new();
 
     objects.push(ObjectSpec::SPHERE {
@@ -206,12 +206,16 @@ fn random_large_scene(rng: &mut dyn RngCore) -> SceneSpec {
     };
 }
 
+pub fn random_large_scene(rng: &mut dyn RngCore) -> Scene {
+    return random_large_scene_spec(rng).to_scene()
+}
+
 fn write_scene_spec(filename: &str, scene_spec: &SceneSpec) -> Result<(), io::Error> {
     let mut file = File::create(filename)?;
     file.write_all(serde_yaml::to_string(scene_spec).unwrap().as_bytes())
 }
 
 pub fn write_large_random_scene(filename: &str) -> Result<(), io::Error> {
-    let spec = random_large_scene(&mut SmallRng::from_entropy());
+    let spec = random_large_scene_spec(&mut SmallRng::from_entropy());
     write_scene_spec(filename, &spec)
 }

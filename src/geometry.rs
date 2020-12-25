@@ -219,3 +219,33 @@ pub mod plane {
         });
     }
 }
+
+// extern crate test;
+//
+// use test::Bencher;
+// use rand::rngs::SmallRng;
+// use rand::{SeedableRng, Rng};
+// use crate::color::Color;
+// use rand::prelude::StdRng;
+//
+// #[bench]
+// fn bench_hittable_list_hit_by(b: &mut Bencher) {
+//     let mut rng = SmallRng::from_entropy();
+//     let num_spheres = 10;
+//     let num_planes = 10;
+//
+//     let mut objects: Vec<ObjectSpec> = Vec::new();
+//
+//
+//     objects.push(ObjectSpec::SPHERE {
+//         radius: 1000.0,
+//         center: Point3::new(0.0, -1000.0, -1.0),
+//         material: Material::LAMBERTIAN {
+//             albedo: Color::new(0.5, 0.5, 0.5)
+//         },
+//     });
+//
+//     b.iter(|| {
+//         plane.hit_by(&ray, std::f64::NEG_INFINITY, std::f64::INFINITY)
+//     });
+// }
