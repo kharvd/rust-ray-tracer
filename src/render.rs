@@ -76,6 +76,6 @@ fn bench_ray_color(b: &mut Bencher) {
     let r = scene.camera.get_ray(&mut rng, u, v);
 
     b.iter(|| {
-        ray_color(&mut rng, &r, &scene.world, 1)
+        ray_color(&mut rng, &r, &scene.world, 10)
     });
 }
