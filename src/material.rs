@@ -35,7 +35,7 @@ impl Material {
             Material::METAL { albedo, fuzz } =>
                 Material::scatter_metal(rng, ray_in, hit_record, albedo, fuzz),
             Material::DIELECTRIC { index_of_refraction } =>
-                Material::scatter_dielectric(ray_in, hit_record, index_of_refraction),
+                Material::scatter_dielectric(rng, ray_in, hit_record, index_of_refraction),
         }
     }
 
@@ -73,6 +73,7 @@ impl Material {
     }
 
     fn scatter_dielectric(
+        rng: &mut dyn RngCore,
         ray_in: &Ray,
         hit_record: &HitRecord,
         index_of_refraction: f64
@@ -90,7 +91,7 @@ impl Material {
         let cannot_refract = refraction_ratio * sin_theta > 1.0;
 
         let should_reflect = cannot_refract ||
-            reflectance(cos_theta, refraction_ratio) > random::<f64>();
+            reflectance(cos_theta, refraction_ratio) > rng.gen();
 
         let dir = if should_reflect {
             unit_direction.reflect(hit_record.normal)
@@ -110,4 +111,75 @@ fn reflectance(cosine: f64, ref_idx: f64) -> f64 {
     // Use Schlick's approximation for reflectance.
     let r0 = ((1.0 - ref_idx) / (1.0 + ref_idx)).powi(2);
     return r0 + (1.0 - r0) * (1.0 - cosine).powi(5);
+}
+
+extern crate test;
+
+use test::Bencher;
+use rand::rngs::SmallRng;
+use rand::{SeedableRng, Rng};
+use crate::point3::Point3;
+use rand::prelude::StdRng;
+
+#[bench]
+fn bench_lambertian(b: &mut Bencher) {
+    let mut rng = SmallRng::from_entropy();
+
+    let albedo = Color::random(&mut rng);
+    let hit_record = HitRecord {
+        material: Material::LAMBERTIAN { albedo },
+        t: 1.0,
+        front_face: true,
+        point: Point3(rng.gen(), rng.gen(), rng.gen()),
+        normal: Vec3::random(&mut rng),
+    };
+
+    b.iter(|| {
+        Material::scatter_lambertian(&mut rng, &hit_record, albedo)
+    });
+}
+
+#[bench]
+fn bench_metal(b: &mut Bencher) {
+    let mut rng = SmallRng::from_entropy();
+
+    let albedo = Color::random(&mut rng);
+    let fuzz = 0.5;
+    let hit_record = HitRecord {
+        material: Material::METAL { albedo, fuzz },
+        t: 1.0,
+        front_face: true,
+        point: Point3(rng.gen(), rng.gen(), rng.gen()),
+        normal: Vec3::random(&mut rng),
+    };
+    let ray = Ray {
+        orig: Point3(rng.gen(), rng.gen(), rng.gen()),
+        dir: Vec3::random(&mut rng),
+    };
+
+    b.iter(|| {
+        Material::scatter_metal(&mut rng, &ray,&hit_record, albedo, fuzz)
+    });
+}
+
+#[bench]
+fn bench_dielectric(b: &mut Bencher) {
+    let mut rng = SmallRng::from_entropy();
+
+    let index_of_refraction = 1.5;
+    let hit_record = HitRecord {
+        material: Material::DIELECTRIC { index_of_refraction },
+        t: 1.0,
+        front_face: true,
+        point: Point3(rng.gen(), rng.gen(), rng.gen()),
+        normal: Vec3::random(&mut rng),
+    };
+    let ray = Ray {
+        orig: Point3(rng.gen(), rng.gen(), rng.gen()),
+        dir: Vec3::random(&mut rng),
+    };
+
+    b.iter(|| {
+        Material::scatter_dielectric(&mut rng, &ray, &hit_record, index_of_refraction)
+    });
 }

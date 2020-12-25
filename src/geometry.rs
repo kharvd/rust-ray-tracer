@@ -61,7 +61,6 @@ pub mod sphere {
     use crate::ray::Ray;
     use crate::geometry::{Hittable, HitRecord};
     use crate::material::Material;
-    use std::borrow::Borrow;
 
     pub struct Sphere {
         pub center: Point3,
@@ -129,30 +128,6 @@ pub mod sphere {
     use crate::color::Color;
 
     #[bench]
-    fn bench_hit_record_create(b: &mut Bencher) {
-        let mut rng = SmallRng::from_entropy();
-        let point = Point3(rng.gen(), rng.gen(), rng.gen());
-        let normal = Vec3::random(&mut rng);
-        let ray = Ray {
-            orig: point,
-            dir: normal,
-        };
-        let t = rng.gen::<f64>();
-
-        b.iter(|| {
-            HitRecord::create(
-                &ray,
-                point,
-                normal,
-                t,
-                Material::LAMBERTIAN {
-                    albedo: Color::new(0.5, 0.5, 0.5),
-                },
-            )
-        });
-    }
-
-    #[bench]
     fn bench_sphere_hit_by(b: &mut Bencher) {
         let mut rng = SmallRng::from_entropy();
         let sphere = Sphere {
@@ -182,7 +157,6 @@ pub mod plane {
     use crate::material::Material;
     use crate::geometry::{Hittable, HitRecord};
     use crate::ray::Ray;
-    use std::borrow::Borrow;
 
     pub struct Plane {
         pub center: Point3,
