@@ -69,41 +69,49 @@ pub mod sphere {
         pub material: Box<dyn Material>,
     }
 
+    #[inline]
+    fn solve_quadratic(a: f64, half_b: f64, c: f64, t_min: f64, t_max: f64) -> Option<f64> {
+        let discr = half_b * half_b - a * c;
+        if discr < 0.0 {
+            return None;
+        }
+
+        let sqrt_discr = discr.sqrt();
+
+        let t1 = (-half_b - sqrt_discr) / a;
+        let t = if t_min < t1 && t1 < t_max {
+            t1
+        } else {
+            let t2 = (-half_b + sqrt_discr) / a;
+            if t_min < t2 && t2 < t_max {
+                t2
+            } else {
+                return Option::None;
+            }
+        };
+
+        return Some(t);
+    }
+
+
     impl Hittable for Sphere {
         fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
             let orig_to_center = ray.orig - self.center;
             let a = ray.dir.length2();
             let half_b = ray.dir.dot(orig_to_center);
             let c = orig_to_center.length2() - self.radius * self.radius;
-            let discr = half_b * half_b - a * c;
 
-            if discr < 0.0 {
-                return Option::None;
-            }
-
-            let sqrt_discr = discr.sqrt();
-
-            let t1 = (-half_b - sqrt_discr) / a;
-            let t = if t_min < t1 && t1 < t_max {
-                t1
-            } else {
-                let t2 = (-half_b + sqrt_discr) / a;
-                if t_min < t2 && t2 < t_max {
-                    t2
-                } else {
-                    return Option::None;
-                }
-            };
-
-            let point = ray.at(t);
-            let normal = self.normal_at(point);
-            return Some(HitRecord::create(
-                ray,
-                point,
-                normal,
-                t,
-                self.material.borrow(),
-            ));
+            solve_quadratic(a, half_b, c, t_min, t_max).map(|t| {
+                let point = ray.at(t);
+                let normal = self.normal_at(point);
+                HitRecord::create(
+                    ray,
+                    point,
+                    normal,
+                    t,
+                    self.material.borrow(),
+                )
+            })
         }
     }
 
@@ -114,6 +122,7 @@ pub mod sphere {
     }
 
     extern crate test;
+
     use test::Bencher;
     use rand::rngs::SmallRng;
     use rand::{SeedableRng, Rng};
@@ -130,12 +139,15 @@ pub mod sphere {
             }),
         };
 
+        let point3 = Point3(rng.gen(), rng.gen(), rng.gen());
+        let vec3 = Vec3::random(&mut rng);
+        let ray = Ray {
+            orig: point3,
+            dir: vec3,
+        };
+
         b.iter(|| {
-            let ray = Ray {
-                orig: Point3(rng.gen(), rng.gen(), rng.gen()),
-                dir: Vec3::random(&mut rng),
-            };
-            sphere.hit_by(&ray, 0.001, std::f64::INFINITY);
+            sphere.hit_by(&ray, std::f64::NEG_INFINITY, std::f64::INFINITY)
         });
     }
 }
@@ -178,10 +190,12 @@ pub mod plane {
     }
 
     extern crate test;
+
     use test::Bencher;
     use rand::rngs::SmallRng;
     use rand::{SeedableRng, Rng};
     use crate::color::Color;
+    use rand::prelude::StdRng;
 
     #[bench]
     fn bench_plane_hit_by(b: &mut Bencher) {
@@ -194,12 +208,16 @@ pub mod plane {
             }),
         };
 
+        let point3 = Point3(rng.gen(), rng.gen(), rng.gen());
+        let vec3 = Vec3::random(&mut rng);
+
+        let ray = Ray {
+            orig: point3,
+            dir: vec3,
+        };
+
         b.iter(|| {
-            let ray = Ray {
-                orig: Point3(rng.gen(), rng.gen(), rng.gen()),
-                dir: Vec3::random(&mut rng),
-            };
-            plane.hit_by(&ray, 0.001, std::f64::INFINITY);
+            plane.hit_by(&ray, std::f64::NEG_INFINITY, std::f64::INFINITY)
         });
     }
 }

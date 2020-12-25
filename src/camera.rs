@@ -60,3 +60,29 @@ impl Camera {
         };
     }
 }
+//
+// extern crate test;
+// use test::Bencher;
+// use rand::rngs::SmallRng;
+// use rand::{SeedableRng, Rng};
+// use crate::color::Color;
+//
+// #[bench]
+// fn bench_camera_get_ray(b: &mut Bencher) {
+//     let mut rng = SmallRng::from_entropy();
+//     let camera = Camera::create(
+//         Point3::new(0.0, 1.0, 0.0),
+//         Point3::new(0.0, 0.0, 0.0),
+//         Vec3(0.0, 1.0, 0.0),
+//         20.0,
+//         16.0 / 9.0,
+//         1.0,
+//         10.0
+//     );
+//
+//
+//
+//     b.iter(|| {
+//         camera.get_ray(&ray, 0.001, std::f64::INFINITY);
+//     });
+// }
