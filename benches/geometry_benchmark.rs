@@ -2,7 +2,7 @@ use criterion::{BenchmarkId, black_box, Criterion};
 use rand::{Rng, SeedableRng};
 use rand::rngs::SmallRng;
 
-use rust_ray_tracer::geometry::{hit_by, Hittable};
+use rust_ray_tracer::geometry::{hit_by, Hittable, hit_by_slow};
 use rust_ray_tracer::material::Material;
 use rust_ray_tracer::point3::Point3;
 use rust_ray_tracer::ray::Ray;
@@ -58,9 +58,10 @@ pub fn hit_by_list_benchmark(c: &mut Criterion) {
         BenchmarkId::from_parameter("Imperative"),
         &scene.world,
         |b, list| b.iter(|| {
-            let s = rng.gen();
-            let t = rng.gen();
-            let ray = scene.camera.get_ray(&mut rng, s, t);
+            let ray = Ray {
+                orig: Point3(rng.gen_range(-5.0..5.0), rng.gen_range(-5.0..5.0), rng.gen_range(-5.0..5.0)),
+                dir: Vec3::random_unit_vector(&mut rng),
+            };
 
             hit_by(
                 list,
@@ -79,7 +80,7 @@ pub fn hit_by_list_benchmark(c: &mut Criterion) {
             let t = rng.gen();
             let ray = scene.camera.get_ray(&mut rng, s, t);
 
-            hit_by(
+            hit_by_slow(
                 list,
                 black_box(&ray),
                 black_box(std::f64::NEG_INFINITY),
