@@ -1,8 +1,9 @@
-use crate::ray::Ray;
-use crate::vec3::Vec3;
+use serde::{Deserialize, Serialize};
+
 use crate::material::Material;
 use crate::point3::Point3;
-use serde::{Serialize, Deserialize};
+use crate::ray::Ray;
+use crate::vec3::Vec3;
 
 pub struct HitRecord {
     pub point: Point3,
@@ -139,17 +140,19 @@ fn solve_quadratic(a: f64, half_b: f64, c: f64, t_min: f64, t_max: f64) -> Optio
 pub fn hit_by(vec: &Vec<Hittable>, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
     let mut closest_t = t_max;
     let mut closest_found: Option<HitRecord> = None;
-    for object in vec {
-        if let Some(rec) = object.hit_by(ray, t_min, t_max) {
+
+    vec.iter()
+        .map(|obj| obj.hit_by(ray, t_min, t_max))
+        .filter_map(|obj| obj)
+        .for_each(|rec| {
             let curr_t = rec.t;
             if closest_t > curr_t {
                 closest_found.replace(rec);
                 closest_t = curr_t;
             }
-        }
-    }
+        });
 
-    return closest_found;
+    closest_found
 }
 
 pub fn hit_by_slow(vec: &Vec<Hittable>, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {

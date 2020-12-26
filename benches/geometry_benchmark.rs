@@ -55,7 +55,7 @@ pub fn hit_by_list_benchmark(c: &mut Criterion) {
     });
 
     group.bench_with_input(
-        BenchmarkId::from_parameter("Imperative"),
+        BenchmarkId::from_parameter("fast"),
         &scene.world,
         |b, list| b.iter(|| {
             let ray = Ray {
@@ -73,7 +73,7 @@ pub fn hit_by_list_benchmark(c: &mut Criterion) {
     );
 
     group.bench_with_input(
-        BenchmarkId::from_parameter("Functional"),
+        BenchmarkId::from_parameter("slow"),
         &scene.world,
         |b, list| b.iter(|| {
             let s = rng.gen();
