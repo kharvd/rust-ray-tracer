@@ -1,6 +1,6 @@
 use std::f64;
 
-use image::{Rgb, RgbImage, ImageBuffer, ImageFormat};
+use image::RgbImage;
 use rand::{Rng, RngCore, SeedableRng};
 use rand::rngs::SmallRng;
 
@@ -43,7 +43,7 @@ pub fn render_image(scene: &Scene) -> RgbImage {
     let mut img = RgbImage::new(image_width, image_height);
 
     for j in (0..image_height).rev() {
-        eprint!("\rScanlines remaining: {}", j);
+        // eprint!("\rScanlines remaining: {}", j);
         for i in 0..image_width {
             let mut pix = Color::new(0.0, 0.0, 0.0);
             for _s in 0..scene.render_config.samples_per_pixel {

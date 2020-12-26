@@ -1,7 +1,8 @@
-use rand::{RngCore, Rng};
 use std::ops;
-use serde::{Serialize, Deserialize};
-use image::{ImageBuffer, RgbImage, Rgb};
+
+use image::{Rgb, RgbImage};
+use rand::{Rng, RngCore};
+use serde::{Deserialize, Serialize};
 
 fn float_to_int(v: f64) -> u8 {
     return (256.0 * clamp(v, 0.0, 0.999)) as u8;
