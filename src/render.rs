@@ -4,7 +4,7 @@ use image::{Rgb, RgbImage, ImageBuffer, ImageFormat};
 use rand::{Rng, RngCore, SeedableRng};
 use rand::rngs::SmallRng;
 
-use crate::color::{Color, print_color, put_color};
+use crate::color::{Color, put_color};
 use crate::geometry::{hit_by, HitRecord, Hittable};
 use crate::ray::Ray;
 use crate::scene::Scene;
