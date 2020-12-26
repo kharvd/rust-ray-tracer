@@ -6,7 +6,7 @@ use crate::ray::Ray;
 use crate::geometry::{Hittable, HitRecord, hit_by};
 use std::f64;
 
-fn ray_color(rng: &mut dyn RngCore, ray: &Ray, world: &Vec<Hittable>, depth: i32) -> Color {
+pub fn ray_color(rng: &mut dyn RngCore, ray: &Ray, world: &Vec<Hittable>, depth: i32) -> Color {
     if depth <= 0 {
         return Color::new(0.0, 0.0, 0.0);
     }

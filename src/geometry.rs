@@ -151,3 +151,10 @@ pub fn hit_by(vec: &Vec<Hittable>, ray: &Ray, t_min: f64, t_max: f64) -> Option<
 
     return closest_found;
 }
+
+pub fn hit_by_slow(vec: &Vec<Hittable>, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
+    return vec.iter()
+        .map(|obj| obj.hit_by(ray, t_min, t_max))
+        .filter_map(|obj| obj)
+        .min_by(|x, y| x.t.partial_cmp(&y.t).unwrap())
+}
