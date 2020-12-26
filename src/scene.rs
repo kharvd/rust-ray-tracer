@@ -39,10 +39,10 @@ impl CameraSpec {
 
 #[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub struct RenderConfig {
-    pub image_width: i32,
-    pub image_height: i32,
-    pub samples_per_pixel: i32,
-    pub max_depth: i32,
+    pub image_width: u32,
+    pub image_height: u32,
+    pub samples_per_pixel: u32,
+    pub max_depth: u32,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

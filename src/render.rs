@@ -1,12 +1,15 @@
-use crate::scene::Scene;
-use crate::color::{Color, print_color};
-use rand::rngs::SmallRng;
-use rand::{SeedableRng, Rng, RngCore};
-use crate::ray::Ray;
-use crate::geometry::{Hittable, HitRecord, hit_by};
 use std::f64;
 
-pub fn ray_color(rng: &mut dyn RngCore, ray: &Ray, world: &Vec<Hittable>, depth: i32) -> Color {
+use image::{Rgb, RgbImage, ImageBuffer, ImageFormat};
+use rand::{Rng, RngCore, SeedableRng};
+use rand::rngs::SmallRng;
+
+use crate::color::{Color, print_color, put_color};
+use crate::geometry::{hit_by, HitRecord, Hittable};
+use crate::ray::Ray;
+use crate::scene::Scene;
+
+pub fn ray_color(rng: &mut dyn RngCore, ray: &Ray, world: &Vec<Hittable>, depth: u32) -> Color {
     if depth <= 0 {
         return Color::new(0.0, 0.0, 0.0);
     }
@@ -31,13 +34,14 @@ pub fn ray_color(rng: &mut dyn RngCore, ray: &Ray, world: &Vec<Hittable>, depth:
     };
 }
 
-pub fn render_scene(scene: &Scene) {
+pub fn render_image(scene: &Scene) -> RgbImage {
     let mut rng = SmallRng::from_entropy();
 
     let image_width = scene.render_config.image_width;
     let image_height = scene.render_config.image_height;
 
-    println!("P3\n{} {}\n255", image_width, image_height);
+    let mut img = RgbImage::new(image_width, image_height);
+
     for j in (0..image_height).rev() {
         eprint!("\rScanlines remaining: {}", j);
         for i in 0..image_width {
@@ -49,7 +53,14 @@ pub fn render_scene(scene: &Scene) {
                 pix += ray_color(&mut rng, &r, &scene.world, scene.render_config.max_depth);
             }
 
-            print_color(pix, scene.render_config.samples_per_pixel);
+            put_color(&mut img, i, image_height - j - 1, pix, scene.render_config.samples_per_pixel);
         }
     }
+
+    img
+}
+
+pub fn render_scene(scene: &Scene, filename: &str) {
+    let img = render_image(scene);
+    img.save(filename).unwrap();
 }
