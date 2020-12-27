@@ -50,7 +50,7 @@ fn map_color_value(x: f64, samples_per_pixel: u32) -> u8 {
     float_to_int((x / samples_per_pixel as f64).powf(1.0 / gamma))
 }
 
-pub(crate) fn get_rgb_u8(pix: Rgb<f64>, samples_per_pixel: u32) -> Rgb<u8> {
+pub fn get_rgb_u8(pix: Rgb<f64>, samples_per_pixel: u32) -> Rgb<u8> {
     let r = map_color_value(pix.0[0], samples_per_pixel);
     let g = map_color_value(pix.0[1], samples_per_pixel);
     let b = map_color_value(pix.0[2], samples_per_pixel);
@@ -69,4 +69,14 @@ pub fn update_pixel(buf: &mut ImageBuffer<Rgb<f64>, Vec<f64>>, x: u32, y: u32, c
     buf[(x, y)].0[0] += color.r;
     buf[(x, y)].0[1] += color.g;
     buf[(x, y)].0[2] += color.b;
+}
+
+pub fn put_color(img: &mut RgbImage, x: u32, y: u32, col: Color, samples_per_pixel: u32) {
+    let scaled_col = col / samples_per_pixel as f64;
+    let gamma = 2.0;
+    let r = scaled_col.r.powf(1.0 / gamma);
+    let g = scaled_col.g.powf(1.0 / gamma);
+    let b = scaled_col.b.powf(1.0 / gamma);
+
+    img.put_pixel(x, y, Rgb([float_to_int(r), float_to_int(g), float_to_int(b)]))
 }
