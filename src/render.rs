@@ -67,6 +67,32 @@ pub fn render_image_sequential(scene: &Scene) -> RgbImage {
     color::discretize_image(&img_buffer, samples_per_pixel)
 }
 
+pub fn render_image_sequential_fast(scene: &Scene) -> RgbImage {
+    let mut rng = SmallRng::from_entropy();
+
+    let image_width = scene.render_config.image_width;
+    let image_height = scene.render_config.image_height;
+
+    let mut img = RgbImage::new(image_width, image_height);
+
+    for j in (0..image_height).rev() {
+        // eprint!("\rScanlines remaining: {}", j);
+        for i in 0..image_width {
+            let mut pix = Color::new(0.0, 0.0, 0.0);
+            for _s in 0..scene.render_config.samples_per_pixel {
+                let u = (i as f64 + rng.gen::<f64>()) / (image_width - 1) as f64;
+                let v = (j as f64 + rng.gen::<f64>()) / (image_height - 1) as f64;
+                let r = scene.camera.get_ray(&mut rng, u, v);
+                pix += ray_color(&mut rng, &r, &scene.world, scene.render_config.max_depth);
+            }
+
+            put_color(&mut img, i, image_height - j - 1, pix, scene.render_config.samples_per_pixel);
+        }
+    }
+
+    img
+}
+
 pub fn render_image_parallel(scene: &Scene) -> RgbImage {
     let image_width = scene.render_config.image_width;
     let image_height = scene.render_config.image_height;
