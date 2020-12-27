@@ -2,7 +2,7 @@ use criterion::{black_box, Criterion};
 use rand::{Rng, SeedableRng};
 use rand::rngs::SmallRng;
 
-use rust_ray_tracer::render::{ray_color, render_image};
+use rust_ray_tracer::render::{ray_color, render_image_sequential};
 use rust_ray_tracer::scene::{RenderConfig, setup_small_scene};
 
 pub fn ray_color_benchmark(c: &mut Criterion) {
@@ -40,7 +40,7 @@ pub fn render_image_benchmark(c: &mut Criterion) {
 
     c.bench_function("render_image", |b| {
         b.iter(|| {
-            render_image(black_box(&scene))
+            render_image_sequential(black_box(&scene))
         });
     });
 }

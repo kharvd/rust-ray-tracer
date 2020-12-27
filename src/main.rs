@@ -1,12 +1,22 @@
-use std::env;
 use std::error::Error;
-use rust_ray_tracer::scene;
-use rust_ray_tracer::render::render_scene;
 
+use clap::Clap;
+
+use rust_ray_tracer::render::render_scene;
+use rust_ray_tracer::scene;
+
+#[derive(Clap)]
+struct Opts {
+    scene_file: String,
+    output_file: String,
+
+    #[clap(short, long)]
+    parallel: bool,
+}
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let args: Vec<String> = env::args().collect();
-    let scene = scene::read_scene(&args[1])?;
-    render_scene(&scene, &args[2]);
+    let opts: Opts = Opts::parse();
+    let scene = scene::read_scene(&opts.scene_file)?;
+    render_scene(&scene, &opts.output_file, opts.parallel);
     Ok(())
 }

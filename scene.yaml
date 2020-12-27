@@ -1,7 +1,7 @@
 render_config:
   image_width: 400
   image_height: 300
-  samples_per_pixel: 100
+  samples_per_pixel: 10
   max_depth: 50
 camera:
   lookfrom:
@@ -16,7 +16,7 @@ camera:
     - 0.0
     - 1.0
     - 0.0
-  vfov_deg: 90.0
+  vfov_deg: 20.0
   aperture: 0.0
   focus_dist: 10.0
 objects:
