@@ -1,7 +1,6 @@
 use std::f64;
-use std::sync::mpsc::channel;
 
-use image::{ImageBuffer, Rgb, RgbImage};
+use image::RgbImage;
 use itertools::iproduct;
 use rand::{Rng, RngCore, SeedableRng, thread_rng};
 use rand::rngs::SmallRng;
@@ -11,8 +10,6 @@ use crate::color::{Color, put_color};
 use crate::geometry::{hit_by, HitRecord, Hittable};
 use crate::ray::Ray;
 use crate::scene::Scene;
-use crate::color;
-use std::collections::HashMap;
 
 pub fn ray_color(rng: &mut dyn RngCore, ray: &Ray, world: &Vec<Hittable>, depth: u32) -> Color {
     if depth <= 0 {
@@ -40,8 +37,6 @@ pub fn ray_color(rng: &mut dyn RngCore, ray: &Ray, world: &Vec<Hittable>, depth:
 }
 
 fn render_pixel(rng: &mut dyn RngCore, x: u32, y: u32, scene: &Scene) -> Color {
-    // let mut rng = thread_rng();
-
     let image_width = scene.render_config.image_width;
     let image_height = scene.render_config.image_height;
 
@@ -73,33 +68,7 @@ pub fn render_image_sequential(scene: &Scene) -> RgbImage {
     img
 }
 
-pub fn render_image_sequential_fast(scene: &Scene) -> RgbImage {
-    let mut rng = SmallRng::from_entropy();
-
-    let image_width = scene.render_config.image_width;
-    let image_height = scene.render_config.image_height;
-
-    let mut img = RgbImage::new(image_width, image_height);
-
-    for j in (0..image_height).rev() {
-        // eprint!("\rScanlines remaining: {}", j);
-        for i in 0..image_width {
-            let mut pix = Color::new(0.0, 0.0, 0.0);
-            for _s in 0..scene.render_config.samples_per_pixel {
-                let u = (i as f64 + rng.gen::<f64>()) / (image_width - 1) as f64;
-                let v = (j as f64 + rng.gen::<f64>()) / (image_height - 1) as f64;
-                let r = scene.camera.get_ray(&mut rng, u, v);
-                pix += ray_color(&mut rng, &r, &scene.world, scene.render_config.max_depth);
-            }
-
-            put_color(&mut img, i, image_height - j - 1, pix, scene.render_config.samples_per_pixel);
-        }
-    }
-
-    img
-}
-
-pub fn render_pixel_par(outer_rng: &mut SmallRng, x: u32, y: u32, scene: &Scene, samples_per_pixel: u32) -> Color {
+pub fn render_pixel_par(x: u32, y: u32, scene: &Scene, samples_per_pixel: u32) -> Color {
     (0..samples_per_pixel)
         .into_par_iter()
         .map_init(|| SmallRng::from_rng(thread_rng()).unwrap(), |rng, _| render_pixel(rng, x, y, scene))
@@ -115,8 +84,8 @@ pub fn render_image_parallel(scene: &Scene) -> RgbImage {
     iproduct!(0..image_width, 0..image_height)
         .collect::<Vec<_>>()
         .par_iter()
-        .map_init(|| SmallRng::from_rng(thread_rng()).unwrap(), |rng, (x, y)| {
-            (*x, *y, render_pixel_par(rng, *x, *y, scene, samples_per_pixel))
+        .map(|(x, y)| {
+            (*x, *y, render_pixel_par(*x, *y, scene, samples_per_pixel))
         })
         .collect_into_vec(&mut result);
 
