@@ -36,6 +36,11 @@ impl HitRecord {
     }
 }
 
+pub trait Hittable {
+    fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord>;
+    fn bounding_box(&self) -> Option<BBox>;
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(tag = "type")]
 pub enum Shape {
@@ -51,8 +56,8 @@ pub enum Shape {
     },
 }
 
-impl Shape {
-    pub fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
+impl Hittable for Shape {
+    fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
         match *self {
             SPHERE { material, center, radius } =>
                 Shape::sphere_hit_by(ray, t_min, t_max, center, radius, material),
@@ -61,7 +66,7 @@ impl Shape {
         }
     }
 
-    pub fn bounding_box(&self) -> Option<BBox> {
+    fn bounding_box(&self) -> Option<BBox> {
         match *self {
             SPHERE { center, radius, .. } => Some(BBox {
                 min: center - Vec3(radius, radius, radius),
@@ -70,7 +75,9 @@ impl Shape {
             PLANE { .. } => None
         }
     }
+}
 
+impl Shape {
     fn sphere_hit_by(
         ray: &Ray,
         t_min: f64,
@@ -150,38 +157,40 @@ fn solve_quadratic(a: f64, half_b: f64, c: f64, t_min: f64, t_max: f64) -> Optio
     return Some(t);
 }
 
-pub fn bounding_box(vec: &Vec<Shape>) -> Option<BBox> {
-    let mut iter = vec.iter();
-    let first = iter.next()?;
-    let first_bbox = first.bounding_box()?;
+impl <T: Hittable> Hittable for Vec<T> {
+    fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
+        let mut closest_t = t_max;
+        let mut closest_found: Option<HitRecord> = None;
 
-    iter
-        .map(|h| h.bounding_box())
-        .fold_options(
-            first_bbox,
-            |accum, bbox| BBox::surrounding_box(accum, bbox)
-        )
+        self.iter()
+            .map(|obj| obj.hit_by(ray, t_min, t_max))
+            .filter_map(|obj| obj)
+            .for_each(|rec| {
+                let curr_t = rec.t;
+                if closest_t > curr_t {
+                    closest_found.replace(rec);
+                    closest_t = curr_t;
+                }
+            });
+
+        closest_found
+    }
+
+    fn bounding_box(&self) -> Option<BBox> {
+        let mut iter = self.iter();
+        let first = iter.next()?;
+        let first_bbox = first.bounding_box()?;
+
+        iter
+            .map(|h| h.bounding_box())
+            .fold_options(
+                first_bbox,
+                |accum, bbox| BBox::surrounding_box(accum, bbox),
+            )
+    }
 }
 
-pub fn hit_by(vec: &Vec<Shape>, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
-    let mut closest_t = t_max;
-    let mut closest_found: Option<HitRecord> = None;
-
-    vec.iter()
-        .map(|obj| obj.hit_by(ray, t_min, t_max))
-        .filter_map(|obj| obj)
-        .for_each(|rec| {
-            let curr_t = rec.t;
-            if closest_t > curr_t {
-                closest_found.replace(rec);
-                closest_t = curr_t;
-            }
-        });
-
-    closest_found
-}
-
-pub fn hit_by_slow(vec: &Vec<Shape>, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
+pub fn hit_by_slow<T: Hittable>(vec: &Vec<T>, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
     return vec.iter()
         .map(|obj| obj.hit_by(ray, t_min, t_max))
         .filter_map(|obj| obj)

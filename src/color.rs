@@ -1,6 +1,6 @@
 use std::{ops, f64};
 
-use image::{Rgb, RgbImage, ImageBuffer};
+use image::{Rgb, RgbImage};
 use rand::{Rng, RngCore};
 use serde::{Deserialize, Serialize};
 

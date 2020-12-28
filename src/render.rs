@@ -7,7 +7,7 @@ use rand::rngs::SmallRng;
 use rayon::prelude::*;
 
 use crate::color::{Color, put_color};
-use crate::geometry::{hit_by, HitRecord, Shape};
+use crate::geometry::{HitRecord, Shape, Hittable};
 use crate::ray::Ray;
 use crate::scene::Scene;
 
@@ -16,7 +16,7 @@ pub fn ray_color(rng: &mut dyn RngCore, ray: &Ray, world: &Vec<Shape>, depth: u3
         return Color::new(0.0, 0.0, 0.0);
     }
 
-    let hit_record: Option<HitRecord> = hit_by(&world, ray, 0.001, f64::INFINITY);
+    let hit_record: Option<HitRecord> = world.hit_by(ray, 0.001, f64::INFINITY);
     return match hit_record {
         Some(rec) => {
             match rec.material.scatter(rng, ray, &rec) {

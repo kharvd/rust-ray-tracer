@@ -2,7 +2,7 @@ use criterion::{BenchmarkId, black_box, Criterion};
 use rand::{Rng, SeedableRng};
 use rand::rngs::SmallRng;
 
-use rust_ray_tracer::geometry::{hit_by, Shape, hit_by_slow};
+use rust_ray_tracer::geometry::{Shape, hit_by_slow, Hittable};
 use rust_ray_tracer::material::Material;
 use rust_ray_tracer::point3::Point3;
 use rust_ray_tracer::ray::Ray;
@@ -63,8 +63,7 @@ pub fn hit_by_list_benchmark(c: &mut Criterion) {
                 dir: Vec3::random_unit_vector(&mut rng),
             };
 
-            hit_by(
-                list,
+            list.hit_by(
                 black_box(&ray),
                 black_box(std::f64::NEG_INFINITY),
                 black_box(std::f64::INFINITY),

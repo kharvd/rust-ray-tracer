@@ -2,7 +2,7 @@ use criterion::{black_box, Criterion, BenchmarkId};
 use rand::{Rng, SeedableRng};
 use rand::rngs::SmallRng;
 
-use rust_ray_tracer::render::{ray_color, render_image_sequential, render_image_sequential_fast, render_image_parallel};
+use rust_ray_tracer::render::{ray_color, render_image_sequential, render_image_parallel};
 use rust_ray_tracer::scene::{RenderConfig, setup_small_scene};
 use std::time::Duration;
 
@@ -47,14 +47,6 @@ pub fn render_image_benchmark(c: &mut Criterion) {
         });
 
         group.bench_with_input(
-            BenchmarkId::new("sequential_fast_samples", samples_per_pixel),
-            samples_per_pixel,
-            |b, _| b.iter(|| {
-                render_image_sequential_fast(black_box(&scene))
-            }),
-        );
-
-        group.bench_with_input(
             BenchmarkId::new("sequential_samples", samples_per_pixel),
             samples_per_pixel,
             |b, _| b.iter(|| {
@@ -78,14 +70,6 @@ pub fn render_image_benchmark(c: &mut Criterion) {
             samples_per_pixel: 1,
             max_depth: 10,
         });
-
-        group.bench_with_input(
-            BenchmarkId::new("sequential_fast_size", size),
-            size,
-            |b, _| b.iter(|| {
-                render_image_sequential_fast(black_box(&scene))
-            }),
-        );
 
         group.bench_with_input(
             BenchmarkId::new("sequential_size", size),
