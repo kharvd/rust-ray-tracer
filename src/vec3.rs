@@ -24,6 +24,10 @@ impl_op_ex!(/ |lhs: &Vec3, rhs: f64| -> Vec3 { Vec3(lhs.0 / rhs, lhs.1 / rhs, lh
 impl_op_ex!(/= |lhs: &mut Vec3, rhs: f64| { lhs.0 /= rhs; lhs.1 /= rhs; lhs.2 /= rhs; });
 
 impl Vec3 {
+    pub fn as_slice(&self) -> [f64; 3] {
+        [self.0, self.1, self.2]
+    }
+
     pub fn length(&self) -> f64 {
         return self.length2().sqrt();
     }
@@ -94,4 +98,3 @@ impl Vec3 {
         return Vec3::random_in_unit_sphere(rng).normalize();
     }
 }
-

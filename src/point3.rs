@@ -7,8 +7,16 @@ use crate::vec3::{Vec3};
 pub struct Point3(pub f64, pub f64, pub f64);
 
 impl Point3 {
+    pub fn zero() -> Point3 {
+        Point3(0.0, 0.0, 0.0)
+    }
+
     pub fn new(x: f64, y: f64, z: f64) -> Point3 {
         return Point3(x, y, z);
+    }
+
+    pub fn as_slice(&self) -> [f64; 3] {
+        [self.0, self.1, self.2]
     }
 }
 

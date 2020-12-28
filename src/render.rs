@@ -7,11 +7,11 @@ use rand::rngs::SmallRng;
 use rayon::prelude::*;
 
 use crate::color::{Color, put_color};
-use crate::geometry::{hit_by, HitRecord, Hittable};
+use crate::geometry::{hit_by, HitRecord, Shape};
 use crate::ray::Ray;
 use crate::scene::Scene;
 
-pub fn ray_color(rng: &mut dyn RngCore, ray: &Ray, world: &Vec<Hittable>, depth: u32) -> Color {
+pub fn ray_color(rng: &mut dyn RngCore, ray: &Ray, world: &Vec<Shape>, depth: u32) -> Color {
     if depth <= 0 {
         return Color::new(0.0, 0.0, 0.0);
     }

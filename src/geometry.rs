@@ -4,6 +4,9 @@ use crate::material::Material;
 use crate::point3::Point3;
 use crate::ray::Ray;
 use crate::vec3::Vec3;
+use crate::bounding_box::BBox;
+use Shape::{SPHERE, PLANE};
+use itertools::Itertools;
 
 pub struct HitRecord {
     pub point: Point3,
@@ -35,7 +38,7 @@ impl HitRecord {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(tag = "type")]
-pub enum Hittable {
+pub enum Shape {
     SPHERE {
         center: Point3,
         radius: f64,
@@ -48,13 +51,23 @@ pub enum Hittable {
     },
 }
 
-impl Hittable {
+impl Shape {
     pub fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
         match *self {
-            Hittable::SPHERE { material, center, radius } =>
-                Hittable::sphere_hit_by(ray, t_min, t_max, center, radius, material),
-            Hittable::PLANE { center, material, normal } =>
-                Hittable::plane_hit_by(ray, t_min, t_max, center, normal, material)
+            SPHERE { material, center, radius } =>
+                Shape::sphere_hit_by(ray, t_min, t_max, center, radius, material),
+            PLANE { center, material, normal } =>
+                Shape::plane_hit_by(ray, t_min, t_max, center, normal, material)
+        }
+    }
+
+    pub fn bounding_box(&self) -> Option<BBox> {
+        match *self {
+            SPHERE { center, radius, .. } => Some(BBox {
+                min: center - Vec3(radius, radius, radius),
+                max: center + Vec3(radius, radius, radius),
+            }),
+            PLANE { .. } => None
         }
     }
 
@@ -137,7 +150,20 @@ fn solve_quadratic(a: f64, half_b: f64, c: f64, t_min: f64, t_max: f64) -> Optio
     return Some(t);
 }
 
-pub fn hit_by(vec: &Vec<Hittable>, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
+pub fn bounding_box(vec: &Vec<Shape>) -> Option<BBox> {
+    let mut iter = vec.iter();
+    let first = iter.next()?;
+    let first_bbox = first.bounding_box()?;
+
+    iter
+        .map(|h| h.bounding_box())
+        .fold_options(
+            first_bbox,
+            |accum, bbox| BBox::surrounding_box(accum, bbox)
+        )
+}
+
+pub fn hit_by(vec: &Vec<Shape>, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
     let mut closest_t = t_max;
     let mut closest_found: Option<HitRecord> = None;
 
@@ -155,9 +181,9 @@ pub fn hit_by(vec: &Vec<Hittable>, ray: &Ray, t_min: f64, t_max: f64) -> Option<
     closest_found
 }
 
-pub fn hit_by_slow(vec: &Vec<Hittable>, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
+pub fn hit_by_slow(vec: &Vec<Shape>, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
     return vec.iter()
         .map(|obj| obj.hit_by(ray, t_min, t_max))
         .filter_map(|obj| obj)
-        .min_by(|x, y| x.t.partial_cmp(&y.t).unwrap())
+        .min_by(|x, y| x.t.partial_cmp(&y.t).unwrap());
 }

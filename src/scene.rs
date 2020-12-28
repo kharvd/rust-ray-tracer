@@ -5,7 +5,7 @@ use crate::color::Color;
 use std::{fs, io};
 use std::error::Error;
 use crate::camera::Camera;
-use crate::geometry::Hittable;
+use crate::geometry::Shape;
 use rand::{RngCore, Rng, SeedableRng};
 use std::fs::File;
 use std::io::Write;
@@ -49,7 +49,7 @@ pub struct RenderConfig {
 struct SceneSpec {
     pub render_config: RenderConfig,
     pub camera: CameraSpec,
-    pub objects: Vec<Hittable>,
+    pub objects: Vec<Shape>,
 }
 
 impl SceneSpec {
@@ -65,7 +65,7 @@ impl SceneSpec {
 pub struct Scene {
     pub render_config: RenderConfig,
     pub camera: Camera,
-    pub world: Vec<Hittable>,
+    pub world: Vec<Shape>,
 }
 
 pub fn read_scene(filename: &str) -> Result<Scene, Box<dyn Error>> {
@@ -75,9 +75,9 @@ pub fn read_scene(filename: &str) -> Result<Scene, Box<dyn Error>> {
 }
 
 fn random_large_scene_spec(rng: &mut dyn RngCore) -> SceneSpec {
-    let mut objects: Vec<Hittable> = Vec::new();
+    let mut objects: Vec<Shape> = Vec::new();
 
-    objects.push(Hittable::SPHERE {
+    objects.push(Shape::SPHERE {
         radius: 1000.0,
         center: Point3::new(0.0, -1000.0, -1.0),
         material: Material::LAMBERTIAN {
@@ -115,7 +115,7 @@ fn random_large_scene_spec(rng: &mut dyn RngCore) -> SceneSpec {
                     }
                 };
 
-                objects.push(Hittable::SPHERE {
+                objects.push(Shape::SPHERE {
                     radius: 0.2,
                     center,
                     material,
@@ -124,7 +124,7 @@ fn random_large_scene_spec(rng: &mut dyn RngCore) -> SceneSpec {
         }
     }
 
-    objects.push(Hittable::SPHERE {
+    objects.push(Shape::SPHERE {
         radius: 1.0,
         center: Point3::new(0.0, 1.0, 0.0),
         material: Material::DIELECTRIC {
@@ -132,7 +132,7 @@ fn random_large_scene_spec(rng: &mut dyn RngCore) -> SceneSpec {
         },
     });
 
-    objects.push(Hittable::SPHERE {
+    objects.push(Shape::SPHERE {
         radius: 1.0,
         center: Point3::new(-4.0, 1.0, 0.0),
         material: Material::LAMBERTIAN {
@@ -140,7 +140,7 @@ fn random_large_scene_spec(rng: &mut dyn RngCore) -> SceneSpec {
         },
     });
 
-    objects.push(Hittable::SPHERE {
+    objects.push(Shape::SPHERE {
         radius: 1.0,
         center: Point3::new(4.0, 1.0, 0.0),
         material: Material::METAL {
@@ -170,35 +170,35 @@ fn random_large_scene_spec(rng: &mut dyn RngCore) -> SceneSpec {
 
 pub fn setup_small_scene(render_config: RenderConfig) -> Scene {
     let world = vec![
-        Hittable::PLANE {
+        Shape::PLANE {
             center: Point3(0.0, -0.5, 0.0),
             normal: Vec3(0.0, 1.0, 0.0),
             material: Material::LAMBERTIAN {
                 albedo: Color::new(0.1, 0.2, 0.5),
             },
         },
-        Hittable::SPHERE {
+        Shape::SPHERE {
             center: Point3(0.0, 0.0, -1.0),
             radius: 0.5,
             material: Material::LAMBERTIAN {
                 albedo: Color::new(0.1, 0.2, 0.5),
             },
         },
-        Hittable::SPHERE {
+        Shape::SPHERE {
             center: Point3(-1.0, 0.0, -1.0),
             radius: 0.5,
             material: Material::DIELECTRIC {
                 index_of_refraction: 1.5,
             },
         },
-        Hittable::SPHERE {
+        Shape::SPHERE {
             center: Point3(-1.0, 0.0, -1.0),
             radius: -0.45,
             material: Material::DIELECTRIC {
                 index_of_refraction: 1.5,
             },
         },
-        Hittable::SPHERE {
+        Shape::SPHERE {
             center: Point3(1.0, 0.0, -1.0),
             radius: 0.5,
             material: Material::METAL {

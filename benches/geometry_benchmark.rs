@@ -2,7 +2,7 @@ use criterion::{BenchmarkId, black_box, Criterion};
 use rand::{Rng, SeedableRng};
 use rand::rngs::SmallRng;
 
-use rust_ray_tracer::geometry::{hit_by, Hittable, hit_by_slow};
+use rust_ray_tracer::geometry::{hit_by, Shape, hit_by_slow};
 use rust_ray_tracer::material::Material;
 use rust_ray_tracer::point3::Point3;
 use rust_ray_tracer::ray::Ray;
@@ -11,12 +11,12 @@ use rust_ray_tracer::vec3::Vec3;
 
 pub fn hit_by_benchmark(c: &mut Criterion) {
     let shapes = [
-        ("sphere", Hittable::SPHERE {
+        ("sphere", Shape::SPHERE {
             center: Point3(0.0, 0.0, 0.0),
             radius: 2.0,
             material: Material::BlackBody,
         }),
-        ("plane", Hittable::PLANE {
+        ("plane", Shape::PLANE {
             center: Point3(0.0, 0.0, 0.0),
             normal: Vec3(0.0, 0.0, 1.0),
             material: Material::BlackBody,
