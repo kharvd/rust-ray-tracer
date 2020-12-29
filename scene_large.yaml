@@ -1,7 +1,7 @@
 render_config:
   image_width: 1200
   image_height: 800
-  samples_per_pixel: 1
+  samples_per_pixel: 500
   max_depth: 50
 camera:
   lookfrom:

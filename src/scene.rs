@@ -71,7 +71,7 @@ pub struct Scene {
 }
 
 impl Scene {
-    pub fn bvh(&self, rng: &mut dyn RngCore) -> BVHNode {
+    pub fn bvh(&self, rng: &mut dyn RngCore) -> BVHNode<Shape> {
         let mut shapes = self.shapes.clone();
         BVHNode::from_shapes(rng, shapes.as_mut_slice())
     }
