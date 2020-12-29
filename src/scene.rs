@@ -11,6 +11,7 @@ use std::fs::File;
 use std::io::Write;
 use rand::rngs::SmallRng;
 use crate::material::Material;
+use crate::bvh::BVHNode;
 
 #[derive(Debug, Serialize, Deserialize)]
 struct CameraSpec {
@@ -54,10 +55,12 @@ struct SceneSpec {
 
 impl SceneSpec {
     fn to_scene(&self) -> Scene {
+        let mut shapes = self.objects.clone();
+
         return Scene {
             render_config: self.render_config,
             camera: self.camera.to_camera(self.render_config),
-            world: self.objects.clone(),
+            world: BVHNode::from_shapes(shapes.as_mut_slice()),
         };
     }
 }
@@ -65,7 +68,7 @@ impl SceneSpec {
 pub struct Scene {
     pub render_config: RenderConfig,
     pub camera: Camera,
-    pub world: Vec<Shape>,
+    pub world: BVHNode,
 }
 
 pub fn read_scene(filename: &str) -> Result<Scene, Box<dyn Error>> {
@@ -169,7 +172,7 @@ fn random_large_scene_spec(rng: &mut dyn RngCore) -> SceneSpec {
 }
 
 pub fn setup_small_scene(render_config: RenderConfig) -> Scene {
-    let world = vec![
+    let mut world = vec![
         Shape::PLANE {
             center: Point3(0.0, -0.5, 0.0),
             normal: Vec3(0.0, 1.0, 0.0),
@@ -220,7 +223,7 @@ pub fn setup_small_scene(render_config: RenderConfig) -> Scene {
 
     Scene {
         camera,
-        world,
+        world: BVHNode::from_shapes(world.as_mut_slice()),
         render_config,
     }
 }

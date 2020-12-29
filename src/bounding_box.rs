@@ -1,6 +1,8 @@
 use crate::point3::Point3;
 use crate::ray::Ray;
+use std::cmp::Ordering;
 
+#[derive(Debug, Clone, Copy)]
 pub struct BBox {
     pub min: Point3,
     pub max: Point3,

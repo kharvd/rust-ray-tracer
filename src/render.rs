@@ -10,8 +10,9 @@ use crate::color::{Color, put_color};
 use crate::geometry::{HitRecord, Shape, Hittable};
 use crate::ray::Ray;
 use crate::scene::Scene;
+use crate::bvh::BVHNode;
 
-pub fn ray_color(rng: &mut dyn RngCore, ray: &Ray, world: &Vec<Shape>, depth: u32) -> Color {
+pub fn ray_color(rng: &mut dyn RngCore, ray: &Ray, world: &BVHNode, depth: u32) -> Color {
     if depth <= 0 {
         return Color::new(0.0, 0.0, 0.0);
     }

@@ -10,4 +10,5 @@ pub mod material;
 pub mod point3;
 pub mod scene;
 pub mod bounding_box;
+pub mod bvh;
 pub mod render;
