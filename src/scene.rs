@@ -54,13 +54,11 @@ struct SceneSpec {
 }
 
 impl SceneSpec {
-    fn to_scene(&self) -> Scene {
-        let mut shapes = self.objects.clone();
-
+    fn scene(self) -> Scene {
         return Scene {
             render_config: self.render_config,
             camera: self.camera.to_camera(self.render_config),
-            world: BVHNode::from_shapes(shapes.as_mut_slice()),
+            shapes: self.objects,
         };
     }
 }
@@ -68,13 +66,20 @@ impl SceneSpec {
 pub struct Scene {
     pub render_config: RenderConfig,
     pub camera: Camera,
-    pub world: BVHNode,
+    pub shapes: Vec<Shape>,
+}
+
+impl Scene {
+    pub fn bvh(&self) -> BVHNode {
+        let mut shapes = self.shapes.clone();
+        BVHNode::from_shapes(shapes.as_mut_slice())
+    }
 }
 
 pub fn read_scene(filename: &str) -> Result<Scene, Box<dyn Error>> {
     let contents = fs::read_to_string(filename)?;
     let scene_spec: SceneSpec = serde_yaml::from_str(contents.as_str())?;
-    Ok(scene_spec.to_scene())
+    Ok(scene_spec.scene())
 }
 
 fn random_large_scene_spec(rng: &mut dyn RngCore) -> SceneSpec {
@@ -172,7 +177,7 @@ fn random_large_scene_spec(rng: &mut dyn RngCore) -> SceneSpec {
 }
 
 pub fn setup_small_scene(render_config: RenderConfig) -> Scene {
-    let mut world = vec![
+    let world = vec![
         Shape::PLANE {
             center: Point3(0.0, -0.5, 0.0),
             normal: Vec3(0.0, 1.0, 0.0),
@@ -223,14 +228,14 @@ pub fn setup_small_scene(render_config: RenderConfig) -> Scene {
 
     Scene {
         camera,
-        world: BVHNode::from_shapes(world.as_mut_slice()),
+        shapes: world,
         render_config,
     }
 }
 
 
 pub fn random_large_scene(rng: &mut dyn RngCore) -> Scene {
-    return random_large_scene_spec(rng).to_scene()
+    return random_large_scene_spec(rng).scene()
 }
 
 fn _write_scene_spec(filename: &str, scene_spec: &SceneSpec) -> Result<(), io::Error> {

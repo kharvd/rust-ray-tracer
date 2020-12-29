@@ -1,8 +1,12 @@
-use crate::bounding_box::BBox;
-use crate::geometry::{Shape, Hittable, HitRecord};
-use crate::ray::Ray;
-use rand::{RngCore, Rng, random, thread_rng};
 use std::cmp::Ordering;
+use std::fmt;
+use std::fmt::Debug;
+
+use rand::{Rng, thread_rng};
+
+use crate::bounding_box::BBox;
+use crate::geometry::{HitRecord, Hittable, Shape};
+use crate::ray::Ray;
 
 pub enum BVHNode {
     Internal {
@@ -30,7 +34,7 @@ impl BVHNode {
         let right = BVHNode::from_shapes(right_slice);
         let bbox = BBox::surrounding_box(
             left.bounding_box().unwrap(),
-            right.bounding_box().unwrap()
+            right.bounding_box().unwrap(),
         );
 
         BVHNode::Internal { bbox, left: Box::new(left), right: Box::new(right) }
@@ -40,6 +44,21 @@ impl BVHNode {
         let min1 = shape1.bounding_box().unwrap().min.as_slice()[axis];
         let min2 = shape2.bounding_box().unwrap().min.as_slice()[axis];
         min1.partial_cmp(&min2).unwrap()
+    }
+}
+
+impl Debug for BVHNode {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            BVHNode::Internal { bbox, left, right } => {
+                f.debug_struct("BVHNode")
+                    .field("bbox", bbox)
+                    .field("left", left)
+                    .field("right", right)
+                    .finish()
+            }
+            BVHNode::Leaf { shape } => shape.fmt(f)
+        }
     }
 }
 

@@ -12,11 +12,14 @@ struct Opts {
 
     #[clap(short, long)]
     parallel: bool,
+
+    #[clap(long)]
+    no_bvh: bool,
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
     let opts: Opts = Opts::parse();
     let scene = scene::read_scene(&opts.scene_file)?;
-    render_scene(&scene, &opts.output_file, opts.parallel);
+    render_scene(&scene, &opts.output_file, opts.parallel, !opts.no_bvh);
     Ok(())
 }

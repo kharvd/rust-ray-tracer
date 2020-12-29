@@ -68,10 +68,13 @@ impl Hittable for Shape {
 
     fn bounding_box(&self) -> Option<BBox> {
         match *self {
-            SPHERE { center, radius, .. } => Some(BBox {
-                min: center - Vec3(radius, radius, radius),
-                max: center + Vec3(radius, radius, radius),
-            }),
+            SPHERE { center, radius, .. } => {
+                let abs_radius = radius.abs();
+                Some(BBox {
+                    min: center - Vec3(abs_radius, abs_radius, abs_radius),
+                    max: center + Vec3(abs_radius, abs_radius, abs_radius),
+                })
+            },
             PLANE { .. } => None
         }
     }
