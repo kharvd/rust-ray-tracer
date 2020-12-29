@@ -21,8 +21,8 @@ pub fn scatter_benchmark(c: &mut Criterion) {
     let angle = 45.0;
     let angle_rad = angle * std::f64::consts::PI / 180.0;
     let ray = Ray {
-        orig: Point3(0.0, 0.0, 0.0),
-        dir: Vec3(1.0, 0.0, 0.0),
+        orig: Point3::new(0.0, 0.0, 0.0),
+        dir: Vec3::new(1.0, 0.0, 0.0),
     };
 
     let mut group = c.benchmark_group("scatter");
@@ -31,8 +31,8 @@ pub fn scatter_benchmark(c: &mut Criterion) {
             material: *material,
             t: 1.0,
             front_face: true,
-            point: Point3(1.0, 0.0, 0.0),
-            normal: Vec3(angle_rad.cos(), angle_rad.sin(), 0.0),
+            point: Point3::new(1.0, 0.0, 0.0),
+            normal: Vec3::new(angle_rad.cos(), angle_rad.sin(), 0.0),
         };
         group.bench_with_input(
             BenchmarkId::from_parameter(mat_name),

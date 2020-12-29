@@ -71,8 +71,8 @@ impl Hittable for Shape {
             SPHERE { center, radius, .. } => {
                 let abs_radius = radius.abs();
                 Some(BBox {
-                    min: center - Vec3(abs_radius, abs_radius, abs_radius),
-                    max: center + Vec3(abs_radius, abs_radius, abs_radius),
+                    min: center - Vec3::new(abs_radius, abs_radius, abs_radius),
+                    max: center + Vec3::new(abs_radius, abs_radius, abs_radius),
                 })
             },
             PLANE { .. } => None
@@ -191,11 +191,4 @@ impl <T: Hittable> Hittable for Vec<T> {
                 |accum, bbox| BBox::surrounding_box(accum, bbox),
             )
     }
-}
-
-pub fn hit_by_slow<T: Hittable>(vec: &Vec<T>, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
-    return vec.iter()
-        .map(|obj| obj.hit_by(ray, t_min, t_max))
-        .filter_map(|obj| obj)
-        .min_by(|x, y| x.t.partial_cmp(&y.t).unwrap());
 }

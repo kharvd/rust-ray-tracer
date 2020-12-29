@@ -2,7 +2,7 @@ use std::cmp::Ordering;
 use std::fmt;
 use std::fmt::Debug;
 
-use rand::{Rng, thread_rng};
+use rand::{Rng, RngCore};
 
 use crate::bounding_box::BBox;
 use crate::geometry::{HitRecord, Hittable, Shape};
@@ -20,18 +20,18 @@ pub enum BVHNode {
 }
 
 impl BVHNode {
-    pub fn from_shapes(shapes: &mut [Shape]) -> BVHNode {
+    pub fn from_shapes(rng: &mut dyn RngCore, shapes: &mut [Shape]) -> BVHNode {
         if shapes.len() == 1 {
             return BVHNode::Leaf { shape: shapes[0].clone() };
         }
 
-        let axis = thread_rng().gen_range(0..3);
+        let axis = rng.gen_range(0..3);
         shapes.sort_by(|s1, s2| BVHNode::compare(axis, s1, s2));
 
         let (left_slice, right_slice) = shapes.split_at_mut(shapes.len() / 2);
 
-        let left = BVHNode::from_shapes(left_slice);
-        let right = BVHNode::from_shapes(right_slice);
+        let left = BVHNode::from_shapes(rng, left_slice);
+        let right = BVHNode::from_shapes(rng, right_slice);
         let bbox = BBox::surrounding_box(
             left.bounding_box().unwrap(),
             right.bounding_box().unwrap(),
@@ -41,8 +41,8 @@ impl BVHNode {
     }
 
     fn compare(axis: usize, shape1: &Shape, shape2: &Shape) -> Ordering {
-        let min1 = shape1.bounding_box().unwrap().min.as_slice()[axis];
-        let min2 = shape2.bounding_box().unwrap().min.as_slice()[axis];
+        let min1 = shape1.bounding_box().unwrap().min[axis];
+        let min2 = shape2.bounding_box().unwrap().min[axis];
         min1.partial_cmp(&min2).unwrap()
     }
 }

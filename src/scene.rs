@@ -12,6 +12,7 @@ use std::io::Write;
 use rand::rngs::SmallRng;
 use crate::material::Material;
 use crate::bvh::BVHNode;
+use std::ops::Range;
 
 #[derive(Debug, Serialize, Deserialize)]
 struct CameraSpec {
@@ -70,9 +71,9 @@ pub struct Scene {
 }
 
 impl Scene {
-    pub fn bvh(&self) -> BVHNode {
+    pub fn bvh(&self, rng: &mut dyn RngCore) -> BVHNode {
         let mut shapes = self.shapes.clone();
-        BVHNode::from_shapes(shapes.as_mut_slice())
+        BVHNode::from_shapes(rng, shapes.as_mut_slice())
     }
 }
 
@@ -167,7 +168,7 @@ fn random_large_scene_spec(rng: &mut dyn RngCore) -> SceneSpec {
         camera: CameraSpec {
             lookfrom: Point3::new(13.0, 2.0, 3.0),
             lookat: Point3::new(0.0, 0.0, 0.0),
-            vup: Vec3(0.0, 1.0, 0.0),
+            vup: Vec3::new(0.0, 1.0, 0.0),
             focus_dist: 10.0,
             aperture: 0.1,
             vfov_deg: 20.0,
@@ -179,35 +180,35 @@ fn random_large_scene_spec(rng: &mut dyn RngCore) -> SceneSpec {
 pub fn setup_small_scene(render_config: RenderConfig) -> Scene {
     let world = vec![
         Shape::PLANE {
-            center: Point3(0.0, -0.5, 0.0),
-            normal: Vec3(0.0, 1.0, 0.0),
+            center: Point3::new(0.0, -0.5, 0.0),
+            normal: Vec3::new(0.0, 1.0, 0.0),
             material: Material::LAMBERTIAN {
                 albedo: Color::new(0.1, 0.2, 0.5),
             },
         },
         Shape::SPHERE {
-            center: Point3(0.0, 0.0, -1.0),
+            center: Point3::new(0.0, 0.0, -1.0),
             radius: 0.5,
             material: Material::LAMBERTIAN {
                 albedo: Color::new(0.1, 0.2, 0.5),
             },
         },
         Shape::SPHERE {
-            center: Point3(-1.0, 0.0, -1.0),
+            center: Point3::new(-1.0, 0.0, -1.0),
             radius: 0.5,
             material: Material::DIELECTRIC {
                 index_of_refraction: 1.5,
             },
         },
         Shape::SPHERE {
-            center: Point3(-1.0, 0.0, -1.0),
+            center: Point3::new(-1.0, 0.0, -1.0),
             radius: -0.45,
             material: Material::DIELECTRIC {
                 index_of_refraction: 1.5,
             },
         },
         Shape::SPHERE {
-            center: Point3(1.0, 0.0, -1.0),
+            center: Point3::new(1.0, 0.0, -1.0),
             radius: 0.5,
             material: Material::METAL {
                 albedo: Color::new(0.1, 0.2, 0.5),
@@ -217,9 +218,52 @@ pub fn setup_small_scene(render_config: RenderConfig) -> Scene {
     ];
 
     let camera = Camera::create(
-        Point3(-2.0, 2.0, 1.0),
-        Point3(0.0, 0.0, -1.0),
-        Vec3(0.0, 1.0, 0.0),
+        Point3::new(-2.0, 2.0, 1.0),
+        Point3::new(0.0, 0.0, -1.0),
+        Vec3::new(0.0, 1.0, 0.0),
+        90.0,
+        4.0 / 3.0,
+        0.0,
+        10.0,
+    );
+
+    Scene {
+        camera,
+        shapes: world,
+        render_config,
+    }
+}
+
+fn random_sphere(rng: &mut dyn RngCore, coord_range: Range<f64>, radius_range: Range<f64>) -> Shape {
+    let radius = rng.gen_range(radius_range.clone());
+    let center = Point3::new(
+        rng.gen_range(coord_range.clone()),
+        rng.gen_range(coord_range.clone()),
+        rng.gen_range(coord_range.clone())
+    );
+
+    let material = Material::LAMBERTIAN {
+        albedo: Color::new(0.1, 0.2, 0.5),
+    };
+
+    Shape::SPHERE {
+        radius,
+        center,
+        material
+    }
+}
+
+pub fn setup_scene(rng: &mut dyn RngCore, render_config: RenderConfig, num_spheres: u32) -> Scene {
+    let mut world = Vec::new();
+
+    for _ in 0..num_spheres {
+        world.push(random_sphere(rng, -20.0..20.0, 0.0..0.5));
+    }
+
+    let camera = Camera::create(
+        Point3::new(-2.0, 2.0, 1.0),
+        Point3::new(0.0, 0.0, -1.0),
+        Vec3::new(0.0, 1.0, 0.0),
         90.0,
         4.0 / 3.0,
         0.0,

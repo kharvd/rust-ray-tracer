@@ -31,7 +31,7 @@ pub fn ray_color<T: Hittable>(rng: &mut dyn RngCore, ray: &Ray, world: &T, depth
 
         _ => {
             let normalized_dir = ray.dir.normalize();
-            let t = 0.5 * (normalized_dir.1 + 1.0);
+            let t = 0.5 * (normalized_dir[1] + 1.0);
             (1.0 - t) * Color::new(1.0, 1.0, 1.0) + t * Color::new(0.5, 0.7, 1.0)
         }
     };
@@ -103,10 +103,11 @@ pub fn render_image_parallel<T>(scene: &Scene, world: &T) -> RgbImage
 }
 
 pub fn render_scene(scene: &Scene, filename: &str, parallel: bool, bvh: bool) {
+    let mut rng = thread_rng();
     let img = match (parallel, bvh) {
-        (true, true) => render_image_parallel(scene, &scene.bvh()),
+        (true, true) => render_image_parallel(scene, &scene.bvh(&mut rng)),
         (true, false) => render_image_parallel(scene, &scene.shapes),
-        (false, true) => render_image_sequential(scene, &scene.bvh()),
+        (false, true) => render_image_sequential(scene, &scene.bvh(&mut rng)),
         (false, false) => render_image_sequential(scene, &scene.shapes)
     };
 

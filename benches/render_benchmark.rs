@@ -24,7 +24,7 @@ pub fn ray_color_benchmark(c: &mut Criterion) {
             ray_color(
                 &mut rng,
                 black_box(&ray),
-                black_box(&scene.world),
+                black_box(&scene.shapes),
                 black_box(scene.render_config.max_depth)
             )
         });
@@ -50,7 +50,7 @@ pub fn render_image_benchmark(c: &mut Criterion) {
             BenchmarkId::new("sequential_samples", samples_per_pixel),
             samples_per_pixel,
             |b, _| b.iter(|| {
-                render_image_sequential(black_box(&scene))
+                render_image_sequential(black_box(&scene), black_box(&scene.shapes))
             }),
         );
 
@@ -58,7 +58,7 @@ pub fn render_image_benchmark(c: &mut Criterion) {
             BenchmarkId::new("parallel_samples", samples_per_pixel),
             samples_per_pixel,
             |b, _| b.iter(|| {
-                render_image_parallel(black_box(&scene))
+                render_image_parallel(black_box(&scene), black_box(&scene.shapes))
             }),
         );
     });
@@ -75,7 +75,7 @@ pub fn render_image_benchmark(c: &mut Criterion) {
             BenchmarkId::new("sequential_size", size),
             size,
             |b, _| b.iter(|| {
-                render_image_sequential(black_box(&scene))
+                render_image_sequential(black_box(&scene), black_box(&scene.shapes))
             }),
         );
 
@@ -83,7 +83,7 @@ pub fn render_image_benchmark(c: &mut Criterion) {
             BenchmarkId::new("parallel_size", size),
             size,
             |b, _| b.iter(|| {
-                render_image_parallel(black_box(&scene))
+                render_image_parallel(black_box(&scene), black_box(&scene.shapes))
             }),
         );
     });
