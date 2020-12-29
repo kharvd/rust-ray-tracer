@@ -5,7 +5,7 @@ use crate::point3::Point3;
 use crate::ray::Ray;
 use crate::vec3::Vec3;
 use crate::bounding_box::BBox;
-use Shape::{SPHERE, PLANE};
+use Shape::{Sphere, Plane};
 
 pub struct HitRecord {
     pub point: Point3,
@@ -43,12 +43,12 @@ pub trait Hittable {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(tag = "type")]
 pub enum Shape {
-    SPHERE {
+    Sphere {
         center: Point3,
         radius: f64,
         material: Material,
     },
-    PLANE {
+    Plane {
         center: Point3,
         normal: Vec3,
         material: Material,
@@ -58,23 +58,23 @@ pub enum Shape {
 impl Hittable for Shape {
     fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
         match *self {
-            SPHERE { material, center, radius } =>
+            Sphere { material, center, radius } =>
                 Shape::sphere_hit_by(ray, t_min, t_max, center, radius, material),
-            PLANE { center, material, normal } =>
+            Plane { center, material, normal } =>
                 Shape::plane_hit_by(ray, t_min, t_max, center, normal, material)
         }
     }
 
     fn bounding_box(&self) -> BBox {
         match *self {
-            SPHERE { center, radius, .. } => {
+            Sphere { center, radius, .. } => {
                 let abs_radius = radius.abs();
                 BBox {
                     min: center - Vec3::new(abs_radius, abs_radius, abs_radius),
                     max: center + Vec3::new(abs_radius, abs_radius, abs_radius),
                 }
             }
-            PLANE { .. } => BBox {
+            Plane { .. } => BBox {
                 min: Point3::new(std::f64::NEG_INFINITY, std::f64::NEG_INFINITY, std::f64::NEG_INFINITY),
                 max: Point3::new(std::f64::INFINITY, std::f64::INFINITY, std::f64::INFINITY),
             }

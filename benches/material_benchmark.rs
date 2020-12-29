@@ -13,9 +13,9 @@ pub fn scatter_benchmark(c: &mut Criterion) {
 
     let albedo = Color::random(&mut rng);
     let materials = [
-        ("lambertian", Material::LAMBERTIAN { albedo }),
-        ("metal", Material::METAL { albedo, fuzz: 0.5 }),
-        ("dielectric", Material::DIELECTRIC { index_of_refraction: 1.5 }),
+        ("lambertian", Material::Lambertian { albedo }),
+        ("metal", Material::Metal { albedo, fuzz: 0.5 }),
+        ("dielectric", Material::Dielectric { index_of_refraction: 1.5 }),
         ("black_body", Material::BlackBody)
     ];
     let angle = 45.0;

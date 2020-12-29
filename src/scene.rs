@@ -86,10 +86,10 @@ pub fn read_scene(filename: &str) -> Result<Scene, Box<dyn Error>> {
 fn random_large_scene_spec(rng: &mut dyn RngCore) -> SceneSpec {
     let mut objects: Vec<Shape> = Vec::new();
 
-    objects.push(Shape::SPHERE {
+    objects.push(Shape::Sphere {
         radius: 1000.0,
         center: Point3::new(0.0, -1000.0, -1.0),
-        material: Material::LAMBERTIAN {
+        material: Material::Lambertian {
             albedo: Color::new(0.5, 0.5, 0.5)
         },
     });
@@ -108,23 +108,23 @@ fn random_large_scene_spec(rng: &mut dyn RngCore) -> SceneSpec {
             if (center - p).length() > 0.9 {
                 let material: Material = if choose_mat < 0.8 {
                     let albedo = Color::random(rng) * Color::random(rng);
-                    Material::LAMBERTIAN {
+                    Material::Lambertian {
                         albedo,
                     }
                 } else if choose_mat < 0.95 {
                     let albedo = Color::random(rng) / 2.0 + 0.5;
                     let fuzz = rng.gen_range(0.0..0.5);
-                    Material::METAL {
+                    Material::Metal {
                         albedo,
                         fuzz,
                     }
                 } else {
-                    Material::DIELECTRIC {
+                    Material::Dielectric {
                         index_of_refraction: 1.5
                     }
                 };
 
-                objects.push(Shape::SPHERE {
+                objects.push(Shape::Sphere {
                     radius: 0.2,
                     center,
                     material,
@@ -133,26 +133,26 @@ fn random_large_scene_spec(rng: &mut dyn RngCore) -> SceneSpec {
         }
     }
 
-    objects.push(Shape::SPHERE {
+    objects.push(Shape::Sphere {
         radius: 1.0,
         center: Point3::new(0.0, 1.0, 0.0),
-        material: Material::DIELECTRIC {
+        material: Material::Dielectric {
             index_of_refraction: 1.5,
         },
     });
 
-    objects.push(Shape::SPHERE {
+    objects.push(Shape::Sphere {
         radius: 1.0,
         center: Point3::new(-4.0, 1.0, 0.0),
-        material: Material::LAMBERTIAN {
+        material: Material::Lambertian {
             albedo: Color::new(0.4, 0.2, 0.1),
         },
     });
 
-    objects.push(Shape::SPHERE {
+    objects.push(Shape::Sphere {
         radius: 1.0,
         center: Point3::new(4.0, 1.0, 0.0),
-        material: Material::METAL {
+        material: Material::Metal {
             albedo: Color::new(0.7, 0.6, 0.5),
             fuzz: 0.0,
         },
@@ -179,38 +179,38 @@ fn random_large_scene_spec(rng: &mut dyn RngCore) -> SceneSpec {
 
 pub fn setup_small_scene(render_config: RenderConfig) -> Scene {
     let world = vec![
-        Shape::PLANE {
+        Shape::Plane {
             center: Point3::new(0.0, -0.5, 0.0),
             normal: Vec3::new(0.0, 1.0, 0.0),
-            material: Material::LAMBERTIAN {
+            material: Material::Lambertian {
                 albedo: Color::new(0.1, 0.2, 0.5),
             },
         },
-        Shape::SPHERE {
+        Shape::Sphere {
             center: Point3::new(0.0, 0.0, -1.0),
             radius: 0.5,
-            material: Material::LAMBERTIAN {
+            material: Material::Lambertian {
                 albedo: Color::new(0.1, 0.2, 0.5),
             },
         },
-        Shape::SPHERE {
+        Shape::Sphere {
             center: Point3::new(-1.0, 0.0, -1.0),
             radius: 0.5,
-            material: Material::DIELECTRIC {
+            material: Material::Dielectric {
                 index_of_refraction: 1.5,
             },
         },
-        Shape::SPHERE {
+        Shape::Sphere {
             center: Point3::new(-1.0, 0.0, -1.0),
             radius: -0.45,
-            material: Material::DIELECTRIC {
+            material: Material::Dielectric {
                 index_of_refraction: 1.5,
             },
         },
-        Shape::SPHERE {
+        Shape::Sphere {
             center: Point3::new(1.0, 0.0, -1.0),
             radius: 0.5,
-            material: Material::METAL {
+            material: Material::Metal {
                 albedo: Color::new(0.1, 0.2, 0.5),
                 fuzz: 0.0,
             },
@@ -242,11 +242,11 @@ fn random_sphere(rng: &mut dyn RngCore, coord_range: Range<f64>, radius_range: R
         rng.gen_range(coord_range.clone())
     );
 
-    let material = Material::LAMBERTIAN {
+    let material = Material::Lambertian {
         albedo: Color::new(0.1, 0.2, 0.5),
     };
 
-    Shape::SPHERE {
+    Shape::Sphere {
         radius,
         center,
         material

@@ -13,12 +13,12 @@ pub struct ScatteringRecord {
 #[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 #[serde(tag = "type")]
 pub enum Material {
-    LAMBERTIAN { albedo: Color },
-    METAL {
+    Lambertian { albedo: Color },
+    Metal {
         albedo: Color,
         fuzz: f64,
     },
-    DIELECTRIC {
+    Dielectric {
         index_of_refraction: f64,
     },
     BlackBody,
@@ -31,11 +31,11 @@ impl Material {
                    hit_record: &HitRecord
     ) -> Option<ScatteringRecord> {
         match *self {
-            Material::LAMBERTIAN { albedo } =>
+            Material::Lambertian { albedo } =>
                 Material::scatter_lambertian(rng, hit_record, albedo),
-            Material::METAL { albedo, fuzz } =>
+            Material::Metal { albedo, fuzz } =>
                 Material::scatter_metal(rng, ray_in, hit_record, albedo, fuzz),
-            Material::DIELECTRIC { index_of_refraction } =>
+            Material::Dielectric { index_of_refraction } =>
                 Material::scatter_dielectric(rng, ray_in, hit_record, index_of_refraction),
             Material::BlackBody => None
         }

@@ -12,12 +12,12 @@ use rust_ray_tracer::bvh::BVHNode;
 
 pub fn hit_by_benchmark(c: &mut Criterion) {
     let shapes = [
-        ("sphere", Shape::SPHERE {
+        ("sphere", Shape::Sphere {
             center: Point3::new(0.0, 0.0, 0.0),
             radius: 2.0,
             material: Material::BlackBody,
         }),
-        ("plane", Shape::PLANE {
+        ("plane", Shape::Plane {
             center: Point3::new(0.0, 0.0, 0.0),
             normal: Vec3::new(0.0, 0.0, 1.0),
             material: Material::BlackBody,
