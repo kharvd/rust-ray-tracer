@@ -6,7 +6,6 @@ use crate::ray::Ray;
 use crate::vec3::Vec3;
 use crate::bounding_box::BBox;
 use Shape::{SPHERE, PLANE};
-use itertools::Itertools;
 
 pub struct HitRecord {
     pub point: Point3,
@@ -38,7 +37,7 @@ impl HitRecord {
 
 pub trait Hittable {
     fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord>;
-    fn bounding_box(&self) -> Option<BBox>;
+    fn bounding_box(&self) -> BBox;
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -66,16 +65,19 @@ impl Hittable for Shape {
         }
     }
 
-    fn bounding_box(&self) -> Option<BBox> {
+    fn bounding_box(&self) -> BBox {
         match *self {
             SPHERE { center, radius, .. } => {
                 let abs_radius = radius.abs();
-                Some(BBox {
+                BBox {
                     min: center - Vec3::new(abs_radius, abs_radius, abs_radius),
                     max: center + Vec3::new(abs_radius, abs_radius, abs_radius),
-                })
-            },
-            PLANE { .. } => None
+                }
+            }
+            PLANE { .. } => BBox {
+                min: Point3::new(std::f64::NEG_INFINITY, std::f64::NEG_INFINITY, std::f64::NEG_INFINITY),
+                max: Point3::new(std::f64::INFINITY, std::f64::INFINITY, std::f64::INFINITY),
+            }
         }
     }
 }
@@ -160,7 +162,7 @@ fn solve_quadratic(a: f64, half_b: f64, c: f64, t_min: f64, t_max: f64) -> Optio
     return Some(t);
 }
 
-impl <T: Hittable> Hittable for Vec<T> {
+impl<T: Hittable> Hittable for Vec<T> {
     fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
         let mut closest_t = t_max;
         let mut closest_found: Option<HitRecord> = None;
@@ -179,14 +181,16 @@ impl <T: Hittable> Hittable for Vec<T> {
         closest_found
     }
 
-    fn bounding_box(&self) -> Option<BBox> {
+    fn bounding_box(&self) -> BBox {
         let mut iter = self.iter();
-        let first = iter.next()?;
-        let first_bbox = first.bounding_box()?;
+        let first_bbox = match iter.next() {
+            None => panic!("No bounding box for an empty set"),
+            Some(shape) => shape.bounding_box()
+        };
 
         iter
             .map(|h| h.bounding_box())
-            .fold_options(
+            .fold(
                 first_bbox,
                 |accum, bbox| BBox::surrounding_box(accum, bbox),
             )

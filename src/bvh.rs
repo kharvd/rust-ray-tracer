@@ -32,17 +32,14 @@ impl<T: Hittable + Clone> BVHNode<T> {
 
         let left = BVHNode::from_shapes(rng, left_slice);
         let right = BVHNode::from_shapes(rng, right_slice);
-        let bbox = BBox::surrounding_box(
-            left.bounding_box().unwrap(),
-            right.bounding_box().unwrap(),
-        );
+        let bbox = BBox::surrounding_box(left.bounding_box(), right.bounding_box());
 
         BVHNode::Internal { bbox, left: Box::new(left), right: Box::new(right) }
     }
 
     fn compare(axis: usize, shape1: &T, shape2: &T) -> Ordering {
-        let min1 = shape1.bounding_box().unwrap().min[axis];
-        let min2 = shape2.bounding_box().unwrap().min[axis];
+        let min1 = shape1.bounding_box().min[axis];
+        let min2 = shape2.bounding_box().min[axis];
         min1.partial_cmp(&min2).unwrap()
     }
 }
@@ -80,9 +77,9 @@ impl<T: Hittable> Hittable for BVHNode<T> {
         }
     }
 
-    fn bounding_box(&self) -> Option<BBox> {
+    fn bounding_box(&self) -> BBox {
         match self {
-            BVHNode::Internal { bbox, .. } => Some(*bbox),
+            BVHNode::Internal { bbox, .. } => *bbox,
             BVHNode::Leaf { hittable: shape } => shape.bounding_box()
         }
     }

@@ -16,37 +16,37 @@ camera:
     - 0.0
     - 1.0
     - 0.0
-  vfov_deg: 20.0
+  vfov_deg: 90.0
   aperture: 0.0
   focus_dist: 10.0
 objects:
-  - type: SPHERE
-    center:
-      - 0.0
-      - -1000.5
-      - 0.0
-    radius: 1000.0
-    material:
-      type: LAMBERTIAN
-      albedo:
-        - 0.8
-        - 0.8
-        - 0.0
-#  - type: PLANE
+#  - type: SPHERE
 #    center:
 #      - 0.0
-#      - -0.5
+#      - -1000.5
 #      - 0.0
-#    normal:
-#      - 0.0
-#      - 1.0
-#      - 0.0
+#    radius: 1000.0
 #    material:
 #      type: LAMBERTIAN
 #      albedo:
 #        - 0.8
 #        - 0.8
 #        - 0.0
+  - type: PLANE
+    center:
+      - 0.0
+      - -0.5
+      - 0.0
+    normal:
+      - 0.0
+      - 1.0
+      - 0.0
+    material:
+      type: LAMBERTIAN
+      albedo:
+        - 0.8
+        - 0.8
+        - 0.0
   - type: SPHERE
     center:
       - 0.0
