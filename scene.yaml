@@ -4,89 +4,41 @@ render_config:
   samples_per_pixel: 100
   max_depth: 10
 camera:
-  lookfrom:
-    - -2.0
-    - 2.0
-    - 1.0
-  lookat:
-    - 0.0
-    - 0.0
-    - -1.0
-  vup:
-    - 0.0
-    - 1.0
-    - 0.0
+  lookfrom: [-2, 2, 1]
+  lookat: [0, 0, -1]
+  vup: [0, 1, 0]
   vfov_deg: 90.0
   aperture: 0.0
   focus_dist: 10.0
 objects:
-#  - type: SPHERE
-#    center:
-#      - 0.0
-#      - -1000.5
-#      - 0.0
-#    radius: 1000.0
-#    material:
-#      type: LAMBERTIAN
-#      albedo:
-#        - 0.8
-#        - 0.8
-#        - 0.0
-  - type: PLANE
-    center:
-      - 0.0
-      - -0.5
-      - 0.0
-    normal:
-      - 0.0
-      - 1.0
-      - 0.0
+  - type: Plane
+    center: [0, -0.5, 0]
+    normal: [0, 1, 0]
     material:
-      type: LAMBERTIAN
-      albedo:
-        - 0.8
-        - 0.8
-        - 0.0
-  - type: SPHERE
-    center:
-      - 0.0
-      - 0.0
-      - -1.0
+      type: Lambertian
+      albedo: [0.8, 0.8, 0.0]
+  - type: Sphere
+    center: [0, 0, -1]
     radius: 0.5
     material:
-      type: LAMBERTIAN
-      albedo:
-        - 0.1
-        - 0.2
-        - 0.5
-  - type: SPHERE
-    center:
-      - -1.0
-      - 0.0
-      - -1.0
+      type: Lambertian
+      albedo: [0.1, 0.2, 0.5]
+  - type: Sphere
+    center: [-1, 0, -1]
     radius: 0.5
     material:
-      type: DIELECTRIC
+      type: Dielectric
       index_of_refraction: 1.5
-  - type: SPHERE
-    center:
-      - -1.0
-      - 0.0
-      - -1.0
+  - type: Sphere
+    center: [-1, 0, -1]
     radius: -0.45
     material:
-      type: DIELECTRIC
+      type: Dielectric
       index_of_refraction: 1.5
-  - type: SPHERE
-    center:
-      - 1.0
-      - 0.0
-      - -1.0
+  - type: Sphere
+    center: [1, 0, -1]
     radius: 0.5
     material:
-      type: METAL
-      albedo:
-        - 0.8
-        - 0.6
-        - 0.2
+      type: Metal
+      albedo: [0.8, 0.6, 0.2]
       fuzz: 0.0
