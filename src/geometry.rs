@@ -197,6 +197,82 @@ impl Hittable for Triangle {
     }
 }
 
+pub struct Parallelepiped {
+    triangles: Vec<Triangle>,
+}
+
+impl Parallelepiped {
+    pub fn new(a: Point3, b: Point3, c: Point3, d: Point3, material: Material) -> Parallelepiped {
+        let v1 = a + ((d - a) + (c - a));
+        let v2 = a + ((c - a) + (b - a));
+        let v3 = a + ((d - a) + (b - a));
+        let v4 = b + ((v3 - b) + (v2 - b));
+
+        Parallelepiped {
+            triangles: vec![
+                Triangle {
+                    vertices: [a, b, c],
+                    material,
+                },
+                Triangle {
+                    vertices: [a, d, b],
+                    material,
+                },
+                Triangle {
+                    vertices: [a, c, d],
+                    material,
+                },
+                Triangle {
+                    vertices: [d, c, v1],
+                    material,
+                },
+                Triangle {
+                    vertices: [c, b, v2],
+                    material,
+                },
+                Triangle {
+                    vertices: [b, d, v3],
+                    material,
+                },
+                Triangle {
+                    vertices: [d, v1, v4],
+                    material,
+                },
+                Triangle {
+                    vertices: [d, v4, v3],
+                    material,
+                },
+                Triangle {
+                    vertices: [c, v4, v1],
+                    material,
+                },
+                Triangle {
+                    vertices: [c, v2, v4],
+                    material,
+                },
+                Triangle {
+                    vertices: [b, v4, v2],
+                    material,
+                },
+                Triangle {
+                    vertices: [b, v3, v4],
+                    material,
+                },
+            ]
+        }
+    }
+}
+
+impl Hittable for Parallelepiped {
+    fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
+        self.triangles.hit_by(ray, t_min, t_max)
+    }
+
+    fn bounding_box(&self) -> BBox {
+        self.triangles.bounding_box()
+    }
+}
+
 impl<T: Hittable> Hittable for Vec<T> {
     fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
         let mut closest_t = t_max;
@@ -232,7 +308,7 @@ impl<T: Hittable> Hittable for Vec<T> {
     }
 }
 
-impl <T: Hittable + ?Sized> Hittable for Arc<T> {
+impl<T: Hittable + ?Sized> Hittable for Arc<T> {
     fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
         T::hit_by(self, ray, t_min, t_max)
     }
@@ -242,7 +318,7 @@ impl <T: Hittable + ?Sized> Hittable for Arc<T> {
     }
 }
 
-impl <T: Hittable> Hittable for &T {
+impl<T: Hittable> Hittable for &T {
     fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
         T::hit_by(self, ray, t_min, t_max)
     }

@@ -13,7 +13,7 @@ use serde::{Deserialize, Serialize};
 use crate::bvh::BVHNode;
 use crate::camera::Camera;
 use crate::color::Color;
-use crate::geometry::{ArcHittable, Hittable, Plane, Sphere, Triangle};
+use crate::geometry::{ArcHittable, Hittable, Plane, Sphere, Triangle, Parallelepiped};
 use crate::material::Material;
 use crate::point3::Point3;
 use crate::vec3::Vec3;
@@ -60,6 +60,10 @@ pub enum ShapeSpec {
         vertices: [Point3; 3],
         material: Material,
     },
+    Parallelepiped {
+        basis: [Point3; 4],
+        material: Material,
+    },
 }
 
 impl ShapeSpec {
@@ -79,6 +83,9 @@ impl ShapeSpec {
                 vertices,
                 material,
             }),
+            ShapeSpec::Parallelepiped { basis, material } => Arc::new(
+                Parallelepiped::new(basis[0], basis[1], basis[2], basis[3], material)
+            )
         }
     }
 }
