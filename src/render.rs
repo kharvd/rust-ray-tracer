@@ -10,7 +10,6 @@ use crate::color::{Color, put_color};
 use crate::geometry::{HitRecord, Hittable};
 use crate::ray::Ray;
 use crate::scene::Scene;
-use std::fmt::Debug;
 
 pub fn ray_color<T: Hittable>(rng: &mut dyn RngCore, ray: &Ray, world: &T, depth: u32) -> Color {
     if depth <= 0 {
@@ -79,7 +78,7 @@ pub fn render_pixel_par<T>(x: u32, y: u32, scene: &Scene, world: &T, samples_per
 }
 
 pub fn render_image_parallel<T>(scene: &Scene, world: &T) -> RgbImage
-    where T: Hittable + Send + Sync + Debug
+    where T: Hittable + Send + Sync
 {
     let image_width = scene.render_config.image_width;
     let image_height = scene.render_config.image_height;
@@ -106,9 +105,9 @@ pub fn render_scene(scene: &Scene, filename: &str, parallel: bool, bvh: bool) {
     let mut rng = thread_rng();
     let img = match (parallel, bvh) {
         (true, true) => render_image_parallel(scene, &scene.bvh(&mut rng)),
-        (true, false) => render_image_parallel(scene, &scene.shapes),
+        (true, false) => render_image_parallel(scene, &scene.hittables),
         (false, true) => render_image_sequential(scene, &scene.bvh(&mut rng)),
-        (false, false) => render_image_sequential(scene, &scene.shapes)
+        (false, false) => render_image_sequential(scene, &scene.hittables)
     };
 
     img.save(filename).unwrap();

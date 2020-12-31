@@ -57,7 +57,7 @@ pub fn hit_by_list_benchmark(c: &mut Criterion) {
 
     group.bench_with_input(
         BenchmarkId::from_parameter("fast"),
-        &scene.shapes,
+        &scene.hittables,
         |b, list| b.iter(|| {
             let ray = Ray {
                 orig: Point3::new(rng.gen_range(-5.0..5.0), rng.gen_range(-5.0..5.0), rng.gen_range(-5.0..5.0)),
@@ -89,7 +89,7 @@ pub fn bvh_benchmark(c: &mut Criterion) {
 
         group.bench_with_input(
             BenchmarkId::new("hit_by_list", num_spheres),
-            &scene.shapes,
+            &scene.hittables,
             |b, list| b.iter(|| {
                 let ray = Ray {
                     orig: Point3::new(rng.gen_range(-5.0..5.0), rng.gen_range(-5.0..5.0), rng.gen_range(-5.0..5.0)),
@@ -104,7 +104,7 @@ pub fn bvh_benchmark(c: &mut Criterion) {
             }),
         );
 
-        let bvh = BVHNode::from_shapes(&mut rng, scene.shapes.clone().as_mut_slice());
+        let bvh = BVHNode::from_shapes(&mut rng, scene.hittables.clone().as_mut_slice());
 
         group.bench_with_input(
             BenchmarkId::new("hit_by_bvh", num_spheres),

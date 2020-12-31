@@ -1,11 +1,10 @@
-use serde::{Deserialize, Serialize};
+use std::sync::Arc;
 
+use crate::bounding_box::BBox;
 use crate::material::Material;
 use crate::point3::Point3;
 use crate::ray::Ray;
 use crate::vec3::Vec3;
-use crate::bounding_box::BBox;
-use Shape::{Sphere, Plane};
 
 pub struct HitRecord {
     pub point: Point3,
@@ -40,117 +39,109 @@ pub trait Hittable {
     fn bounding_box(&self) -> BBox;
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(tag = "type")]
-pub enum Shape {
-    Sphere {
-        center: Point3,
-        radius: f64,
-        material: Material,
-    },
-    Plane {
-        center: Point3,
-        normal: Vec3,
-        material: Material,
-    },
-    Triangle {
-        vertices: [Point3; 3],
-        material: Material,
-    }
+pub struct Sphere {
+    pub center: Point3,
+    pub radius: f64,
+    pub material: Material,
 }
 
-impl Hittable for Shape {
+impl Hittable for Sphere {
     fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
-        match *self {
-            Sphere { material, center, radius } =>
-                Shape::sphere_hit_by(ray, t_min, t_max, center, radius, material),
-            Plane { center, material, normal } =>
-                Shape::plane_hit_by(ray, t_min, t_max, center, normal, material),
-            Shape::Triangle { vertices, material } =>
-                Shape::triangle_hit_by(ray, t_min, t_max, &vertices, material),
-        }
-    }
-
-    fn bounding_box(&self) -> BBox {
-        match *self {
-            Sphere { center, radius, .. } => {
-                let abs_radius = radius.abs();
-                BBox {
-                    min: center - Vec3::new(abs_radius, abs_radius, abs_radius),
-                    max: center + Vec3::new(abs_radius, abs_radius, abs_radius),
-                }
-            }
-            Plane { .. } => BBox {
-                min: Point3::new(std::f64::NEG_INFINITY, std::f64::NEG_INFINITY, std::f64::NEG_INFINITY),
-                max: Point3::new(std::f64::INFINITY, std::f64::INFINITY, std::f64::INFINITY),
-            },
-            Shape::Triangle { vertices, .. } => Shape::triangle_bbox(&vertices)
-        }
-    }
-}
-
-impl Shape {
-    fn sphere_hit_by(
-        ray: &Ray,
-        t_min: f64,
-        t_max: f64,
-        center: Point3,
-        radius: f64,
-        material: Material,
-    ) -> Option<HitRecord> {
-        let orig_to_center = ray.orig - center;
+        let orig_to_center = ray.orig - self.center;
         let a = ray.dir.length2();
         let half_b = ray.dir.dot(orig_to_center);
-        let c = orig_to_center.length2() - radius * radius;
+        let c = orig_to_center.length2() - self.radius * self.radius;
 
         solve_quadratic(a, half_b, c, t_min, t_max).map(|t| {
             let point = ray.at(t);
-            let normal = (point - center) / radius;
+            let normal = (point - self.center) / self.radius;
             HitRecord::create(
                 ray,
                 point,
                 normal,
                 t,
-                material,
+                self.material,
             )
         })
     }
 
-    fn plane_hit_by(
-        ray: &Ray,
-        t_min: f64,
-        t_max: f64,
-        center: Point3,
-        normal: Vec3,
-        material: Material,
-    ) -> Option<HitRecord> {
-        let dir_dot_normal = ray.dir.dot(normal);
+    fn bounding_box(&self) -> BBox {
+        let abs_radius = self.radius.abs();
+        BBox {
+            min: self.center - Vec3::new(abs_radius, abs_radius, abs_radius),
+            max: self.center + Vec3::new(abs_radius, abs_radius, abs_radius),
+        }
+    }
+}
+
+#[inline]
+fn solve_quadratic(a: f64, half_b: f64, c: f64, t_min: f64, t_max: f64) -> Option<f64> {
+    let discr = half_b * half_b - a * c;
+    if discr < 0.0 {
+        return None;
+    }
+
+    let sqrt_discr = discr.sqrt();
+
+    let t1 = (-half_b - sqrt_discr) / a;
+    let t = if t_min < t1 && t1 < t_max {
+        t1
+    } else {
+        let t2 = (-half_b + sqrt_discr) / a;
+        if t_min < t2 && t2 < t_max {
+            t2
+        } else {
+            return Option::None;
+        }
+    };
+
+    return Some(t);
+}
+
+pub struct Plane {
+    pub center: Point3,
+    pub normal: Vec3,
+    pub material: Material,
+}
+
+impl Hittable for Plane {
+    fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
+        let dir_dot_normal = ray.dir.dot(self.normal);
         if dir_dot_normal.abs() < 1e-8 {
             return None;
         }
 
-        let orig_to_center = center - ray.orig;
-        let t = orig_to_center.dot(normal) / dir_dot_normal;
+        let orig_to_center = self.center - ray.orig;
+        let t = orig_to_center.dot(self.normal) / dir_dot_normal;
         if t_min < t && t < t_max {
             return Some(HitRecord::create(
                 ray,
                 ray.at(t),
-                normal,
+                self.normal,
                 t,
-                material,
+                self.material,
             ));
         }
 
         return None;
     }
 
-    fn triangle_hit_by(
-        ray: &Ray,
-        t_min: f64,
-        t_max: f64,
-        vertices: &[Point3; 3],
-        material: Material,
-    ) -> Option<HitRecord> {
+    fn bounding_box(&self) -> BBox {
+        BBox {
+            min: Point3::new(std::f64::NEG_INFINITY, std::f64::NEG_INFINITY, std::f64::NEG_INFINITY),
+            max: Point3::new(std::f64::INFINITY, std::f64::INFINITY, std::f64::INFINITY),
+        }
+    }
+}
+
+pub struct Triangle {
+    pub vertices: [Point3; 3],
+    pub material: Material,
+}
+
+impl Hittable for Triangle {
+    fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
+        let vertices = &self.vertices;
         let edge1 = vertices[1] - vertices[0];
         let edge2 = vertices[2] - vertices[0];
         let h = ray.dir.cross(edge2);
@@ -184,11 +175,13 @@ impl Shape {
             point,
             outward_normal,
             t,
-            material,
+            self.material,
         ))
     }
 
-    fn triangle_bbox(vertices: &[Point3; 3]) -> BBox {
+    fn bounding_box(&self) -> BBox {
+        let vertices = &self.vertices;
+
         let min_x = vertices[0][0].min(vertices[1][0]).min(vertices[2][0]);
         let min_y = vertices[0][1].min(vertices[1][1]).min(vertices[2][1]);
         let min_z = vertices[0][2].min(vertices[1][2]).min(vertices[2][2]);
@@ -202,30 +195,6 @@ impl Shape {
             max: Point3::new(max_x, max_y, max_z),
         }
     }
-}
-
-#[inline]
-fn solve_quadratic(a: f64, half_b: f64, c: f64, t_min: f64, t_max: f64) -> Option<f64> {
-    let discr = half_b * half_b - a * c;
-    if discr < 0.0 {
-        return None;
-    }
-
-    let sqrt_discr = discr.sqrt();
-
-    let t1 = (-half_b - sqrt_discr) / a;
-    let t = if t_min < t1 && t1 < t_max {
-        t1
-    } else {
-        let t2 = (-half_b + sqrt_discr) / a;
-        if t_min < t2 && t2 < t_max {
-            t2
-        } else {
-            return Option::None;
-        }
-    };
-
-    return Some(t);
 }
 
 impl<T: Hittable> Hittable for Vec<T> {
@@ -262,3 +231,25 @@ impl<T: Hittable> Hittable for Vec<T> {
             )
     }
 }
+
+impl <T: Hittable + ?Sized> Hittable for Arc<T> {
+    fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
+        T::hit_by(self, ray, t_min, t_max)
+    }
+
+    fn bounding_box(&self) -> BBox {
+        T::bounding_box(self)
+    }
+}
+
+impl <T: Hittable> Hittable for &T {
+    fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
+        T::hit_by(self, ray, t_min, t_max)
+    }
+
+    fn bounding_box(&self) -> BBox {
+        T::bounding_box(self)
+    }
+}
+
+pub type ArcHittable = Arc<dyn Hittable + Send + Sync>;
