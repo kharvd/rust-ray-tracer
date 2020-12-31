@@ -42,3 +42,11 @@ objects:
       type: Metal
       albedo: [0.8, 0.6, 0.2]
       fuzz: 0.0
+  - type: Triangle
+    vertices:
+      - [1, 0, -2]
+      - [-1, 0, -2]
+      - [0, 2, -1]
+    material:
+      type: Lambertian
+      albedo: [0.2, 0.1, 0.5]

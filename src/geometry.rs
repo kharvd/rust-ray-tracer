@@ -53,6 +53,10 @@ pub enum Shape {
         normal: Vec3,
         material: Material,
     },
+    Triangle {
+        vertices: [Point3; 3],
+        material: Material,
+    }
 }
 
 impl Hittable for Shape {
@@ -61,7 +65,9 @@ impl Hittable for Shape {
             Sphere { material, center, radius } =>
                 Shape::sphere_hit_by(ray, t_min, t_max, center, radius, material),
             Plane { center, material, normal } =>
-                Shape::plane_hit_by(ray, t_min, t_max, center, normal, material)
+                Shape::plane_hit_by(ray, t_min, t_max, center, normal, material),
+            Shape::Triangle { vertices, material } =>
+                Shape::triangle_hit_by(ray, t_min, t_max, &vertices, material),
         }
     }
 
@@ -77,7 +83,8 @@ impl Hittable for Shape {
             Plane { .. } => BBox {
                 min: Point3::new(std::f64::NEG_INFINITY, std::f64::NEG_INFINITY, std::f64::NEG_INFINITY),
                 max: Point3::new(std::f64::INFINITY, std::f64::INFINITY, std::f64::INFINITY),
-            }
+            },
+            Shape::Triangle { vertices, .. } => Shape::triangle_bbox(&vertices)
         }
     }
 }
@@ -135,6 +142,65 @@ impl Shape {
         }
 
         return None;
+    }
+
+    fn triangle_hit_by(
+        ray: &Ray,
+        t_min: f64,
+        t_max: f64,
+        vertices: &[Point3; 3],
+        material: Material,
+    ) -> Option<HitRecord> {
+        let edge1 = vertices[1] - vertices[0];
+        let edge2 = vertices[2] - vertices[0];
+        let h = ray.dir.cross(edge2);
+        let a = edge1.dot(h);
+        if a.abs() < 1e-8 {
+            return None;
+        }
+
+        let f = 1.0 / a;
+        let s = ray.orig - vertices[0];
+        let u = f * s.dot(h);
+        if u < 0.0 || u > 1.0 {
+            return None;
+        }
+
+        let q = s.cross(edge1);
+        let v = f * ray.dir.dot(q);
+        if v < 0.0 || u + v > 1.0 {
+            return None;
+        }
+
+        let t = f * edge2.dot(q);
+        if t < t_min || t > t_max {
+            return None;
+        }
+
+        let outward_normal = edge1.cross(edge2).normalize();
+        let point = ray.at(t);
+        Some(HitRecord::create(
+            ray,
+            point,
+            outward_normal,
+            t,
+            material,
+        ))
+    }
+
+    fn triangle_bbox(vertices: &[Point3; 3]) -> BBox {
+        let min_x = vertices[0][0].min(vertices[1][0]).min(vertices[2][0]);
+        let min_y = vertices[0][1].min(vertices[1][1]).min(vertices[2][1]);
+        let min_z = vertices[0][2].min(vertices[1][2]).min(vertices[2][2]);
+
+        let max_x = vertices[0][0].max(vertices[1][0]).max(vertices[2][0]);
+        let max_y = vertices[0][1].max(vertices[1][1]).max(vertices[2][1]);
+        let max_z = vertices[0][2].max(vertices[1][2]).max(vertices[2][2]);
+
+        BBox {
+            min: Point3::new(min_x, min_y, min_z),
+            max: Point3::new(max_x, max_y, max_z),
+        }
     }
 }
 
