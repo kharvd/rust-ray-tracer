@@ -1,10 +1,10 @@
 render_config:
   image_width: 400
   image_height: 300
-  samples_per_pixel: 50
+  samples_per_pixel: 100
   max_depth: 10
 camera:
-  lookfrom: [-1, 2, 2]
+  lookfrom: [-1, 3, 3]
   lookat: [0, 0, -1]
   vup: [0, 1, 0]
   vfov_deg: 90.0
@@ -42,12 +42,8 @@ objects:
       type: Metal
       albedo: [0.8, 0.6, 0.2]
       fuzz: 0.0
-  - type: Parallelepiped
-    basis:
-      - [0, -0.45, 0]
-      - [0, -0.45, 1]
-      - [1, -0.45, 0]
-      - [0, 0.45, 0]
+  - type: Object
+    filename: teapot.obj
     material:
-      type: Lambertian
-      albedo: [0.1, 0.2, 0.5]
+      type: Dielectric
+      index_of_refraction: 1.5

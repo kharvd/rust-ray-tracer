@@ -1,11 +1,12 @@
 use std::{fs, io};
 use std::error::Error;
 use std::fs::File;
-use std::io::Write;
+use std::io::{BufReader, Write};
 use std::ops::Range;
 use std::sync::Arc;
 
 use itertools::Itertools;
+use obj::{load_obj, Obj, Vertex};
 use rand::{Rng, RngCore, SeedableRng};
 use rand::rngs::SmallRng;
 use serde::{Deserialize, Serialize};
@@ -13,7 +14,7 @@ use serde::{Deserialize, Serialize};
 use crate::bvh::BVHNode;
 use crate::camera::Camera;
 use crate::color::Color;
-use crate::geometry::{ArcHittable, Hittable, Plane, Sphere, Triangle, Parallelepiped};
+use crate::geometry::{ArcHittable, Parallelepiped, Plane, Sphere, Triangle, TriangleMesh};
 use crate::material::Material;
 use crate::point3::Point3;
 use crate::vec3::Vec3;
@@ -64,27 +65,50 @@ pub enum ShapeSpec {
         basis: [Point3; 4],
         material: Material,
     },
+    Object {
+        filename: String,
+        material: Material,
+    },
+}
+
+fn read_obj(filename: &String, material: Material) -> TriangleMesh {
+    let input = BufReader::new(File::open(filename).unwrap());
+    let object: Obj<Vertex, usize> = load_obj(input).unwrap();
+    let vertices =
+        object.vertices.iter()
+            .map(|v|
+                Point3::new(
+                    v.position[0] as f64,
+                    v.position[1] as f64,
+                    v.position[2] as f64,
+                )
+            )
+            .collect_vec();
+    TriangleMesh::new(&vertices, &object.indices, material)
 }
 
 impl ShapeSpec {
-    fn to_hittable(&self) -> Arc<dyn Hittable + Send + Sync> {
-        match *self {
+    fn to_hittable(&self) -> ArcHittable {
+        match self {
             ShapeSpec::Sphere { center, radius, material } => Arc::new(Sphere {
-                center,
-                radius,
-                material,
+                center: *center,
+                radius: *radius,
+                material: *material,
             }),
             ShapeSpec::Plane { center, normal, material } => Arc::new(Plane {
-                center,
-                normal,
-                material,
+                center: *center,
+                normal: *normal,
+                material: *material,
             }),
             ShapeSpec::Triangle { vertices, material } => Arc::new(Triangle {
-                vertices,
-                material,
+                vertices: *vertices,
+                material: *material,
             }),
             ShapeSpec::Parallelepiped { basis, material } => Arc::new(
-                Parallelepiped::new(basis[0], basis[1], basis[2], basis[3], material)
+                Parallelepiped::new(basis[0], basis[1], basis[2], basis[3], *material)
+            ),
+            ShapeSpec::Object { filename, material } => Arc::new(
+                read_obj(filename, *material)
             )
         }
     }

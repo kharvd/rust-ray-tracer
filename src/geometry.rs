@@ -1,6 +1,9 @@
 use std::sync::Arc;
 
+use rand::thread_rng;
+
 use crate::bounding_box::BBox;
+use crate::bvh::BVHNode;
 use crate::material::Material;
 use crate::point3::Point3;
 use crate::ray::Ray;
@@ -134,6 +137,7 @@ impl Hittable for Plane {
     }
 }
 
+#[derive(Clone, Copy)]
 pub struct Triangle {
     pub vertices: [Point3; 3],
     pub material: Material,
@@ -196,6 +200,40 @@ impl Hittable for Triangle {
         }
     }
 }
+
+pub struct TriangleMesh {
+    triangles: BVHNode<Triangle>,
+}
+
+impl TriangleMesh {
+    pub fn new(vertices: &Vec<Point3>, vertices_index: &Vec<usize>, material: Material) -> TriangleMesh {
+        let mut triangles: Vec<Triangle> = vec![];
+        for i in 0..vertices_index.len() / 3 {
+            triangles.push(Triangle {
+                vertices: [
+                    vertices[vertices_index[3 * i]],
+                    vertices[vertices_index[3 * i + 1]],
+                    vertices[vertices_index[3 * i + 2]]
+                ],
+                material,
+            });
+        }
+
+        let bvh = BVHNode::from_shapes(&mut thread_rng(), triangles.as_mut_slice());
+        TriangleMesh { triangles: bvh }
+    }
+}
+
+impl Hittable for TriangleMesh {
+    fn hit_by(&self, ray: &Ray, t_min: f64, t_max: f64) -> Option<HitRecord> {
+        self.triangles.hit_by(ray, t_min, t_max)
+    }
+
+    fn bounding_box(&self) -> BBox {
+        self.triangles.bounding_box()
+    }
+}
+
 
 pub struct Parallelepiped {
     triangles: Vec<Triangle>,
